@@ -6,4 +6,6 @@ app.get('/',(req,res) => {
     res.send('Hello world');
 });
 
-app.listen(5000);
+app.listen(5000,()=>{
+    console.log('서버 가동');
+});
