@@ -11,6 +11,7 @@ dotenv.config();
 // 라우팅
 const home = require("./src/routes/home"); 
 const chat = require("./src/routes/chat");
+const board = require("./src/routes/board");
 
 app.set("views","./src/views");
 app.set("view engine","ejs");
@@ -22,6 +23,7 @@ app.use(express.urlencoded({extended : true}));
 
 app.use("/",home);
 app.use("/chat",chat);
+app.use("/board",board);
   
 
 module.exports = app;
