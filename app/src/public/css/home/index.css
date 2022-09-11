@@ -1,0 +1,93 @@
+.container{
+    margin : 0;
+    color : #eee;
+    line-height: 1.5em;
+    font-size : 30px;
+    background-color : #222;
+    font-weight:  300;
+    box-sizing:border-box;
+}
+
+.container a {
+    text-decoration: none;
+    color:#eee;
+    font-size:20px;
+}
+
+header{
+    font-weight: normal;
+    background: #222;
+    box-shadow :5px 0 15px rgba(0,0,0,0.15);
+}
+
+nav{
+    width : 1100px;
+    margin : auto;
+}
+
+nav>div{
+    height : 70px;
+    line-height: 70px;
+}
+
+.icon{
+    float:left;
+    width:180px;
+    line-height : 70px;
+    text-align : left;
+}
+
+.gnb{
+    margin: auto;
+    text-align: center;
+}
+
+.gnb a{
+    margin :20px;
+}
+
+.content{
+    margin : auto;
+    text-align: center;
+}
+
+table{
+    border-collapse: separate;
+    border-spacing: 0;
+   
+}
+td {
+    padding: 6px 15px;
+  }
+
+  tr:last-child td:first-child {
+    border-bottom-left-radius: 6px;
+  }
+  tr:last-child td:last-child {
+    border-bottom-right-radius: 6px;
+  }
+
+  tr:first-child th:first-child {
+    border-top-left-radius: 6px;
+  }
+  tr:first-child th:last-child {
+    border-top-right-radius: 6px;
+  }
+  td {
+    border-right: 1px solid #c6c9cc;
+    border-bottom: 1px solid #c6c9cc;
+    border-top : 1px solid #c6c9cc
+  }
+  td:first-child {
+    border-left: 1px solid #c6c9cc;
+    border-top : 1px solid #c6c9cc
+  }
+  tr:nth-child(even) td {
+    background: #eaeaed;
+  }
+.menu{
+    border: 1px;;
+    margin-top: 15%;
+    margin-left: 30%;
+    font-size: 70px;
+}

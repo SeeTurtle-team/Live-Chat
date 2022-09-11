@@ -2,7 +2,7 @@
 
 const output = {
     home:(req,res) => {
-        res.render("home/test");
+        res.render("home/index");
     }
 }
 
