@@ -10,4 +10,12 @@ const ctrl = require("./home.ctrl");
 router.get('/', ctrl.output.home); //여기서 html 파일 가져오는 듯
 
 router.get("/login", ctrl.output.login);
+
+router.get("/register", ctrl.output.register);
+
+//------------------post----------------------//
+router.post("/register", ctrl.process.register);
+
+router.post("/login", ctrl.process.login);
+
 module.exports=router;
