@@ -8,4 +8,6 @@ const ctrl = require("./chat.ctrl");
 
 router.get('/', ctrl.output.chat); 
 
+router.get('/random',ctrl.output.random);
+
 module.exports=router;
