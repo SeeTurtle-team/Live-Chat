@@ -46,6 +46,16 @@ nav>div{
     margin :20px;
 }
 
+.gnb a .login_menu{
+    box-shadow :5px 0 15px rgba(0,0,0,0.15);
+    
+    margin-left: 50px;
+    float:right;
+    width:180px;
+    line-height : 70px;
+    text-align : left;
+}
+
 .content{
     margin : auto;
     text-align: center;

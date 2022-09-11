@@ -9,4 +9,5 @@ const ctrl = require("./home.ctrl");
 //router가 서버에서 주고 받고 하는 API 역할인듯 하다
 router.get('/', ctrl.output.home); //여기서 html 파일 가져오는 듯
 
+router.get("/login", ctrl.output.login);
 module.exports=router;

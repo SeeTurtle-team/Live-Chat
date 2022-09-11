@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/home/login.css">
+    <link rel="stylesheet" href="/css/home/index.css">
+    <script src="/js/home/login.js" defer></script>
+    <title>Document</title>
+</head>
+<script>
+  const userId = document.getElementById("userid").innerText;
+  alert(userId);
+  if(userId !== null){
+    alert("이미 로그인 되어 있습니다");
+    window.history.go(-1);
+  }
+</script>
+<body>
+    <div class = "container">
+        <header>
+            <nav>
+                <div class = "icon">HolyMoly</div>
+                <div class = "gnb">
+                    <a>오픈 채팅</a>
+                    <a>게시판</a>
+                    <a>1대1 채팅</a>
+                    <a>랜덤채팅</a>
+                    <a href="/login" class="login_menu">로그인</a>
+                </div>
+                
+            </nav>
+            
+        </header>
+
+    </div>
+    <div class="login-page">
+        <div class="form">
+          <form class="login-form">
+            <input id="id" type="text" placeholder="userid"/>
+            <input id="passWord" type="password" placeholder="password"/>
+            <p id="button">login</p>
+            <p class="message">Not registered? <a href="/register">Create an account</a></p>
+          </form>
+        </div>
+      </div>
+      <!--<span id="userid" ></span>-->
+</body>
+</html>
