@@ -5,7 +5,22 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>project</title>
         <link rel = "stylesheet" href ="/css/home/index.css">
+        <script src="/socket.io/socket.io.js"></script>
     </head>
+    <script>
+        // 위의 socket.io.js에서 뽑아 쓴다.
+        const socket = io.connect('http://localhost:5000', { // ws:// 를 안쓰고 http를 쓴다
+           path: '/socket.io', // 서버 path와 일치시켜준다
+           transports: ['websocket']
+        });
+      // 서버로부터 메세지 수신
+        socket.on('news', function (data) {
+            console.log(data);
+            
+            // 서버에게 메세지 송신
+            socket.emit('reply', 'Hello Node.JS');
+        });
+     </script>
     <body>
         <div class = "container">
             <header>
@@ -22,7 +37,6 @@
                 </nav>
                 
             </header>
-
         </div>
     </body>
 </html>
