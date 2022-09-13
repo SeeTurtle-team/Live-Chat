@@ -10,12 +10,23 @@ const SocketIO = require('socket.io');
 const io = SocketIO(server,{path:'/socket.io'});
 
 io.on('connection',(socket)=>{
+    var instanceId = socket.id;
+
     socket.on('disconnect',()=>{
         console.log('클라이언트 접속 해제',socket.id);
         clearInterval(socket.interval);
         
     });
+    socket.on('joinRoom',function (data) {
+        console.log(data);
+        socket.join(data.roomName);
+        roomName = data.roomName;
+    });
 
+    socket.on('reqMsg', function (data) {
+        console.log(data);
+        io.sockets.in(roomName).emit('recMsg', {comment: instanceId + " : " + data.comment+'\n'});
+    })
     socket.on('error',(error)=>{
         console.error(error);
     });

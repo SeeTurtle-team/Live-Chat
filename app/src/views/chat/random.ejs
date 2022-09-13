@@ -6,8 +6,10 @@
         <title>project</title>
         <link rel = "stylesheet" href ="/css/home/index.css">
         <script src="/socket.io/socket.io.js"></script>
+        
     </head>
     <script>
+        /*
         // 위의 socket.io.js에서 뽑아 쓴다.
         const socket = io.connect('http://localhost:5000', { // ws:// 를 안쓰고 http를 쓴다
            path: '/socket.io', // 서버 path와 일치시켜준다
@@ -19,7 +21,7 @@
             
             // 서버에게 메세지 송신
             socket.emit('reply', 'Hello Node.JS');
-        });
+        });*/
      </script>
     <body>
         <div class = "container">
@@ -38,5 +40,25 @@
                 
             </header>
         </div>
+        <textarea rows="20" cols="30" id="chat"></textarea><br>
+        <input type="text" id="user"><input type="button" value="msg submit" onclick="myOnClick()">
     </body>
+
+    <script>
+        var socket = io.connect('http://localhost:5000');
+    
+        socket.emit('joinRoom', {roomName: 'myroom'});
+    
+        socket.on('recMsg', function (data) {
+            console.log(data.comment)
+            document.getElementById("chat").append(data.comment);
+        });
+    
+        function myOnClick() {
+            var msg = document.getElementById("user").value ;
+            
+            socket.emit("reqMsg", {comment:msg});
+            
+        }
+    </script>
 </html>
