@@ -12,4 +12,7 @@ router.get('/random',ctrl.output.random);
 
 router.get('/newChat',ctrl.output.open);
 
+//---------------post------------------//
+router.post('/newOpen',ctrl.process.open);
+
 module.exports=router;

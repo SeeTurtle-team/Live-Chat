@@ -13,7 +13,9 @@ const output = {
 }
 
 const process = {
-   
+   open : (req,res) => {
+        console.log(req.body);
+   }
 }
 
 module.exports = {
