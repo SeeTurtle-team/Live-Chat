@@ -26,6 +26,13 @@ function newChat(){
         body: JSON.stringify(req)
     })
     .then((res)=>res.json())
+    .then((res)=>{
+        if(res.success){
+            alert('성공');
+        } else {
+            alert(res.msg);
+        }
+    })
     
     
 

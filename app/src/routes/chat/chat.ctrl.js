@@ -1,5 +1,7 @@
 "use strict";
 
+const { json } = require("express");
+const Open = require("../../models/Open");
 const output = {
     chat : (req,res) => {
         res.render("chat/openChat");
@@ -13,9 +15,12 @@ const output = {
 }
 
 const process = {
-   open : (req,res) => {
+    open : async (req,res) => {
         console.log(req.body);
-   }
+        const open = new Open(req.body);
+        const response = await open.Open();
+        return res.json(response);
+    }
 }
 
 module.exports = {
