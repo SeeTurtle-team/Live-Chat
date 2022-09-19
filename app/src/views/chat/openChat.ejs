@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>오픈 채팅</title>
+        <link rel = "stylesheet" href ="/css/home/index.css">
+        <link rel = "stylesheet" href="/css/chat/chat.css"
+        <script src="/socket.io/socket.io.js"></script>
+        
+    </head>
+    <script>
+        function newChat(){
+            location.href="/chat/newChat";
+        }
+    </script>
+    <body>
+        <div class = "container">
+            <header>
+                <nav>
+                    <div class = "icon">HolyMoly</div>
+                    <div class = "gnb">
+                        <a href="/chat">오픈 채팅</a>
+                        <a href="/board">게시판</a>
+                        <a href="/">1대1 채팅</a>
+                        <a href="/chat/random">랜덤채팅</a>
+                        <a href="/login" class="login_menu">로그인</a>
+                    </div>
+                    
+                </nav>
+                
+            </header>
+        </div>
+        <div></div>
+        <div>
+            <button onclick = "newChat()" class="btn">새 채팅방 만들기</button>
+        </div>
+    </body>
+
+</html>

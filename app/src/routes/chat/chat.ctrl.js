@@ -2,15 +2,18 @@
 
 const output = {
     chat : (req,res) => {
-        res.send("하이루");
+        res.render("chat/openChat");
     },
     random : (req,res) => {
         res.render('chat/random');
+    },
+    open : (req,res) => {
+        res.render("chat/newOpen");
     }
 }
 
 const process = {
-
+   
 }
 
 module.exports = {

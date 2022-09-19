@@ -10,4 +10,6 @@ router.get('/', ctrl.output.chat);
 
 router.get('/random',ctrl.output.random);
 
+router.get('/newChat',ctrl.output.open);
+
 module.exports=router;
