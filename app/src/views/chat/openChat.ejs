@@ -33,16 +33,20 @@
         </div>
         <div class = "search-box">
             <input type="text" id="search"/>
-            <button>검색하기</button>
+            <button class="btn-search">검색하기</button>
         </div>
+        <hr>
         <div>
             <%
                 var i = 0;
                 for(i;i<rows.length;i++){
                     var data = rows[i];
                 %>
-                <p><%=data.openName%></p>
-                <h5><%=data.openCategory %></h5>
+                <div class="openChat">
+                    <p class="openName"><%=data.openName%></p>
+                    <h5 class=openCategory""><%=data.openCategory %></h5>
+                </div>
+                
                 <hr>
                 <%}%>
         </div>
