@@ -3,13 +3,17 @@
 const { json } = require("express");
 const Open = require("../../models/Open");
 const output = {
-    chat : (req,res) => {
-        res.render("chat/openChat");
+    chat : async (req,res) => {  //오픈 채팅 목록 페이지
+        const open = new Open();
+        const rows = await open.OpenAll();
+        console.log(rows[0]);
+        res.render("chat/openChat",{rows:rows});
     },
     random : (req,res) => {
         res.render('chat/random');
     },
     open : (req,res) => {
+        
         res.render("chat/newOpen");
     }
 }

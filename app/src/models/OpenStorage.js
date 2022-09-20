@@ -15,6 +15,16 @@ class OpenStorage{
         
         });
     }
+
+    static async openChatAll(){
+        return new Promise((resolve,reject)=>{
+            const query = "select * from openchat;";
+            db.query(query,(err,rows)=>{
+                if(err){reject('${err}')};
+                resolve(rows);
+            })
+        })
+    }
 }
 
 module.exports = OpenStorage;

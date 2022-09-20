@@ -18,6 +18,15 @@ class Open{
         }
 
     }
+
+    async OpenAll(){
+        try{
+            const response = await OpenStorage.openChatAll();
+            return response;
+        }catch(err){
+            console.log('실패');
+        }
+    }
 }
 
 module.exports = Open;

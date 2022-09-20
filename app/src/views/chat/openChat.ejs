@@ -31,7 +31,21 @@
                 
             </header>
         </div>
-        <div></div>
+        <div class = "search-box">
+            <input type="text" id="search"/>
+            <button>검색하기</button>
+        </div>
+        <div>
+            <%
+                var i = 0;
+                for(i;i<rows.length;i++){
+                    var data = rows[i];
+                %>
+                <p><%=data.openName%></p>
+                <h5><%=data.openCategory %></h5>
+                <hr>
+                <%}%>
+        </div>
         <div>
             <button onclick = "newChat()" class="btn">새 채팅방 만들기</button>
         </div>
