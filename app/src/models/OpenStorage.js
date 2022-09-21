@@ -25,6 +25,16 @@ class OpenStorage{
             })
         })
     }
+
+    static async selectOpen(key){
+        return new Promise((resolve, reject)=>{
+            const query = "select * from openchat where openName = ?;";
+            db.query(query,[key],(err,rows)=>{
+                if(err){reject('${err}')};
+                resolve(rows);
+            })
+        })
+    }
 }
 
 module.exports = OpenStorage;

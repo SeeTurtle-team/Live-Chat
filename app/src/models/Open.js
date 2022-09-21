@@ -7,7 +7,7 @@ class Open{
         this.body = body;
     }
 
-    async Open(){
+    async Open(){  //채팅 방 만들기
         const chat = this.body;
         console.log(chat);
         try{
@@ -19,9 +19,18 @@ class Open{
 
     }
 
-    async OpenAll(){
+    async OpenAll(){  //채팅 방 전체 불러오기
         try{
             const response = await OpenStorage.openChatAll();
+            return response;
+        }catch(err){
+            console.log('실패');
+        }
+    }
+
+    async selectOpen(key){
+        try{
+            const response = await OpenStorage.selectOpen(key);
             return response;
         }catch(err){
             console.log('실패');
