@@ -2,7 +2,7 @@
 
 const output = {
     board : (req, res) => {
-        res.send("게시판");
+        res.render("board/board");
     }
 }
 
