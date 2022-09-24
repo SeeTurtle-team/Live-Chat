@@ -15,6 +15,11 @@ const output = {
     open : (req,res) => {
         
         res.render("chat/newOpen");
+    },
+
+    openRoom : (req,res) => {
+        console.log(req.query.seq);
+        res.render("chat/openRoom");
     }
 }
 

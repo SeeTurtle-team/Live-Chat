@@ -12,6 +12,8 @@ router.get('/random',ctrl.output.random);
 
 router.get('/newChat',ctrl.output.open);
 
+router.get('/openRoom',ctrl.output.openRoom);
+
 //---------------post------------------//
 router.post('/newOpen',ctrl.process.open);
 
