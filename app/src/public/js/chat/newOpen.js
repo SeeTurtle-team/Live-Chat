@@ -33,7 +33,12 @@ function newChat(){
             alert(res.msg);
         }
     })
-    
-    
+ 
+}
 
+function search(){
+    const text = document.getElementById('search').value;
+    console.log(text);
+
+    location.href="/chat?option=search&key="+text;
 }
