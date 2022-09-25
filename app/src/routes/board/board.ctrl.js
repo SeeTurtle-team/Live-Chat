@@ -2,7 +2,12 @@
 
 const output = {
     board : (req, res) => {
-        res.render("board/board");
+        if(req.session.userId){
+            res.render("board/board",{login:'로그아웃'});
+        }else{
+            res.render("board/board",{login:'로그인'});
+        }
+        
     }
 }
 

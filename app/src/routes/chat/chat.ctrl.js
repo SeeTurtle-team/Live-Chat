@@ -4,7 +4,7 @@ const { json } = require("express");
 const Open = require("../../models/Open");
 const output = {
     chat : async (req,res) => {  //오픈 채팅 목록 페이지
-        if(req.session.userId===null){
+        if(!req.session.userId){
             res.send(`
                 <script>
                     alert("로그인 페이지로 이동합니다");
@@ -28,7 +28,17 @@ const output = {
         
     },
     random : (req,res) => {
-        res.render('chat/random');
+        if(!req.session.userId){
+            res.send(`
+                <script>
+                    alert("로그인 페이지로 이동합니다");
+                    location.href="/login";
+                </script>            
+            `);
+        }else{
+            res.render('chat/random');
+        }
+        
     },
     open : (req,res) => {
         
