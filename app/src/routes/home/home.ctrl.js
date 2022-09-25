@@ -8,7 +8,18 @@ const output = {
     },
 
     login:(req,res) => {
-        res.render("home/login");
+        if(req.session.userId===null){
+           res.render("home/login");
+        }else{
+            res.send(`
+                <script>
+                    alert('이미 로그인 하셨습니다');
+                    location.href='/'; 
+                </script>`
+                );
+            
+        }
+       
     },
 
     register:(req,res) => {
