@@ -13,6 +13,8 @@ router.get("/login", ctrl.output.login);
 
 router.get("/register", ctrl.output.register);
 
+router.get('/logout', ctrl.process.logout);
+
 //------------------post----------------------//
 router.post("/register", ctrl.process.register);
 

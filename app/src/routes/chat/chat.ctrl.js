@@ -4,7 +4,14 @@ const { json } = require("express");
 const Open = require("../../models/Open");
 const output = {
     chat : async (req,res) => {  //오픈 채팅 목록 페이지
-        
+        if(req.session.userId===null){
+            res.send(`
+                <script>
+                    alert("로그인 페이지로 이동합니다");
+                    location.href="/login";
+                </script>            
+            `);
+        }
         const option = req.query.option;
         if(option===undefined){
             const open = new Open();

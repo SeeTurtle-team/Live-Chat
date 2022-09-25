@@ -4,22 +4,22 @@ const User = require("../../models/User");
 
 const output = {
     home:(req,res) => {
-        res.render("home/index");
+        if(req.session.userId){
+            res.render("home/index",{login:'로그아웃'});
+        }else{
+            res.render("home/index",{login:'로그인'});
+        }
+        
     },
 
     login:(req,res) => {
-        if(req.session.userId===null){
-           res.render("home/login");
+        if(req.session.userId){
+            console.log("logout");
+            return res.redirect('/logout')
         }else{
-            res.send(`
-                <script>
-                    alert('이미 로그인 하셨습니다');
-                    location.href='/'; 
-                </script>`
-                );
-            
+            res.render("home/login");
         }
-       
+   
     },
 
     register:(req,res) => {
@@ -42,6 +42,19 @@ const process ={
             
         }
         return res.json(response);
+    },
+
+    logout : (req, res) => {
+        req.session.destroy(()=>{
+            req.session
+        });
+        
+        res.send(`
+            <script>
+                alert('로그아웃 되셨습니다');
+                location.href='/';
+            </script>
+        `)
     }
 }
 
