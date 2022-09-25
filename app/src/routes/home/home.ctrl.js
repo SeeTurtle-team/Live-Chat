@@ -26,6 +26,10 @@ const process ={
     login : async (req, res) => {
         const user = new User(req.body);
         const response = await user.login();
+        if(response.success){
+            req.session.userId = req.body.id;
+            
+        }
         return res.json(response);
     }
 }
