@@ -14,7 +14,7 @@ class User{
         try{
             if(user){
                 console.log(user);
-                if(user.userId=== client.id && user.userPW === client.pw){
+                if(user.userId=== client.id && user.userPw === client.pw){
                     return {success : true};
                 }
                 return {success : false, msg : "비밀번호가 틀렸습니다"};
