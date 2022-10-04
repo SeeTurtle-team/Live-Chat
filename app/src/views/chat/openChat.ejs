@@ -14,8 +14,9 @@
         function newChat(){
             location.href="/chat/newChat";
         }
-        function goOpenChat(seq){
+        function goOpenChat(seq,name){
             console.log(seq);
+            seq = seq + "open";
             location.href = "/chat/openRoom?seq="+seq;
         }
     </script>
@@ -48,7 +49,7 @@
                     var data = rows[i];
                 %>
                 <div class="openChat">
-                    <p class="openName" onclick="goOpenChat('<%=data.seq%>')"><%=data.openName%></p>
+                    <p class="openName" onclick="goOpenChat('<%=data.seq%>','<%=data.openName%>')"><%=data.openName%></p>
                     <h5 class=openCategory""><%=data.openCategory %></h5>
                 </div>
                 

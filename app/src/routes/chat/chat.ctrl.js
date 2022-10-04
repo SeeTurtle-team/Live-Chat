@@ -47,7 +47,8 @@ const output = {
 
     openRoom : (req,res) => {
         console.log(req.query.seq);
-        res.render("chat/openRoom");
+        var data = req.query.seq;
+        res.render("chat/openRoom",{data});
     }
 }
 

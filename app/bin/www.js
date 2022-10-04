@@ -11,6 +11,8 @@ const io = SocketIO(server,{path:'/socket.io'});
 
 io.on('connection',(socket)=>{
     var instanceId = socket.id;
+    
+    var room = new Array();
 
     socket.on('disconnect',()=>{
         console.log('클라이언트 접속 해제',socket.id);
@@ -21,7 +23,21 @@ io.on('connection',(socket)=>{
         console.log(data);
         socket.join(data.roomName);
         roomName = data.roomName;
+        for(i=0; i<room.length;i++){
+            if(room[i]===roomName){
+                return;
+            }
+            
+        }
+        room.push(roomName);
     });
+
+    for(i=0; i<room.length;i++){
+        socket.on(room[i],function(data){
+            console.log(data);
+            io.socket.in(room[i]).emit('reqMsg',{comment: instanceId + " : " + data.comment+'\n'})
+        })
+    }
 
     socket.on('reqMsg', function (data) {
         console.log(data);
