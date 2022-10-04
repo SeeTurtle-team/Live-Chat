@@ -59,8 +59,9 @@
 
         function myOnClick() {
             var msg = document.getElementById("user").value ;
-            
-            socket.emit("reqMsg", {comment:msg});
+            console.log(roomName);
+            socket.emit('test',{roomName:roomName})
+            socket.emit(roomName, {comment:msg});
             
         }
     </script>

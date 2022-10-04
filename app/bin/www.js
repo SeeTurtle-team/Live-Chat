@@ -8,12 +8,11 @@ const server = app.listen(port,()=>{
 const SocketIO = require('socket.io');
 
 const io = SocketIO(server,{path:'/socket.io'});
+var room = new Array();
 
 io.on('connection',(socket)=>{
     var instanceId = socket.id;
     
-    var room = new Array();
-
     socket.on('disconnect',()=>{
         console.log('클라이언트 접속 해제',socket.id);
         clearInterval(socket.interval);
@@ -23,6 +22,7 @@ io.on('connection',(socket)=>{
         console.log(data);
         socket.join(data.roomName);
         roomName = data.roomName;
+        
         for(i=0; i<room.length;i++){
             if(room[i]===roomName){
                 return;
@@ -30,14 +30,33 @@ io.on('connection',(socket)=>{
             
         }
         room.push(roomName);
+        console.log(room)
     });
 
-    for(i=0; i<room.length;i++){
+   /* for(i=0; i<room.length;i++){
         socket.on(room[i],function(data){
             console.log(data);
-            io.socket.in(room[i]).emit('reqMsg',{comment: instanceId + " : " + data.comment+'\n'})
+            io.sockets.in(room[i]).emit('reqMsg',{comment: instanceId + " : " + data.comment+'\n'})
         })
-    }
+    }*/
+
+    socket.on('test',function(data){
+        var test = data.roomName;
+        for(i=0; i<room.length;i++){
+            console.log(room[i]+"2")
+            if(room[i]===test){
+                var roomSeq = room[i];
+                socket.on(roomSeq,function(data){
+                    console.log(data.comment+"sadfasd");
+                    console.log(roomSeq)
+                    io.sockets.in(roomSeq).emit('recMsg',{comment: instanceId + " : " + data.comment+'\n'})
+                    console.log("adfsd");
+                })
+                return;
+            }
+            
+        }
+    })
 
     socket.on('reqMsg', function (data) {
         console.log(data);
