@@ -42,9 +42,11 @@ io.on('connection',(socket)=>{
 
     socket.on('test',function(data){
         var test = data.roomName;
+        
         for(i=0; i<room.length;i++){
             console.log(room[i]+"2")
             if(room[i]===test){
+                console.log(room);
                 var roomSeq = room[i];
                 socket.on(roomSeq,function(data){
                     console.log(data.comment+"sadfasd");
@@ -52,7 +54,7 @@ io.on('connection',(socket)=>{
                     io.sockets.in(roomSeq).emit('recMsg',{comment: instanceId + " : " + data.comment+'\n'})
                     console.log("adfsd");
                 })
-                return;
+               
             }
             
         }
