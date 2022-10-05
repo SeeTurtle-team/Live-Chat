@@ -60,8 +60,8 @@
         function myOnClick() {
             var msg = document.getElementById("user").value ;
             console.log(roomName);
-            socket.emit('test',{roomName:roomName})
-            socket.emit(roomName, {comment:msg});
+            socket.emit('test',{roomName:roomName,comment:msg})
+            //socket.emit(roomName, {comment:msg});
             
         }
     </script>

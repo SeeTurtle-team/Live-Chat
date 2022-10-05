@@ -8,10 +8,11 @@ const server = app.listen(port,()=>{
 const SocketIO = require('socket.io');
 
 const io = SocketIO(server,{path:'/socket.io'});
-var room = new Array();
+var room = new Array();  //생성된 방 목록들
 
 io.on('connection',(socket)=>{
-    var instanceId = socket.id;
+    const session = require('express-session');
+    var instanceId = session.userId;
     
     socket.on('disconnect',()=>{
         console.log('클라이언트 접속 해제',socket.id);
@@ -41,23 +42,29 @@ io.on('connection',(socket)=>{
     }*/
 
     socket.on('test',function(data){
+        console.log("/-----------테스트 시작--------------//")
         var test = data.roomName;
-        
+        console.log('test count');
         for(i=0; i<room.length;i++){
-            console.log(room[i]+"2")
+            console.log(room[i]+"  for 문이 돌음")
             if(room[i]===test){
                 console.log(room);
                 var roomSeq = room[i];
+                io.sockets.in(roomSeq).emit('recMsg',{comment: instanceId + " : " + data.comment+'\n'})
+                /*
                 socket.on(roomSeq,function(data){
                     console.log(data.comment+"sadfasd");
                     console.log(roomSeq)
                     io.sockets.in(roomSeq).emit('recMsg',{comment: instanceId + " : " + data.comment+'\n'})
                     console.log("adfsd");
-                })
+                    console.log('/---------------test is done------------//');
+                    return;
+                })*/
                
             }
             
         }
+       
     })
 
     socket.on('reqMsg', function (data) {
