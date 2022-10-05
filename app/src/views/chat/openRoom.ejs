@@ -34,6 +34,7 @@
            
             </div>
             <div>
+                <span id ="id"><%=userId%></span>
                 <input class="text-submit" type="text" id="user"/>
                 <button onclick="myOnClick()" class="btn-submit">전송</button>
             </div>
@@ -48,9 +49,11 @@
 
         const roomName = urlParams.get('seq'); 
 
+        const userId = document.getElementById("id").innerText;
+        console.log(userId);
         var socket = io.connect('http://localhost:5000');
         
-        socket.emit('joinRoom',{roomName:roomName});
+        socket.emit('joinRoom',{roomName:roomName,userId:userId});
 
         socket.on('recMsg', function (data) {
             console.log(data.comment)
@@ -60,7 +63,7 @@
         function myOnClick() {
             var msg = document.getElementById("user").value ;
             console.log(roomName);
-            socket.emit('test',{roomName:roomName,comment:msg})
+            socket.emit('test',{roomName:roomName,userId:userId,comment:msg})
             //socket.emit(roomName, {comment:msg});
             
         }

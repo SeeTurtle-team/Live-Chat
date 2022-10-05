@@ -48,7 +48,8 @@ const output = {
     openRoom : (req,res) => {
         console.log(req.query.seq);
         var data = req.query.seq;
-        res.render("chat/openRoom",{data});
+        var userId = req.session.userId;
+        res.render("chat/openRoom",{userId});
     }
 }
 

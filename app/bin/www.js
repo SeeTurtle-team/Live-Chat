@@ -7,6 +7,7 @@ const server = app.listen(port,()=>{
 
 const SocketIO = require('socket.io');
 
+
 const io = SocketIO(server,{path:'/socket.io'});
 var room = new Array();  //생성된 방 목록들
 
@@ -23,15 +24,16 @@ io.on('connection',(socket)=>{
         console.log(data);
         socket.join(data.roomName);
         roomName = data.roomName;
-        
+        var userId = data.userId;
         for(i=0; i<room.length;i++){
             if(room[i]===roomName){
+                io.sockets.in(roomName).emit('recMsg',{comment: userId + " 님이 입장하였습니다. " +'\n'})
                 return;
             }
             
         }
         room.push(roomName);
-        console.log(room)
+        console.log(room);
     });
 
    /* for(i=0; i<room.length;i++){
@@ -50,7 +52,8 @@ io.on('connection',(socket)=>{
             if(room[i]===test){
                 console.log(room);
                 var roomSeq = room[i];
-                io.sockets.in(roomSeq).emit('recMsg',{comment: instanceId + " : " + data.comment+'\n'})
+                var userId = data.userId;
+                io.sockets.in(roomSeq).emit('recMsg',{comment: userId + " : " + data.comment+'\n'})
                 /*
                 socket.on(roomSeq,function(data){
                     console.log(data.comment+"sadfasd");

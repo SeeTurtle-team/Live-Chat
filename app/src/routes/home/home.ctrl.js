@@ -1,5 +1,6 @@
 "use strict";
 
+const session = require("express-session");
 const User = require("../../models/User");
 
 const output = {
@@ -41,8 +42,9 @@ const process ={
         const response = await user.login();
         if(response.success){
             req.session.userId = req.body.id;
-            
+            session.userId = req.body.id;
         }
+        console.log(session.userId);
         return res.json(response);
     },
 
