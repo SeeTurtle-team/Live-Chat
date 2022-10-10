@@ -53,7 +53,8 @@ io.on('connection',(socket)=>{
                 console.log(room);
                 var roomSeq = room[i];
                 var userId = data.userId;
-                io.sockets.in(roomSeq).emit('recMsg',{comment: userId + " : " + data.comment+'\n'})
+                socket.broadcast.to(roomSeq).emit('recMsg',{comment: userId + " : " + data.comment+'\n'})//msg 보낸 사람빼고 전부
+                //io.sockets.in(roomSeq).emit('recMsg',{comment: userId + " : " + data.comment+'\n'})//방 전부
                 /*
                 socket.on(roomSeq,function(data){
                     console.log(data.comment+"sadfasd");

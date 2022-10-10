@@ -57,7 +57,16 @@
 
         socket.on('recMsg', function (data) {
             console.log(data.comment)
-            document.getElementById("chat").append(data.comment);
+            var chat = document.getElementById('chat');
+
+            var message = document.createElement('div');
+            var node = document.createTextNode(data.comment)
+            //document.getElementById("chat").append(data.comment);
+            var className='other';
+
+            message.classList.add(className);
+            message.appendChild(node);
+            chat.appendChild(message);
         });
 
         function myOnClick() {
