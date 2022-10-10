@@ -61,11 +61,17 @@
         });
 
         function myOnClick() {
-            var msg = document.getElementById("user").value ;
+            var message = document.getElementById("user").value ;
             console.log(roomName);
-            socket.emit('test',{roomName:roomName,userId:userId,comment:msg})
+            socket.emit('test',{roomName:roomName,userId:userId,comment:message})
             //socket.emit(roomName, {comment:msg});
-            
+            document.getElementById('user').value = '';
+            var chat = document.getElementById('chat')
+            var msg = document.createElement('div')
+            var node = document.createTextNode(userId+" : "+message)
+            msg.classList.add('me');
+            msg.appendChild(node);
+            chat.appendChild(msg);
         }
     </script>
 </html>
