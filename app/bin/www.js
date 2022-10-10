@@ -27,7 +27,7 @@ io.on('connection',(socket)=>{
         var userId = data.userId;
         for(i=0; i<room.length;i++){
             if(room[i]===roomName){
-                io.sockets.in(roomName).emit('recMsg',{comment: userId + " 님이 입장하였습니다. " +'\n'})
+                io.sockets.in(roomName).emit('recMsg',{class:'connect',comment: userId + " 님이 입장하였습니다. " +'\n'})
                 return;
             }
             
@@ -53,7 +53,7 @@ io.on('connection',(socket)=>{
                 console.log(room);
                 var roomSeq = room[i];
                 var userId = data.userId;
-                socket.broadcast.to(roomSeq).emit('recMsg',{comment: userId + " : " + data.comment+'\n'})//msg 보낸 사람빼고 전부
+                socket.broadcast.to(roomSeq).emit('recMsg',{class:'msg',comment: userId + " : " + data.comment+'\n'})//msg 보낸 사람빼고 전부
                 //io.sockets.in(roomSeq).emit('recMsg',{comment: userId + " : " + data.comment+'\n'})//방 전부
                 /*
                 socket.on(roomSeq,function(data){

@@ -58,11 +58,24 @@
         socket.on('recMsg', function (data) {
             console.log(data.comment)
             var chat = document.getElementById('chat');
+            var className=data.class;
+            /*switch(className) {
+                case 'msg':
+                className = 'other'
+                break
 
+                case 'connect':
+                className = 'connect'
+                break
+
+                case 'disconnect':
+                className = 'disconnect'
+                break
+            }*/
             var message = document.createElement('div');
             var node = document.createTextNode(data.comment)
             //document.getElementById("chat").append(data.comment);
-            var className='other';
+            
 
             message.classList.add(className);
             message.appendChild(node);
