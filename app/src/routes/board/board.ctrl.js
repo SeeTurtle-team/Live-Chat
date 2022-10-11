@@ -1,5 +1,6 @@
 "use strict";
 
+const Open = require("../../models/boardStorage");
 const output = {
     board : (req, res) => {
         if(req.session.userId){
@@ -12,6 +13,12 @@ const output = {
 }
 
 const process ={
+    open : async (req,res) => {
+        console.log(req.body);
+        const open = new Open(req.body);
+        const response = await open.Open();
+        return res.json(response);
+    }
 
 }
 
