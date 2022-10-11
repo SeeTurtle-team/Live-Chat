@@ -10,7 +10,7 @@
         <script src="/js/home/login.js" defer></script>
         <script src="/js/chat/newOpen.js"></script>
         <script src="/socket.io/socket.io.js"></script>
-
+            <!--css 모듈화 및 불필요 링크들 제거-->
         <style>
             div.select-box {
                 border: 2px solid #B8860B;
@@ -47,11 +47,11 @@
                 <nav>
                     <div class = "icon" onclick="location.href = '/'">HolyMoly</div>
                     <div class = "gnb">
-                        <a>오픈 채팅</a>
-                        <a>게시판</a>
-                        <a>1대1 채팅</a>
-                        <a>랜덤채팅</a>
-                        <a href="/login" class="login_menu"><%=login%></a>
+                        <a href="/chat">오픈 채팅</a>
+                        <a href="/board">게시판</a>
+                        <a href="/">1대1 채팅</a>
+                        <a href="/chat/random">랜덤채팅</a>
+                        <a href="/login" class="login_menu">로그아웃</a>
                     </div>
                 </nav>
             </header>
