@@ -4,12 +4,12 @@ const { promiseImpl } = require("ejs");
 const db = require("../config/db");
 
 class boardStorage{
-    static async newBoard(userInfo){
+    static async newBoard(){
         return new promise((resolve, reject)=>{
-            const query = "insert into openchat(seq,openName,openCategory,openDetail) values(?,?,?,?);";
-            db.query(query, [userInfo.seq, chatInfo.name, chatInfo.category, chatInfo.detail],(err)=>{
-                if(err) reject('${err}');
-                resolve({success:true});
+            const query = "select * from openchat;";
+            db.query(query, [key], (err, rows)=>{
+                if(err){reject('${err}')};
+                resolve(rows);
             });
         })
     }
