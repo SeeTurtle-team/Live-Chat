@@ -2,6 +2,7 @@
 
 const session = require("express-session");
 const User = require("../../models/User");
+const useArr = require("../../public/js/chat/oneChatList");
 
 const output = {
     home:(req,res) => {
@@ -42,6 +43,7 @@ const process ={
         const response = await user.login();
         if(response.success){
             req.session.userId = req.body.id;
+            useArr.push(req.body.id);
             session.userId = req.body.id;
         }
         console.log(session.userId);
@@ -49,7 +51,9 @@ const process ={
     },
 
     logout : (req, res) => {
+        
         req.session.destroy(()=>{
+            
             req.session
         });
         

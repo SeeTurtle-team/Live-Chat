@@ -2,6 +2,7 @@
 
 const { json } = require("express");
 const Open = require("../../models/Open");
+const useArr = require("../../public/js/chat/oneChatList");
 const output = {
     chat : async (req,res) => {  //오픈 채팅 목록 페이지
         if(!req.session.userId){
@@ -67,6 +68,7 @@ const output = {
 
 
         console.log(arr);
+        console.log(useArr);
         res.render("chat/oneChat");
     }
 }
