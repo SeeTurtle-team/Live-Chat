@@ -51,8 +51,22 @@ const output = {
         var userId = req.session.userId;
         res.render("chat/openRoom",{userId});
     },
-
+    //----------------일대일 채팅-----------------//
     oneChat : (req, res) => {
+        var arr = [1,2,3,4,5];
+        console.log(arr);
+
+        var sec = 2;
+        var num=0;
+        for(var i=0;i<arr.length;i++){
+            if(sec===arr[i]){
+                num = i;
+            }
+        }
+        arr.splice(num, 1);
+
+
+        console.log(arr);
         res.render("chat/oneChat");
     }
 }
