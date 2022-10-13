@@ -4,15 +4,16 @@ const { json } = require("express");
 const Open = require("../../models/boardStorage");
 
 const output = {
-    board : (req, res) => {
+    board : async (req, res) => {
         if(req.session.userId){
             res.render("board/board",{login:'로그아웃'});
         }else{
             res.render("board/board",{login:'로그인'});
         }
-        
     }
 }
+
+
 
 const process ={
     open : async (req,res) => {
@@ -30,19 +31,28 @@ const boardList = {
 }
 
 const boardTable = {
-    table : (req, res) => {
-        connection.query('SELECT * from openchat', (error, rows) => {
-          if (error) throw error;
-          console.log('openchat info is: ', rows);
-          res.send(rows);
+    table :  (req, res, next) => {
+        var page = req.params.page; 
+        var mysql = require('../../config/db');
+        var con = mysql.createConnection();
+        var sql = "select seq, openName, openCategory, openDetail from openchat"; 
+        con.query(sql, function (err, rows) { 
+            if (err) console.error(err); 
+            res.render('board', rows = sql); 
         });
-      }
+    }
 };
 
+const boardRedirect = {
+    redirect : (req, res, next) => {
+        res.redirect('/board/board/1');
+    }
+}
 
 module.exports = {
     output,
     process,
     boardList,
     boardTable,
-}
+    boardRedirect,
+};

@@ -9,7 +9,6 @@
         <link rel="stylesheet" href="/css/chat/chat.css">
         <script src="/js/home/login.js" defer></script>
         <script src="/js/chat/newOpen.js"></script>
-        <script src="/socket.io/socket.io.js"></script>
             <!--css 모듈화 및 불필요 링크들 제거-->
         <style>
             div.select-box {
@@ -38,7 +37,7 @@
          function goOpenChat(seq,name){
             console.log(seq);
             seq = seq + "open";
-            location.href = "/chat/openRoom?seq="+seq;
+            location.href = "/chat/openRoom?seq=" + seq;
         }
     </script>
     <body>
@@ -78,20 +77,18 @@
             <td width = "100">작성자</td>
             <td width = "300">제목</td>
             <td width = "200">작성일</td>
-            <td width = "100">조회수</td>
         </tr>
-        <%
-        for(var i=0; i<rows.length; i++)
-        {
+        <% 
+        var sql = "select * from socket.openchat";
+        const rows = sql;
+        for(var i=0; i<rows.length; i++){
             var data = rows[i];
         %>
         <tr>
-            <td><%=data.seq%></td>
-            <td><%=data.openName%></td>
-            <td><a href="/board/read/<%=data.seq%>"><%=data.openCategory%></a></td>
-            <td><%=data.openCategory%></td>
-            <td><%=data.openDetail%></td>
-            <td><%=data.openDetail%></td>
+            <td><%=data.seq %></td>
+            <td><%=data.openName %></td>
+            <td><%=data.openCategory %></td>
+            <td><%=data.openDetail %></td>
         </tr>
         <%}%>
     </table>

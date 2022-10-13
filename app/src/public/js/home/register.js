@@ -5,7 +5,12 @@ const id = document.querySelector("#id"),
     pw =document.querySelector("#passWord"),
     nickName = document.querySelector("#nickname"),
     pwConfirm =document.querySelector("#confirm-passWord"),
+    seq = document.querySelector("#seq"),
+    openName = document.querySelector("#openName"),
+    openCategory = document.querySelector("#openCategory"),
+    openDetail = document.querySelector("#openDetail"),
     registerBtn = document.querySelector("#button");
+
     
 registerBtn.addEventListener("click",register);
 
