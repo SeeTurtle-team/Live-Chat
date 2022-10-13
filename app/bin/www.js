@@ -1,12 +1,16 @@
 "use strict";
 
 const app =require("../app");
+const Socket = require("../src/socket/Socket");
 
 const port =process.env.PORT || 5000;
 const server = app.listen(port,()=>{
     console.log('서버 가동');
 });
 
+const chat = new Socket();
+chat.startChat(server);
+/*
 const SocketIO = require('socket.io');
 
 
@@ -25,9 +29,9 @@ io.on('connection',(socket)=>{
     socket.on('joinRoom',function (data) {
         console.log(data);
         socket.join(data.roomName);
-        roomName = data.roomName;
+        var roomName = data.roomName;
         var userId = data.userId;
-        for(i=0; i<room.length;i++){
+        for(var i=0; i<room.length;i++){
             if(room[i]===roomName){
                 io.sockets.in(roomName).emit('recMsg',{class:'connect',comment: userId + " 님이 입장하였습니다. " +'\n'})
                 return;
@@ -44,12 +48,12 @@ io.on('connection',(socket)=>{
             io.sockets.in(room[i]).emit('reqMsg',{comment: instanceId + " : " + data.comment+'\n'})
         })
     }*/
-
+/*
     socket.on('test',function(data){
         console.log("/-----------테스트 시작--------------//")
         var test = data.roomName;
         console.log('test count');
-        for(i=0; i<room.length;i++){
+        for(var i=0; i<room.length;i++){
             console.log(room[i]+"  for 문이 돌음")
             if(room[i]===test){
                 console.log(room);
@@ -66,7 +70,7 @@ io.on('connection',(socket)=>{
                     console.log('/---------------test is done------------//');
                     return;
                 })*/
-               
+               /*
             }
             
         }
@@ -87,4 +91,4 @@ io.on('connection',(socket)=>{
     });
     
     socket.emit('news','hello monkey');
-})
+})*/
