@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+    <haed>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>1대 1 채팅</title>
+        <link rel = "stylesheet" href ="/css/home/index.css">
+        <link rel = "stylesheet" href="/css/chat/chat.css">
+        <script src="/socket.io/socket.io.js"></script>
+    </haed>
+    <body>
+        <div class = "container">
+            <header>
+                <nav>
+                    <div class = "icon" onclick="location.href = '/'">HolyMoly</div>
+                    <div class = "gnb">
+                        <a href="/chat">오픈 채팅</a>
+                        <a href="/board">게시판</a>
+                        <a href="/chat/oneChat">1대1 채팅</a>
+                        <a href="/chat/random">랜덤채팅</a>
+                        <a href="/login" class="login_menu">로그아웃</a>
+                    </div>
+                </nav>
+            </header>
+        </div>
+        <div class = "search-box">
+            <input type="text" id="search"/>
+            <button onclick = "" class="btn-search">검색하기</button>
+        </div>
+    </body>
+</html>

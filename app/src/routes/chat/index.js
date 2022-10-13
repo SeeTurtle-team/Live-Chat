@@ -14,6 +14,8 @@ router.get('/newChat',ctrl.output.open);
 
 router.get('/openRoom',ctrl.output.openRoom);
 
+router.get('/oneChat',ctrl.output.oneChat);
+
 //---------------post------------------//
 router.post('/newOpen',ctrl.process.open);
 

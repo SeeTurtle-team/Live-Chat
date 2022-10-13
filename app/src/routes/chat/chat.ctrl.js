@@ -50,6 +50,10 @@ const output = {
         var data = req.query.seq;
         var userId = req.session.userId;
         res.render("chat/openRoom",{userId});
+    },
+
+    oneChat : (req, res) => {
+        res.render("chat/oneChat");
     }
 }
 
