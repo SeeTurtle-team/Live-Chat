@@ -68,8 +68,18 @@ const output = {
 
 
         console.log(arr);*/
-        console.log(useArr.useArr);
-        res.render("chat/oneChat");
+        if(!req.session.userId){
+            res.send(`
+                <script>
+                    alert("로그인 페이지로 이동합니다");
+                    location.href="/login";
+                </script>            
+            `);
+        }else{
+            console.log(useArr.useArr);
+            res.render("chat/oneChat");
+        }
+        
     }
 }
 
