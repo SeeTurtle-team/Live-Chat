@@ -54,7 +54,7 @@ const output = {
     },
     //----------------일대일 채팅-----------------//
     oneChat : (req, res) => {
-        var arr = [1,2,3,4,5];
+        /*var arr = [1,2,3,4,5];
         console.log(arr);
 
         var sec = 2;
@@ -67,8 +67,8 @@ const output = {
         arr.splice(num, 1);
 
 
-        console.log(arr);
-        console.log(useArr);
+        console.log(arr);*/
+        console.log(useArr.useArr);
         res.render("chat/oneChat");
     }
 }

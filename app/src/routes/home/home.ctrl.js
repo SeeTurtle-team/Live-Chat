@@ -43,7 +43,7 @@ const process ={
         const response = await user.login();
         if(response.success){
             req.session.userId = req.body.id;
-            useArr.push(req.body.id);
+            useArr.useArr.push(req.body.id);
             session.userId = req.body.id;
         }
         console.log(session.userId);
@@ -53,7 +53,7 @@ const process ={
     logout : (req, res) => {
         
         req.session.destroy(()=>{
-            
+            useArr.deleteUser(session.userId);
             req.session
         });
         

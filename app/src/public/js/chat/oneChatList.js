@@ -5,7 +5,7 @@ const useArr = new Array();
 const deleteUser = (id) =>{
     var num = -1;
     for(var i=0;i<useArr.length;i++){
-        if(id===arr[i]){
+        if(id===useArr[i]){
             num = i;
         }
     }
