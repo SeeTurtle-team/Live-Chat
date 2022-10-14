@@ -1,7 +1,7 @@
 "use strict";
 
 const { json } = require("express");
-const Open = require("../../models/boardStorage");
+const Open = require("../../models/WriteStorage");
 
 const output = {
     board : async (req, res) => {
