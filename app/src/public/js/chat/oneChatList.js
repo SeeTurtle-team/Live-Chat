@@ -2,6 +2,14 @@
 
 const useArr = new Array();
 
+const addUser = (id) => {
+    for(var i=0;i<useArr.length;i++){
+        if(id===useArr[i]){
+            return;
+        }
+    }
+    useArr.push(id);
+}
 const deleteUser = (id) =>{
     var num = -1;
     for(var i=0;i<useArr.length;i++){
@@ -17,5 +25,6 @@ const deleteUser = (id) =>{
 
 module.exports = {
     useArr,
+    addUser,
     deleteUser,
 };

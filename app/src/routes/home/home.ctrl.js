@@ -43,7 +43,7 @@ const process ={
         const response = await user.login();
         if(response.success){
             req.session.userId = req.body.id;
-            useArr.useArr.push(req.body.id);
+            useArr.addUser(req.body.id);
             session.userId = req.body.id;
         }
         console.log(session.userId);
