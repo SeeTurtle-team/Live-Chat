@@ -28,19 +28,7 @@ const output = {
         }
         
     },
-    random : (req,res) => {
-        if(!req.session.userId){
-            res.send(`
-                <script>
-                    alert("로그인 페이지로 이동합니다");
-                    location.href="/login";
-                </script>            
-            `);
-        }else{
-            res.render('chat/random');
-        }
-        
-    },
+    
     open : (req,res) => {
         
         res.render("chat/newOpen");
@@ -76,7 +64,22 @@ const output = {
         console.log("일대일 채팅 접속자 검색 결과 : " + useSearch)
         var countUser = useSearch.length;
         res.render("chat/oneChat",{rows:useSearch,count:countUser});
-    }
+    },
+
+    //--------------랜덤채팅--------------//
+    random : (req,res) => {
+        if(!req.session.userId){
+            res.send(`
+                <script>
+                    alert("로그인 페이지로 이동합니다");
+                    location.href="/login";
+                </script>            
+            `);
+        }else{
+            res.render('chat/random');
+        }
+        
+    },
 }
 
 const process = {
