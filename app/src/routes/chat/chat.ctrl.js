@@ -54,20 +54,6 @@ const output = {
     },
     //----------------일대일 채팅-----------------//
     oneChat : (req, res) => {
-        /*var arr = [1,2,3,4,5];
-        console.log(arr);
-
-        var sec = 2;
-        var num=0;
-        for(var i=0;i<arr.length;i++){
-            if(sec===arr[i]){
-                num = i;
-            }
-        }
-        arr.splice(num, 1);
-
-
-        console.log(arr);*/
         if(!req.session.userId){
             res.send(`
                 <script>
@@ -77,7 +63,8 @@ const output = {
             `);
         }else{
             console.log(useArr.useArr);
-            res.render("chat/oneChat");
+            var countUser = useArr.useArr.length;
+            res.render("chat/oneChat",{rows:useArr.useArr,count:countUser});
         }
         
     }
