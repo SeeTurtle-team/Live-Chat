@@ -67,6 +67,13 @@ const output = {
             res.render("chat/oneChat",{rows:useArr.useArr,count:countUser});
         }
         
+    },
+
+    oneSearch : (req,res) => {
+        const text = req.query.text;
+        console.log(text);
+        const useSearch = useArr.searchUser(text);
+        console.log("일대일 채팅 접속자 검색 결과 : " + useSearch)
     }
 }
 

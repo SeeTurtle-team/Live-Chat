@@ -23,10 +23,20 @@ const deleteUser = (id) =>{
     }
 }
 
+const searchUser = (text) => {
+    const search = new Array();
+    for(var i=0;i<useArr.length;i++){
+        if(text===useArr[i]){
+            search.push(useArr[i]);
+        }
+    }
 
+    return search;
+}
 
 module.exports = {
     useArr,
     addUser,
     deleteUser,
+    searchUser
 };

@@ -44,6 +44,8 @@
     border-radius: 10px;
 }
 
+
+/*오픈 채팅*/
 .openName{
     font-size:20px;
 }
@@ -114,4 +116,15 @@
   background-color: white;
   border-radius: 5px;
   margin-top: 10px;
+}
+
+
+/*일대일 채팅*/
+.oneBtn {
+    padding : 10px;
+    color : white;
+    background : black;
+    border-radius: 10px;
+    font-size:10;
+    margin-left: 85%;
 }

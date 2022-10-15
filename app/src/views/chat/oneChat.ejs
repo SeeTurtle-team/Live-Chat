@@ -8,6 +8,13 @@
         <link rel = "stylesheet" href="/css/chat/chat.css">
         <script src="/socket.io/socket.io.js"></script>
     </haed>
+    <script>
+        function search(){
+            var text = document.getElementById("search").value;
+            
+            location.href = "/chat/oneSearch?text="+text;
+        }
+    </script>
     <body>
         <div class = "container">
             <header>
@@ -25,7 +32,7 @@
         </div>
         <div class = "search-box">
             <input type="text" id="search"/>
-            <button onclick = "" class="btn-search">검색하기</button>
+            <button onclick = "search()" class="btn-search">검색하기</button>
         </div>
         
         <div>
@@ -39,8 +46,8 @@
                     var data = rows[i];
                 %>
                 <div class="openChat">
-                    <p class="openName"><%=data%></p>
-                    <button>채팅하기</button>
+                    <p class="openName">사용자 ID : <%=data%></p>
+                    <button class="oneBtn">채팅하기</button>
                 </div>
                 
                 <hr>
