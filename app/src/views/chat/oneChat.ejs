@@ -7,6 +7,7 @@
         <link rel = "stylesheet" href ="/css/home/index.css">
         <link rel = "stylesheet" href="/css/chat/chat.css">
         <script src="/socket.io/socket.io.js"></script>
+        <script src="/js/chat/oneChatStart.js"></script>
     </haed>
     <script>
         function search(){
@@ -14,6 +15,8 @@
             
             location.href = "/chat/oneSearch?text="+text;
         }
+
+        
     </script>
     <body>
         <div class = "container">
@@ -47,7 +50,7 @@
                 %>
                 <div class="openChat">
                     <p class="openName">사용자 ID : <%=data%></p>
-                    <button class="oneBtn">채팅하기</button>
+                    <button class="oneBtn" onclick="goChat('<%=data%>')">채팅하기</button>
                 </div>
                 
                 <hr>

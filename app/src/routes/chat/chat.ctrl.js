@@ -88,6 +88,10 @@ const process = {
         const open = new Open(req.body);
         const response = await open.Open();
         return res.json(response);
+    },
+
+    oneStart : (req,res) => {
+        console.log(req.body);
     }
 }
 

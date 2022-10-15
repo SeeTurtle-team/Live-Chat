@@ -21,4 +21,5 @@ router.get('/oneSearch',ctrl.output.oneSearch);//일대일 검색기능
 //---------------post------------------//
 router.post('/newOpen',ctrl.process.open);  //오픈채팅 새로운 방 만들기
 
+router.post('/oneStart', ctrl.process.oneStart);
 module.exports=router;
