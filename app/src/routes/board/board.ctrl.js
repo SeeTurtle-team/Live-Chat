@@ -1,58 +1,40 @@
 "use strict";
 
 const { json } = require("express");
+const db = require("../../config/db");
 const Open = require("../../models/WriteStorage");
 
 const output = {
     board : async (req, res) => {
         if(req.session.userId){
-            res.render("board/board",{login:'로그아웃'});
+            res.render("board/list",{login:'로그아웃'});
         }else{
-            res.render("board/board",{login:'로그인'});
+            res.render("board/list",{login:'로그인'});
         }
-    }
-}
-
-
-
-const process ={
-    open : async (req,res) => {
-        console.log(req.body);
-        const open = new Open(req.body);
-        const response = await open.Open();
-        return res.json(response);
-    }
-}
-
-const boardList = {
+    },
     list : (req, res, next) => {
-        res.redirect('/board/board/1');
-    }
-}
-
-const boardTable = {
-    table :  (req, res, next) => {
-        var page = req.params.page; 
+        res.redirect('/board/list');
+    },
+    table :  (req, res) => {
+        // var page = req.params.page; 
         var mysql = require('../../config/db');
         var con = mysql.createConnection();
-        var sql = "select seq, openName, openCategory, openDetail from openchat"; 
-        con.query(sql, function (err, rows) { 
+        var sql = 'SELECT * FROM write'; 
+        con.query(sql, function (err, rows, fields) { 
             if (err) console.error(err); 
-            res.render('board', rows = sql); 
+            else res.render('board/list.ejs', {list : rows}); 
+        });
+    },
+    redirect : (req, res) => {
+        var sql = 'SELECT * FROM write'; 
+        db.query(sql, function (err, rows, fields) { 
+            if (err) console.error(err); 
+            else res.render('board/list.ejs', {list : rows}); 
         });
     }
-};
 
-const boardRedirect = {
-    redirect : (req, res, next) => {
-        res.redirect('/board/board/1');
-    }
 }
 
 module.exports = {
     output,
-    process,
-    boardList,
-    boardTable,
-    boardRedirect,
 };
