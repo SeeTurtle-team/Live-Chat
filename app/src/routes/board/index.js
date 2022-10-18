@@ -8,10 +8,12 @@ const ctrl = require("./board.ctrl");
 
 router.get('/', ctrl.output.board); 
 
-router.get('/board', ctrl.output.list);
+router.get('/newBoard', ctrl.output.newBoard);
 
-router.get('/board/:list', ctrl.output.table);
+router.get('/writeG', ctrl.output.writeG);
 
-router.get('/list', ctrl.output.redirect);
+router.get('/list', ctrl.output.table);
+
+router.post('/writeP', ctrl.process.writeP);
 
 module.exports=router;
