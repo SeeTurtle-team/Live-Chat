@@ -43,7 +43,7 @@
         <div class = "container">
             <header>
                 <nav>
-                    <div class = "icon" onclick="location.href = '/'">LiveChat</div>
+                    <div class = "icon" onclick="location.href = '/'">HolyMoly</div>
                     <div class = "gnb">
                         <a href="/chat">오픈 채팅</a>
                         <a href="/board">게시판</a>
@@ -76,13 +76,15 @@
             <td width = "100">작성자</td>
             <td width = "300">제목</td>
             <td width = "200">작성일</td>
+            <td width = "50">조회수</td>
         </tr>
         <% for(var i=0; i<list.length; i++) { %>
         <tr>
             <td><%=i+1 %></td>
-            <td><%=list[i].openName %></td>
-            <td><%=list[i].openCategory %></td>
-            <td><%=list[i].openDetail %></td>
+            <td><%=list[i].writer %></td>
+            <td><%=list[i].title %></td>
+            <td><%=list[i].date %></td>
+            <td><%=list[i].views %></td>
         </tr>
         <% } %>
     </table>
