@@ -18,6 +18,8 @@ router.get('/oneChat',ctrl.output.oneChat);//일대일 리스트
 
 router.get('/oneSearch',ctrl.output.oneSearch);//일대일 검색기능
 
+router.get('/oneMyList',ctrl.output.oneMyList);
+
 //---------------post------------------//
 router.post('/newOpen',ctrl.process.open);  //오픈채팅 새로운 방 만들기
 

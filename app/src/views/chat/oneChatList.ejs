@@ -15,7 +15,9 @@
             
             location.href = "/chat/oneSearch?text="+text;
         }
-
+        function myList(){
+            location.href="/chat/oneMyList";
+        }
         
     </script>
     <body>
@@ -59,7 +61,7 @@
         </div>
 
         <div>
-            <button class="btn">내 채팅 방 목록</button>
+            <button onclick = "myList()" class="btn">내 채팅 방 목록</button>
         </div>
     </body>
 </html>

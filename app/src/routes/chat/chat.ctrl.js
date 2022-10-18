@@ -52,7 +52,7 @@ const output = {
         }else{
             console.log(useArr.useArr);
             var countUser = useArr.useArr.length;
-            res.render("chat/oneChat",{rows:useArr.useArr,count:countUser});
+            res.render("chat/oneChatList",{rows:useArr.useArr,count:countUser});
         }
         
     },
@@ -63,7 +63,11 @@ const output = {
         const useSearch = useArr.searchUser(text);
         console.log("일대일 채팅 접속자 검색 결과 : " + useSearch)
         var countUser = useSearch.length;
-        res.render("chat/oneChat",{rows:useSearch,count:countUser});
+        res.render("chat/oneChatList",{rows:useSearch,count:countUser});
+    },
+
+    oneMyList : (req,res) => {
+        res.render("chat/myOneChat");
     },
 
     //--------------랜덤채팅--------------//
