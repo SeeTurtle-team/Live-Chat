@@ -1,8 +1,11 @@
 "use strict";
 
 const { json } = require("express");
-const Open = require("../../models/Open");
-const useArr = require("../../public/js/chat/oneChatList");
+const Open = require("../../models/Open");//오픈채팅
+const OneChat = require("../../models/OneChat");
+
+const useArr = require("../../public/js/chat/oneChatList");//접속한 유저 저장 리스트
+
 const output = {
     chat : async (req,res) => {  //오픈 채팅 목록 페이지
         if(!req.session.userId){
@@ -66,8 +69,12 @@ const output = {
         res.render("chat/oneChatList",{rows:useSearch,count:countUser});
     },
 
-    oneMyList : (req,res) => {
-        res.render("chat/myOneChat");
+    oneMyList : async (req,res) => {
+        const oneList = new OneChat(req.body);
+        var userId = req.session.userId;
+        const rows = await oneList.oneList(userId);
+        console.log(rows);
+        res.render("chat/oneMyList");
     },
 
     //--------------랜덤채팅--------------//
