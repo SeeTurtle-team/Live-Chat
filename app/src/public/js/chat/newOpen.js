@@ -29,6 +29,7 @@ function newChat(){
     .then((res)=>{
         if(res.success){
             alert('성공');
+            location.href='/chat';
         } else {
             alert(res.msg);
         }

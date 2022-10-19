@@ -75,15 +75,16 @@ const output = {
 }
 
 const process = {
-    open : async (req,res) => {
+    open : async (req,res) => {  //오픈 채팅 방 만들기
         console.log(req.body);
         const open = new Open(req.body);
         const response = await open.Open();
         return res.json(response);
     },
 
-    oneStart : (req,res) => {
-        console.log(req.body);
+    oneStart : (req,res) => {   //일대일 채팅 방 만들기
+        const userId = req.session.userId;
+        console.log(req.body.id + " 와"+userId + " 일대일 채팅 시작");
     }
 }
 
