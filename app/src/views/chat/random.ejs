@@ -6,23 +6,7 @@
         <title>랜덤 채팅</title>
         <link rel = "stylesheet" href ="/css/home/index.css">
         <script src="/socket.io/socket.io.js"></script>
-        
     </head>
-    <script>
-        /*
-        // 위의 socket.io.js에서 뽑아 쓴다.
-        const socket = io.connect('http://localhost:5000', { // ws:// 를 안쓰고 http를 쓴다
-           path: '/socket.io', // 서버 path와 일치시켜준다
-           transports: ['websocket']
-        });
-      // 서버로부터 메세지 수신
-        socket.on('news', function (data) {
-            console.log(data);
-            
-            // 서버에게 메세지 송신
-            socket.emit('reply', 'Hello Node.JS');
-        });*/
-     </script>
     <body>
         <div class = "container">
             <header>
@@ -35,30 +19,38 @@
                         <a href="/chat/random">랜덤채팅</a>
                         <a href="/login" class="login_menu">로그아웃</a>
                     </div>
-                    
                 </nav>
-                
             </header>
         </div>
-        <textarea rows="20" cols="30" id="chat"></textarea><br>
-        <input type="text" id="user"><input type="button" value="msg submit" onclick="myOnClick()">
+        <span id ="id"><%=userId%></span>
+        <button id="fBtn" onclick="finding()">상대 찾기</button>
+        <button id="eBtn" style="visibility:hidden;" onclick="exit()">나가기</button>
     </body>
-
     <script>
-        var socket = io.connect('http://localhost:5000');
-    
-        socket.emit('joinRoom', {roomName: 'myroom'});
-    
-        socket.on('recMsg', function (data) {
-            console.log(data.comment)
-            document.getElementById("chat").append(data.comment);
-        });
-    
-        function myOnClick() {
-            var msg = document.getElementById("user").value ;
+        const userId = document.getElementById("id").innerText;
+        const target1 = document.getElementById("fBtn");
+        const target2 = document.getElementById("eBtn");
+
+        function finding() {
+            console.log("searching users...");
+
+            target1.style.visibility = 'hidden';
+            target2.style.visibility = 'visible';
             
-            socket.emit("reqMsg", {comment:msg});
-            
+            var socket = io.connect('http://localhost:5000');
+
+            socket.emit('searchingUser', {userId:userId, nowUser:1});
+        }
+
+        function exit() {
+            console.log("exit the room");
+
+            target1.style.visibility = 'visible';
+            target2.style.visibility = 'hidden';
+
+            var socket = io.connect('http://localhost:5000');
+
+            socket.emit('exitRoom', {userId:userId, nowUser:-1});
         }
     </script>
 </html>

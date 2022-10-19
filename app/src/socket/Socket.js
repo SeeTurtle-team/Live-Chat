@@ -1,5 +1,6 @@
 const SocketIO = require('socket.io');
 const server = require("../../bin/www");
+var nowUser = 0;
 
 class Socket{
     constructor(){
@@ -42,6 +43,25 @@ class Socket{
                 })
             }*/
         
+            //랜덤채팅 상대 찾기
+            socket.on('searchingUser', function(data) {
+                console.log(data);
+                nowUser = nowUser + data.nowUser;
+                console.log(nowUser);
+            });
+
+            //랜덤채팅 방 나가기
+            socket.on('exitRoom', function(data) {
+                console.log(data);
+                nowUser = nowUser + data.nowUser;
+                console.log(nowUser);
+            });
+
+
+
+
+
+
             socket.on('test',function(data){
                 console.log("/-----------테스트 시작--------------//")
                 var test = data.roomName;

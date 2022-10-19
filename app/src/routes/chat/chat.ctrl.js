@@ -66,10 +66,8 @@ const output = {
 
     //--------------랜덤채팅--------------//
     random : (req,res) => {
-        
-        res.render('chat/random');
-        
-        
+        var userId = req.session.userId;
+        res.render('chat/random', {userId});
     },
 
 }    
