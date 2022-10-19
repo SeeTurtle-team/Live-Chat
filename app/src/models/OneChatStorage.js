@@ -18,7 +18,6 @@ class OneChatStorage{
     }
 
     static async insertOne(userId1,nextSeq){
-        console.log("쿼리 도는곳")
         return new Promise((resolve,reject) => {
             const query = "insert into oneChatList(userId,seq) values(?,?);";
             db.query(query,[userId1,nextSeq],(err)=>{
@@ -32,6 +31,19 @@ class OneChatStorage{
         return new Promise((resolve,reject) =>{
             const query = "select * from oneChatList order by seq desc limit 1";
             db.query(query,(err,row)=>{
+                if(err){reject(err)};
+                resolve(row);
+            })
+        })
+    }
+
+    static async checkOne(userId1,userId2){  //채팅방 중복 생성이 되지 않게
+        return new Promise((resolve,reject) => {
+            const query = "select a.seq, a.userId userId1, b.userId userId2"
+                        + " from oneChatList a,oneChatList b "
+                        + "where a.userId =? and a.seq=b.seq and a.userId!=b.userId"
+                        + " and b.userId = ?";
+            db.query(query,[userId1,userId2],(err,row)=>{
                 if(err){reject(err)};
                 resolve(row);
             })

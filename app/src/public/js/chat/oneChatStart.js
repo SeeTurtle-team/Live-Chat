@@ -18,7 +18,7 @@ function goChat(id){
         if(res.success){
             alert(id+'님과 채팅을 시작합니다');
         }else{
-            alert(res.msg +"문제가 발생했습니다");
+            alert(res.msg);
         }
     })
 }

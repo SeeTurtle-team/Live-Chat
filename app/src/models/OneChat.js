@@ -19,8 +19,11 @@ class OneChat{
 
     async insertOne(userId1,userId2){
         const maxSeq = await this.maxSeq();
-        console.log("nextSeq : "+maxSeq[0].seq);
         const nextSeq = parseInt(maxSeq[0].seq)+1;
+        const check = await OneChatStorage.checkOne(userId1,userId2);
+        if(check!==null){
+            return ({success:false,msg : "이미 존재하는 채팅방입니다"});
+        }
         try{
             console.log("insertOne 들어옴")
             const response1 = await OneChatStorage.insertOne(userId1,nextSeq);
@@ -50,6 +53,8 @@ class OneChat{
             return {success : false, msg : err};
         }
     }
+
+    
 }
 
 module.exports = OneChat;
