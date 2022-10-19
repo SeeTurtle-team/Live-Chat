@@ -60,6 +60,9 @@ const output = {
         console.log(rows);
         res.render("chat/oneMyList",{rows:rows,userId});
     },
+    oneRoom : (req,res) => {
+
+    },
 
     //--------------랜덤채팅--------------//
     random : (req,res) => {
@@ -69,10 +72,7 @@ const output = {
         
     },
 
-    oneRoom : (req,res) => {
-
-    }
-}
+}    
 
 const process = {
     open : async (req,res) => {  //오픈 채팅 방 만들기
@@ -82,9 +82,13 @@ const process = {
         return res.json(response);
     },
 
-    oneStart : (req,res) => {   //일대일 채팅 방 만들기
-        const userId = req.session.userId;
-        console.log(req.body.id + " 와"+userId + " 일대일 채팅 시작");
+    oneStart : async (req,res) => {   //일대일 채팅 방 만들기
+        const userId1 = req.session.userId;
+        const userId2 = req.body.id;
+        console.log(req.body.id + " 와"+userId1 + " 일대일 채팅 시작");
+        const one = new OneChat(req.body);
+        const response = await one.insertOne(userId1,userId2);
+        return res.json(response);
     }
 }
 
