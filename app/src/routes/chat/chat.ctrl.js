@@ -74,7 +74,7 @@ const output = {
         var userId = req.session.userId;
         const rows = await oneList.oneList(userId);
         console.log(rows);
-        res.render("chat/oneMyList");
+        res.render("chat/oneMyList",{rows:rows,userId});
     },
 
     //--------------랜덤채팅--------------//

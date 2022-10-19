@@ -27,6 +27,30 @@
             <input type="text" id="search"/>
             <button onclick = "" class="btn-search">검색하기</button>
         </div>
+        <div>
+            <h4>내 일대일 채팅</h4>
+        </div>
+        <hr>
+        <div>
+            <%
+                var i = 0;
+                for(i;i<rows.length;i++){
+                    var data = rows[i];
+                    var id=userId;
+                    var other;
+                    if(userId===data.userId1){
+                        other = data.userId2;
+                    }else{
+                        other = data.userId1;
+                    }
+                %>
+                    <div class="openChat">
+                        <p class="openName">상대 ID : <%=other%></p>
+                        <button class="oneBtn">채팅하기</button>
+                    </div>
+                    <hr>
+                <%}%>
+        </div>
         
     </body>
 </html>
