@@ -12,7 +12,9 @@ router.get('/newBoard', ctrl.output.newBoard);
 
 router.get('/writeG', ctrl.output.writeG);
 
-router.get('/list', ctrl.output.table);
+// router.get('/list', ctrl.output.table);
+
+router.get('/page/:page', ctrl.output.page);
 
 router.post('/writeP', ctrl.process.writeP);
 
