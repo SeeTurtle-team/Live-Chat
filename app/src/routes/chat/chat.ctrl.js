@@ -8,14 +8,6 @@ const useArr = require("../../public/js/chat/oneChatList");//접속한 유저 �
 
 const output = {
     chat : async (req,res) => {  //오픈 채팅 목록 페이지
-        if(!req.session.userId){
-            res.send(`
-                <script>
-                    alert("로그인 페이지로 이동합니다");
-                    location.href="/login";
-                </script>            
-            `);
-        }
         const option = req.query.option;
         if(option===undefined){
             const open = new Open();
@@ -45,19 +37,11 @@ const output = {
     },
     //----------------일대일 채팅-----------------//
     oneChat : (req, res) => {
-        if(!req.session.userId){
-            res.send(`
-                <script>
-                    alert("로그인 페이지로 이동합니다");
-                    location.href="/login";
-                </script>            
-            `);
-        }else{
-            console.log(useArr.useArr);
-            var countUser = useArr.useArr.length;
-            res.render("chat/oneChatList",{rows:useArr.useArr,count:countUser});
-        }
-        
+       
+        console.log(useArr.useArr);
+        var countUser = useArr.useArr.length;
+        res.render("chat/oneChatList",{rows:useArr.useArr,count:countUser});
+             
     },
 
     oneSearch : (req,res) => {
@@ -79,18 +63,15 @@ const output = {
 
     //--------------랜덤채팅--------------//
     random : (req,res) => {
-        if(!req.session.userId){
-            res.send(`
-                <script>
-                    alert("로그인 페이지로 이동합니다");
-                    location.href="/login";
-                </script>            
-            `);
-        }else{
-            res.render('chat/random');
-        }
+        
+        res.render('chat/random');
+        
         
     },
+
+    oneRoom : (req,res) => {
+
+    }
 }
 
 const process = {
