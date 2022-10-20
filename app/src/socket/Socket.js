@@ -1,5 +1,7 @@
 const SocketIO = require('socket.io');
 const server = require("../../bin/www");
+const OneChat = require("../models/OneChat");
+
 var nowUser = 0;
 
 class Socket{
@@ -115,12 +117,14 @@ class Socket{
                         console.log(room);
                         var roomSeq = room[i];
                         var userId = data.userId;
-                        socket.broadcast.to(roomSeq).emit('oneMsg',{class:'msg',comment: userId + " : " + data.comment+'\n'})//msg 보낸 사람빼고 전부
+                        socket.broadcast.to(roomSeq).emit('oneMsg',{class:'other',comment: userId + " : " + data.comment+'\n'})//msg 보낸 사람빼고 전부
                     }
                 }              
             })       
             
         })
+
+       
     }
 }
 

@@ -67,7 +67,7 @@ const output = {
         const one = new OneChat(req.body);
         const rows = await one.selectOne(seq);
         console.log(rows);
-        res.render("chat/oneRoom",{userId,other,rows:rows});
+        res.render("chat/oneRoom",{userId,other,rows:rows,seq});
     },
 
     //--------------랜덤채팅--------------//
@@ -92,6 +92,16 @@ const process = {
         console.log(req.body.id + " 와"+userId1 + " 일대일 채팅 시작");
         const one = new OneChat(req.body);
         const response = await one.insertOne(userId1,userId2);
+        return res.json(response);
+    },
+
+    oneInsert : async (req,res) => {
+        const one = new OneChat(req.body);
+        const userId = req.body.userId;
+        const chat = req.body.chat;
+        const seq = parseInt(req.body.seq);
+        const response = await one.insertOneChat(userId,chat,seq);
+        console.log("success : "+response.success);
         return res.json(response);
     }
 }

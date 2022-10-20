@@ -29,4 +29,6 @@ router.post('/newOpen',interceptor,ctrl.process.open);  //오픈채팅 새로운
 
 router.post('/oneStart',interceptor, ctrl.process.oneStart);
 
+router.post('/oneInsert',ctrl.process.oneInsert);
+
 module.exports=router;

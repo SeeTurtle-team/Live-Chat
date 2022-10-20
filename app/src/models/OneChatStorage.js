@@ -52,11 +52,22 @@ class OneChatStorage{
 
     static async selectOne(seq){
         return new Promise((resolve,reject) => {
-            const query = "select * from oneChat where chatSeq=?";
+            const query = "select * from oneChat where chatSeq=? order by seq";
             db.query(query,[seq],(err,rows) => {
                 if(err){reject(err)};
                 resolve(rows);
             });
+        })
+    }
+
+    static async insertOneChat(userId,chat,seq){
+        console.log("tlfgodehlsl");
+        return new Promise((resolve,reject) =>{
+            const query = "insert oneChat(userId,chat,chatSeq) values (?,?,?);";
+            db.query(query,[userId,chat,seq],(err) => {
+                if(err){reject(err)}
+                resolve({success:true});
+            })
         })
     }
 }
