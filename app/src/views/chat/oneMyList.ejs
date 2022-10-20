@@ -46,11 +46,22 @@
                 %>
                     <div class="openChat">
                         <p class="openName">상대 ID : <%=other%></p>
-                        <button onclick="oneChatStart('<%=other%>')" class="oneBtn">채팅하기</button>
+                        <button onclick="oneChatStart('<%=other%>','<%=data.seq%>')" class="oneBtn">채팅하기</button>
                     </div>
                     <hr>
                 <%}%>
         </div>
         
     </body>
+    <script>
+        const pageUrl = window.location.href;
+        
+        const url = new URL(pageUrl);
+        const urlParams = url.searchParams;
+
+        const roomName = urlParams.get('seq'); 
+
+        const userId = document.getElementById("id").innerText;
+        console.log(userId);
+    </script>
 </html>

@@ -1,8 +1,8 @@
 "use strict";
 
-function goChat(id){
+function goChat(id,seq){
     console.log("채팅할 대상 : "+ id);
-
+    
     const req = {
         id : id,
     }
@@ -24,6 +24,8 @@ function goChat(id){
     })
 }
 
-function oneChatStart(id){
-    location.href="/chat/oneRoom?id="+id;
+function oneChatStart(id, seq){
+    console.log(seq);
+    seq = seq + "one"
+    location.href="/chat/oneRoom?id="+id+"&seq="+seq;
 }

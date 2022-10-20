@@ -7,6 +7,7 @@
         <link rel = "stylesheet" href ="/css/home/index.css">
         <link rel = "stylesheet" href="/css/chat/chat.css">
         <script src="/js/chat/oneChatStart.js"></script>
+        <script src="/socket.io/socket.io.js"></script>
     </head>
     <body>
         <div class = "container">
@@ -41,4 +42,60 @@
             </div>
         </div>
     </body>
+    <script>
+        const pageUrl = window.location.href;
+        
+        const url = new URL(pageUrl);
+        const urlParams = url.searchParams;
+
+        const roomName = urlParams.get('seq'); 
+
+        const userId = document.getElementById("id").innerText;
+        console.log(userId);
+
+        var socket = io.connect('http://localhost:5000');
+        
+        socket.emit('joinRoom',{roomName:roomName,userId:userId});
+
+        socket.on('oneMsg', function (data) {
+            console.log(data.comment)
+            var chat = document.getElementById('chat');
+            var className=data.class;
+            /*switch(className) {
+                case 'msg':
+                className = 'other'
+                break
+
+                case 'connect':
+                className = 'connect'
+                break
+
+                case 'disconnect':
+                className = 'disconnect'
+                break
+            }*/
+            var message = document.createElement('div');
+            var node = document.createTextNode(data.comment)
+            //document.getElementById("chat").append(data.comment);
+            
+
+            message.classList.add(className);
+            message.appendChild(node);
+            chat.appendChild(message);
+        });
+
+        function myOnClick() {
+            var message = document.getElementById("user").value ;
+            console.log(roomName);
+            socket.emit('one',{roomName:roomName,userId:userId,comment:message})
+            //socket.emit(roomName, {comment:msg});
+            document.getElementById('user').value = '';
+            var chat = document.getElementById('chat')
+            var msg = document.createElement('div')
+            var node = document.createTextNode(userId+" : "+message)
+            msg.classList.add('me');
+            msg.appendChild(node);
+            chat.appendChild(msg);
+        }
+    </script>
 </html>
