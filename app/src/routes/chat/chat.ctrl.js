@@ -61,13 +61,15 @@ const output = {
         res.render("chat/oneMyList",{rows:rows,userId});
     },
     oneRoom : (req,res) => {
-
+        const userId = req.session.userId;
+        const other = req.body.id;
+        res.render("chat/oneRoom",{userId,other});
     },
 
     //--------------랜덤채팅--------------//
     random : (req,res) => {
         var userId = req.session.userId;
-        res.render('chat/random', {userId});
+        res.render('/chat/random', {userId});
     },
 
 }    

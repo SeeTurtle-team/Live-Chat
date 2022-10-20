@@ -15,7 +15,7 @@
                     <div class = "icon" onclick="location.href = '/'">LiveChat</div>
                     <div class = "gnb">
                         <a href="/chat">오픈 채팅</a>
-                        <a href="/board">게시판</a>
+                        <a href="/board/page/1">게시판</a>
                         <a href="/chat/oneChat">1대1 채팅</a>
                         <a href="/chat/random">랜덤채팅</a>
                         <a href="/login" class="login_menu">로그아웃</a>
@@ -27,30 +27,18 @@
             <input type="text" id="search"/>
             <button onclick = "" class="btn-search">검색하기</button>
         </div>
-        <div>
-            <h4>내 일대일 채팅</h4>
+
+        <div class="content">
+            
+            <div class="chat-box" id="chat">
+                
+           
+            </div>
+            <div>
+                <span id ="id"><%=userId%></span>
+                <input class="text-submit" type="text" id="user"/>
+                <button onclick="myOnClick()" class="btn-submit">전송</button>
+            </div>
         </div>
-        <hr>
-        <div>
-            <%
-                var i = 0;
-                for(i;i<rows.length;i++){
-                    var data = rows[i];
-                    var id=userId;
-                    var other;
-                    if(userId===data.userId1){
-                        other = data.userId2;
-                    }else{
-                        other = data.userId1;
-                    }
-                %>
-                    <div class="openChat">
-                        <p class="openName">상대 ID : <%=other%></p>
-                        <button onclick="oneChatStart('<%=other%>')" class="oneBtn">채팅하기</button>
-                    </div>
-                    <hr>
-                <%}%>
-        </div>
-        
     </body>
 </html>

@@ -17,8 +17,13 @@ function goChat(id){
     .then((res)=>{
         if(res.success){
             alert(id+'님과 채팅을 시작합니다');
+            location.href = '/chat/oneRoom?id='+id;
         }else{
             alert(res.msg);
         }
     })
+}
+
+function oneChatStart(id){
+    location.href="/chat/oneRoom?id="+id;
 }
