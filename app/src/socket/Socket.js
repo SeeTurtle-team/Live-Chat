@@ -106,8 +106,7 @@ class Socket{
             socket.emit('news','hello monkey');
 
 
-            socket.on('one',function(data){
-                console.log("/-----------테스트 시작--------------//")
+            socket.on('one',function(data){//일대일 채팅
                 var test = data.roomName;
                 console.log('test count');
                 for(var i=0; i<room.length;i++){
@@ -117,23 +116,9 @@ class Socket{
                         var roomSeq = room[i];
                         var userId = data.userId;
                         socket.broadcast.to(roomSeq).emit('oneMsg',{class:'msg',comment: userId + " : " + data.comment+'\n'})//msg 보낸 사람빼고 전부
-                        //io.sockets.in(roomSeq).emit('recMsg',{comment: userId + " : " + data.comment+'\n'})//방 전부
-                        /*
-                        socket.on(roomSeq,function(data){
-                            console.log(data.comment+"sadfasd");
-                            console.log(roomSeq)
-                            io.sockets.in(roomSeq).emit('recMsg',{comment: instanceId + " : " + data.comment+'\n'})
-                            console.log("adfsd");
-                            console.log('/---------------test is done------------//');
-                            return;
-                        })*/
-                       
                     }
-                    
-                }
-               
-            })
-        
+                }              
+            })       
             
         })
     }
