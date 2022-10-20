@@ -41,7 +41,8 @@ const output = {
         db.query(sql, [seq], (err, row) => {
             if(err) console.error(err);
             else res.render('board/content', {row : row[0]});
-        })
+        });
+        db.query(`UPDATE socket.write SET views=views+1 WhERE seq='${seq}'`);
     }
 
 
