@@ -4,7 +4,7 @@ const interceptor = (req, res, next) => {
     if(!req.session.userId){
         res.send(`
             <script>
-                alert("로그인 페이지로 이동합니다");
+                alert("로그인 페이지로 이동합니다board");
                 location.href="/login";
             </script>            
         `);

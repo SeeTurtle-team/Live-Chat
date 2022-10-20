@@ -7,9 +7,9 @@ const Open = require("../../models/WriteStorage");
 const output = {
     board : async (req, res) => {
         if(req.session.userId){
-            res.render("home/index",{login:'로그아웃'});
+            res.render("board/page/1",{login:'로그아웃'});
         }else{
-            res.render("home/index",{login:'로그인'});
+            res.render("board/page/1",{login:'로그인'});
         }
     },
     newBoard : (req, res) => {
@@ -34,6 +34,17 @@ const output = {
             else res.render('board/page.ejs', { rows : rows, page: page, length:rows.length-1, page_num:10});
         })
     },
+    content : (req, res, next) => {
+        var seq = req.params.seq;
+        console.log(seq);
+        var sql = "SELECT seq, writer, title, content, date, views FROM socket.write WHERE seq=?";
+        db.query(sql, [seq], (err, row) => {
+            if(err) console.error(err);
+            else res.render('board/content', {row : row[0]});
+        })
+    }
+
+
 }
 
 const process = {

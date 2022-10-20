@@ -12,6 +12,8 @@ router.get('/newBoard', ctrl.output.newBoard);
 
 router.get('/writeG', ctrl.output.writeG);
 
+router.get('/content/:seq', ctrl.output.content);
+
 // router.get('/list', ctrl.output.table);
 
 router.get('/page/:page', ctrl.output.page);
