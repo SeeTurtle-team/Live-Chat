@@ -32,7 +32,19 @@
         <div class="content">
             
             <div class="chat-box" id="chat">
-                
+                <%
+                    var i = 0;
+                    for(i;i<rows.length;i++){
+                        var data = rows[i];
+                        var id = data.userId;
+                        if(id===userId){
+                        %>
+                            <div class="me"><%=data.userId%> : <%=data.chat%></div>
+                        <%}else{
+                            %>
+                            <div class="other"><%=data.userId%> : <%=data.chat%></div>
+                        <%}
+                    }%>
            
             </div>
             <div>
@@ -48,7 +60,7 @@
         const url = new URL(pageUrl);
         const urlParams = url.searchParams;
 
-        const roomName = urlParams.get('seq'); 
+        const roomName = urlParams.get('name'); 
 
         const userId = document.getElementById("id").innerText;
         console.log(userId);

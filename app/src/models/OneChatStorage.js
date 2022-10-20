@@ -27,7 +27,7 @@ class OneChatStorage{
         })
     }
 
-    static async maxSeq(){
+    static async maxSeq(){  //채팅방 생성시 이전 최대 seq 조회
         return new Promise((resolve,reject) =>{
             const query = "select * from oneChatList order by seq desc limit 1";
             db.query(query,(err,row)=>{
@@ -47,6 +47,16 @@ class OneChatStorage{
                 if(err){reject(err)};
                 resolve(row);
             })
+        })
+    }
+
+    static async selectOne(seq){
+        return new Promise((resolve,reject) => {
+            const query = "select * from oneChat where chatSeq=?";
+            db.query(query,[seq],(err,rows) => {
+                if(err){reject(err)};
+                resolve(rows);
+            });
         })
     }
 }

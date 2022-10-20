@@ -54,6 +54,15 @@ class OneChat{
         }
     }
 
+    async selectOne(seq){
+        try{
+            const rows = await OneChatStorage.selectOne(seq);
+            return rows
+        }catch(err){
+            return {success : false, msg : err};
+        }
+    }
+
     
 }
 

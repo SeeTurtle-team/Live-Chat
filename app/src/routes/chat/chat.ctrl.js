@@ -60,10 +60,14 @@ const output = {
         console.log(rows);
         res.render("chat/oneMyList",{rows:rows,userId});
     },
-    oneRoom : (req,res) => {
+    oneRoom : async (req,res) => {
         const userId = req.session.userId;
         const other = req.body.id;
-        res.render("chat/oneRoom",{userId,other});
+        const seq = req.query.seq;
+        const one = new OneChat(req.body);
+        const rows = await one.selectOne(seq);
+        console.log(rows);
+        res.render("chat/oneRoom",{userId,other,rows:rows});
     },
 
     //--------------랜덤채팅--------------//

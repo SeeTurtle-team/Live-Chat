@@ -26,6 +26,6 @@ function goChat(id,seq){
 
 function oneChatStart(id, seq){
     console.log(seq);
-    seq = seq + "one"
-    location.href="/chat/oneRoom?id="+id+"&seq="+seq;
+    const name = seq + "one"
+    location.href="/chat/oneRoom?id="+id+"&seq="+seq+"&name="+name;
 }
