@@ -36,7 +36,6 @@ const output = {
     },
     content : (req, res, next) => {
         var seq = req.params.seq;
-        console.log(seq);
         var sql = "SELECT seq, writer, title, content, date, views FROM socket.write WHERE seq=?";
         db.query(sql, [seq], (err, row) => {
             if(err) console.error(err);
@@ -51,11 +50,11 @@ const output = {
 const process = {
     writeP : (req, res) => {
         var body = req.body;
-        var sql = 'INSERT INTO socket.write VALUES(?, ?, ?, ?, NOW(), ?)';
+        var sql = 'INSERT INTO socket.write VALUES(?, ?, ?, ?, NOW(), 0)';
         var params = [body.seq, body.writer, body.title, body.content, body.date, body.views];
         db.query(sql, params, function(err) {
             if(err) console.error(err);
-            else res.redirect('/board/list');
+            else res.redirect('/board/page/1');
         })
     },
 }
