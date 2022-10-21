@@ -6,6 +6,7 @@
         <title>오픈 채팅</title>
         <link rel = "stylesheet" href ="/css/home/index.css">
         <link rel = "stylesheet" href="/css/chat/chat.css">
+        <link rel = "stylesheet" href="/css/home/login.css">
         <script src="/js/chat/newOpen.js"></script>
         <script src="/socket.io/socket.io.js"></script>
         
@@ -30,27 +31,25 @@
                 
             </header>
         </div>
-        <div class="box">
-            <div class="name">
-                채팅방 이름 <input class="inp" id="name" type="text"/>
-            </div>
-            <div class="detail">
-                채팅방 내용 <input class="inp" id="detail" type="text"/>
-            </div>
-            <div class="category">
-                채팅방 카테고리
+  
+        <div class="login-page">
+            <div class="form">
+              <form class="login-form">
+                <input id="name" type="text" placeholder="채팅방 이름"/>
+                <input id="detail" type="password" placeholder="채팅방 내용"/>
                 <select class="inp" id="category">
                     <option value="exercise">운동</option>
                     <option value="게임">게임</option>
                     <option value="코딩">코딩</option>
                     <option value="진로">진로</option>
                 </select>
+                <p onclick = "newChat()" id="button">새 채팅방 만들기</p>
+                <p class="message">back <a href="/openChat">page</a></p>
+                
+              </form>
             </div>
-            
-        </div>
-        <div>
-            <button onclick = "newChat()" class="btn">새 채팅방 만들기</button>
-        </div>
+          </div>
+        
     </body>
 
 </html>
