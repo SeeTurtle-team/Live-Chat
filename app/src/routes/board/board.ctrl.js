@@ -1,15 +1,16 @@
 "use strict";
 
+const session = require("express-session");
 const { json } = require("express");
 const db = require("../../config/db");
 const Open = require("../../models/WriteStorage");
 
 const output = {
-    board : async (req, res) => {
+    board : (req, res) => {
         if(req.session.userId){
-            res.render("board/page/1",{login:'로그아웃'});
+            res.render("board/page",{login:'로그아웃'});
         }else{
-            res.render("board/page/1",{login:'로그인'});
+            res.render("board/page",{login:'로그인'});
         }
     },
     newBoard : (req, res) => {
@@ -37,11 +38,12 @@ const output = {
     content : (req, res, next) => {
         var seq = req.params.seq;
         var sql = "SELECT seq, writer, title, content, date, views FROM socket.write WHERE seq=?";
+        db.query(`UPDATE socket.write SET views=views+1 WHERE seq='${seq}'`);
         db.query(sql, [seq], (err, row) => {
             if(err) console.error(err);
             else res.render('board/content', {row : row[0]});
         });
-        db.query(`UPDATE socket.write SET views=views+1 WhERE seq='${seq}'`);
+        
     }
 
 
@@ -50,8 +52,9 @@ const output = {
 const process = {
     writeP : (req, res) => {
         var body = req.body;
-        var sql = 'INSERT INTO socket.write VALUES(?, ?, ?, ?, NOW(), 0)';
-        var params = [body.seq, body.writer, body.title, body.content, body.date, body.views];
+        const id = req.session.userId;
+        var sql = `INSERT INTO socket.write VALUES(?, '${id}', ?, ?, NOW(), 0)`;
+        var params = [body.writer, body.title, body.content];
         db.query(sql, params, function(err) {
             if(err) console.error(err);
             else res.redirect('/board/page/1');
