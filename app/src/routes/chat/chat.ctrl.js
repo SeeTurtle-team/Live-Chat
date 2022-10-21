@@ -76,6 +76,10 @@ const output = {
         res.render('/chat/random', {userId});
     },
 
+    video : (req,res) => {
+        res.render('video/videoChat');
+    }
+
 }    
 
 const process = {

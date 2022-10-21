@@ -24,6 +24,7 @@ router.get('/oneMyList',interceptor, ctrl.output.oneMyList);//일대일 채팅�
 
 router.get('/oneRoom', interceptor,ctrl.output.oneRoom);
 
+router.get('/video',ctrl.output.video);
 //---------------post------------------//
 router.post('/newOpen',interceptor,ctrl.process.open);  //오픈채팅 새로운 방 만들기
 
