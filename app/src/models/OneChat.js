@@ -64,7 +64,6 @@ class OneChat{
     }
 
     async insertOneChat(userId,chat,seq){
-        
         try{
             const response = await OneChatStorage.insertOneChat(userId,chat,seq);
             return response;
