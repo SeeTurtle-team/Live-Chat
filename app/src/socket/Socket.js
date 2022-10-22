@@ -1,6 +1,7 @@
 const SocketIO = require('socket.io');
 const server = require("../../bin/www");
 const OneChat = require("../models/OneChat");
+const randomStack = require("../public/js/chat/randomChatList");
 
 var nowUser = 0;
 
@@ -18,7 +19,9 @@ class Socket{
             var instanceId = session.userId;
             
             socket.on('disconnect',()=>{
+                var userId = session.userId;
                 console.log('클라이언트 접속 해제',socket.id);
+                randomStack.deleteUser(userId);
                 clearInterval(socket.interval);
                 
             });
@@ -47,16 +50,20 @@ class Socket{
         
             //랜덤채팅 상대 찾기
             socket.on('searchingUser', function(data) {
+                const userId = data.userId;
                 console.log(data);
-                nowUser = nowUser + data.nowUser;
-                console.log(nowUser);
+                console.log('찾기');
+                randomStack.addUser(userId);
+                console.log(randomStack.useArr);
             });
 
             //랜덤채팅 방 나가기
             socket.on('exitRoom', function(data) {
+                const userId = data.userId;
                 console.log(data);
-                nowUser = nowUser + data.nowUser;
-                console.log(nowUser);
+                console.log('나가기');
+                randomStack.deleteUser(userId);
+                console.log(randomStack.useArr);
             });
 
 

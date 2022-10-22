@@ -73,7 +73,7 @@ const output = {
     //--------------랜덤채팅--------------//
     random : (req,res) => {
         var userId = req.session.userId;
-        res.render('/chat/random', {userId});
+        res.render('chat/random', {userId});
     },
 
     video : (req,res) => {
