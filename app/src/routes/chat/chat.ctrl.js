@@ -36,7 +36,7 @@ const output = {
         res.render("chat/openRoom",{userId});
     },
     //----------------일대일 채팅-----------------//
-    oneChat : (req, res) => {
+    oneChat : (req, res) => {  //접속 유저 리스트
        
         console.log(useArr.useArr);
         var countUser = useArr.useArr.length;
@@ -44,7 +44,7 @@ const output = {
              
     },
 
-    oneSearch : (req,res) => {
+    oneSearch : (req,res) => { //접속 유저 찾기
         const text = req.query.text;
         console.log(text);
         const useSearch = useArr.searchUser(text);
@@ -53,14 +53,15 @@ const output = {
         res.render("chat/oneChatList",{rows:useSearch,count:countUser});
     },
 
-    oneMyList : async (req,res) => {
+    oneMyList : async (req,res) => {  //내 채팅 방 리스트
         const oneList = new OneChat(req.body);
         var userId = req.session.userId;
         const rows = await oneList.oneList(userId);
         console.log(rows);
         res.render("chat/oneMyList",{rows:rows,userId});
     },
-    oneRoom : async (req,res) => {
+
+    oneRoom : async (req,res) => {  //채팅방 페이지
         const userId = req.session.userId;
         const other = req.body.id;
         const seq = req.query.seq;
@@ -76,6 +77,7 @@ const output = {
         res.render('chat/random', {userId});
     },
 
+    //--------------화상채팅 고민 중----------//
     video : (req,res) => {
         res.render('video/videoChat');
     }

@@ -21,7 +21,8 @@ class OneChat{
         const maxSeq = await this.maxSeq();
         const nextSeq = parseInt(maxSeq[0].seq)+1;
         const check = await OneChatStorage.checkOne(userId1,userId2);
-        if(check!==null){
+        console.log(check.length);
+        if(check.length!==0){
             return ({success:false,msg : "이미 존재하는 채팅방입니다"});
         }
         try{
