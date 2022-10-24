@@ -37,10 +37,14 @@
                     for(i;i<rows.length;i++){
                         var data = rows[i];
                         var id = data.userId;
+                        var flag = data.flag;
                         if(id===userId){
-                        %>
-                            <div class="me"><%=data.userId%> : <%=data.chat%></div>
-                        <%}else{
+                            if(flag===0){%>
+                                <div class="me"><%=data.userId%> : <%=data.chat%><span class="flag"></div>
+                            <%}else{%>
+                                <div class="me"><%=data.userId%> : <%=data.chat%><span class="flag"><%=data.flag%></span></div>
+                            <%}        
+                        }else{
                             %>
                             <div class="other"><%=data.userId%> : <%=data.chat%></div>
                         <%}
