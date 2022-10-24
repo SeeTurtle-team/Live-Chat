@@ -66,9 +66,20 @@ const output = {
         const other = req.body.id;
         const seq = req.query.seq;
         const one = new OneChat(req.body);
-        const rows = await one.selectOne(seq);
-        console.log(rows);
-        res.render("chat/oneRoom",{userId,other,rows:rows,seq});
+        const response = await one.readOne(seq,userId);
+        if(response.success){
+            const rows = await one.selectOne(seq);
+            console.log(rows);
+            res.render("chat/oneRoom",{userId,other,rows:rows,seq});
+        }else{
+            res.send(`
+                <script>
+                    alert('로그아웃 되셨습니다');
+                    return;
+                </script>
+            `);
+        }
+        
     },
 
     //--------------랜덤채팅--------------//

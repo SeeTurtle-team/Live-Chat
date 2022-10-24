@@ -73,6 +73,15 @@ class OneChat{
         }
     }
 
+    async readOne(seq,userId){
+        try{
+            const response = await OneChatStorage.readOne(seq,userId)
+            return response;
+        }catch(err){
+            return {success : false, msg:err};
+        }
+    }
+
     
 }
 

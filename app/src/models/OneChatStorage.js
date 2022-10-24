@@ -70,6 +70,16 @@ class OneChatStorage{
             })
         })
     }
+
+    static async readOne(seq,userId){
+        return new Promise((resolve,reject)=>{
+            const query = "update oneChat set flag=0 where chatSeq=? and userId!=?;";
+            db.query(query,[seq,userId],(err) => {
+                if(err){reject(err)}
+                resolve({success:true});
+            })
+        })
+    }
 }
 
 module.exports = OneChatStorage;
