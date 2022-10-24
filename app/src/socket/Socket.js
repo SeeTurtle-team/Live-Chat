@@ -19,9 +19,7 @@ class Socket{
             var instanceId = session.userId;
             
             socket.on('disconnect',()=>{
-                var userId = session.userId;
                 console.log('클라이언트 접속 해제',socket.id);
-                randomStack.deleteUser(userId);
                 clearInterval(socket.interval);
                 
             });
@@ -48,23 +46,47 @@ class Socket{
                 })
             }*/
         
-            //랜덤채팅 상대 찾기
-            socket.on('searchingUser', function(data) {
-                const userId = data.userId;
-                console.log(data);
-                console.log('찾기');
-                randomStack.addUser(userId);
-                console.log(randomStack.useArr);
-            });
+            //random chat 요청
+            socket.on('requestRandomChat', function(data) {
+                randomStack.addClient(data.userId, socket.id, 1, null);
+                for(var i = 0; i<randomStack.clients.length; i++){
+                    if(randomStack.clients[i].status == 1 && data.userId != randomStack.clients[i].id){
+                        console.log("입장");
+                        socket.join(randomStack.clients[i].roomName);
+                        randomStack.clients[i].status = 0;
+                        for(var j = 0; i<randomStack.clients.length; j++){
+                            if(randomStack.clients[j].id == data.userId){
+                                randomStack.clients[j].status = 0;
+                                randomStack.clients[j].roomName = randomStack.clients[i].roomName;
+                                console.log(randomStack.clients);
+                                break;
+                            }
+                        }
+                        break;
+                    } else{
+                        console.log("방 만들기");
+                        randomStack.clients[i].roomName = socket.id;
+                        socket.join(socket.id);
+                        console.log(randomStack.clients);
+                        break;
+                    }
+                }
+            })
 
-            //랜덤채팅 방 나가기
-            socket.on('exitRoom', function(data) {
-                const userId = data.userId;
-                console.log(data);
-                console.log('나가기');
-                randomStack.deleteUser(userId);
-                console.log(randomStack.useArr);
-            });
+            //random chat 나가기
+            socket.on('exitRoom', function(data){
+                for(var i = 0; i<randomStack.clients.length; i++){
+                    if(randomStack.clients[i].id == data.userId){
+                        randomStack.clients.splice(i, 1);
+                        console.log(randomStack.clients);
+                        break;
+                    }
+                }
+            })
+
+            //랜덤 채팅 메시지 전송
+            socket.on('sendMessage', function(data){
+            })
 
 
 

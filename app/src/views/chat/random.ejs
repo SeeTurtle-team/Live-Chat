@@ -29,7 +29,7 @@
         <div id="disabled" style="display: none">
             <span>id : <%=userId%></span>
             <input type="text" id="message"/>
-            <button>전송</button>
+            <button onclick="send()">전송</button>
             <button onclick="exit()">나가기</button>
         </div>
     </body>
@@ -41,13 +41,17 @@
         function searching(){
             document.getElementById("abled").style.display = "none";
             document.getElementById("disabled").style.display = "block";
-            socket.emit('searchingUser', {userId:userId});
+            socket.emit('requestRandomChat', {userId:userId});
         }
 
         function exit(){
             document.getElementById("abled").style.display = "block";
             document.getElementById("disabled").style.display = "none";
             socket.emit('exitRoom', {userId:userId});
+        }
+
+        function send(){
+            socket.emit('sendMessage', {});
         }
     </script>
 </html>
