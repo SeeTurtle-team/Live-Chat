@@ -25,6 +25,9 @@ class OneChat{
         if(check.length!==0){
             return ({success:false,msg : "이미 존재하는 채팅방입니다"});
         }
+        if(userId1===userId2){
+            return ({success:false,msg : "본인과는 채팅을 할 수 없습니다"});
+        }
         try{
             console.log("insertOne 들어옴")
             const response1 = await OneChatStorage.insertOne(userId1,nextSeq);
