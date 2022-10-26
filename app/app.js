@@ -8,6 +8,7 @@ read flag
 마이페이지
 채팅 중 이미지 전송
 랜덤채팅, 게시판 마무리
+읽지 않은 거 채팅 리스트 페이지에서 뜨기
 */
 //모듈
 const express = require('express');
