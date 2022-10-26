@@ -1,5 +1,14 @@
 "use strict";
-
+/*
+할거
+퍼블리싱 및 프론트 작업
+모델 부분 모듈화
+read flag
+화상채팅 할지 말지
+마이페이지
+채팅 중 이미지 전송
+랜덤채팅, 게시판 마무리
+*/
 //모듈
 const express = require('express');
 
