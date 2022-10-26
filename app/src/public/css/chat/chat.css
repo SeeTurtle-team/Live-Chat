@@ -1,6 +1,6 @@
 .btn{
     margin-left:48%;
-    margin-top : 30%;
+    margin-top : 10%;
     padding : 10px;
     color : white;
     background : black;
@@ -150,4 +150,10 @@
 .flag{
     
     float: right;
+}
+mark {
+	background: yellow;
+}
+mark.current {
+	background: orange;
 }

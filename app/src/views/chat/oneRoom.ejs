@@ -8,7 +8,9 @@
         <link rel = "stylesheet" href="/css/chat/chat.css">
         <script src="/js/chat/oneChatStart.js"></script>
         <script src="/socket.io/socket.io.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js"></script>
     </head>
+    
     <body>
         <div class = "container">
             <header>
@@ -26,6 +28,10 @@
         </div>
         <div class = "search-box">
             <input type="text" id="search"/>
+            <button data-search="next" id="next" class="next-btn">∨</button>
+            <button data-search="prev" id="prev" class="prev-btn">∧</button>
+            <button data-search="clear" id="clear" class="clear-btn">Ⅹ</button>
+            <span class="kwt-count" id="count">-</span>
             <button onclick = "" class="btn-search">검색하기</button>
         </div>
 
@@ -141,6 +147,41 @@
             msg.classList.add('me');
             msg.appendChild(node);
             chat.appendChild(msg);
+        }
+    </script>
+    <script>
+        document.body.onload = function(){
+            var input = document.querySelector("#search"),
+                clearBtn = document.querySelector("#next"),
+                nextBtn = document.querySelector("#next"),
+                prevBtn = document.querySelector("#prev"),
+                count = document.querySelector("#count");
+                contentMark = new Mark(content),
+                offsetTop = 200,
+                currnetIndex = 0;
+            var variableCounter = 0;
+            var totalCount = 0;
+            var result;
+
+            input.addEventListener("input",()=>{
+                var searchVal = this.value;
+                contentMark.unmark( {
+				done: function(totalMatches) {
+					contentMark.mark(searchVal, {
+                        separateWordSearch: false,
+						acrossElements: true,
+						done: function(totalMatches) {
+							$results = $content.querySelectorAll("mark");
+							totalCount = totalMatches;
+							if (totalCount) {
+								variableCounter = 1;
+								$(".kwt-count").html(variableCounter+ " / " +totalCount);
+							}
+						}
+					});
+				}
+			});
+            })
         }
     </script>
 </html>
