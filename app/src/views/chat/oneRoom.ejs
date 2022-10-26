@@ -8,6 +8,7 @@
         <link rel = "stylesheet" href="/css/chat/chat.css">
         <script src="/js/chat/oneChatStart.js"></script>
         <script src="/socket.io/socket.io.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js"></script>
     </head>
     <body>
         <div class = "container">
@@ -26,6 +27,10 @@
         </div>
         <div class = "search-box">
             <input type="text" id="search"/>
+            <button data-search="next" class="next-btn">∨</button>
+            <button data-search="prev" class="prev-btn">∧</button>
+            <button data-search="clear" class="clear-btn">Ⅹ</button>
+            <span class="kwt-count">-</span>
             <button onclick = "" class="btn-search">검색하기</button>
         </div>
 
@@ -142,5 +147,95 @@
             msg.appendChild(node);
             chat.appendChild(msg);
         }
+    </script>
+
+    <!--페이지 내 검색 기능-->
+   
+    <script>
+        document.body.onload = function() {
+            var $input = document.querySelector("input[type='text']"),
+                    $clearBtn = document.querySelector("button[data-search='clear']"),
+                    $prevBtn = document.querySelector("button[data-search='prev']"),
+                    $nextBtn = document.querySelector("button[data-search='next']"),
+                    $content = document.querySelector(".chat-box"),
+                    $contentMark = new Mark($content),
+                    $results,
+                    currentClass = "current",
+                    offsetTop = 200,
+                    currentIndex = 0;
+            var variableCounter = 0;
+            var totalCount = 0;
+                
+            $input.addEventListener("input", function() {
+                 var searchVal = this.value;
+                 $contentMark.unmark( {
+                    done: function(totalMatches) {
+                        $contentMark.mark(searchVal, {
+                            separateWordSearch: false,
+                            acrossElements: true,
+                            done: function(totalMatches) {
+                                $results = $content.querySelectorAll("mark");
+                                totalCount = totalMatches;
+                                if (totalCount) {
+                                    variableCounter = 1;
+                                    $(".kwt-count").html(variableCounter+ " / " +totalCount);
+                                }
+                            }
+                      });
+                    }
+                });
+            });
+
+            $nextBtn.addEventListener("click", prevNextHandler);
+            $prevBtn.addEventListener("click", prevNextHandler);
+            $nextBtn.after($prevBtn);
+            function prevNextHandler() {
+                if ($results.length) {
+                    currentIndex += (this.dataset.search === "prev" ? -1 : 1);
+                    if (currentIndex < 0) {
+                        currentIndex = $results.length - 1;
+                    }
+                    if (currentIndex > $results.length - 1) {
+                        currentIndex = 0;
+                    }
+                    jumpTo();
+                }
+            }
+            $("[data-search=next]").click(function() {
+			if (variableCounter < totalCount)
+				variableCounter = variableCounter + 1;
+			else
+				variableCounter = 1;
+			$(".kwt-count").html(variableCounter+ " / " +totalCount);
+		})
+
+		$("[data-search=prev]").click(function() {
+			if (variableCounter > 1)
+				variableCounter = variableCounter - 1;
+			else
+				variableCounter = totalCount;
+			$(".kwt-count").html(variableCounter+ " / " +totalCount);
+		})
+        function jumpTo() {
+			if ($results.length) {
+				var position,
+						$current = $results[currentIndex];
+				$results.forEach($result => $result.classList.remove(currentClass));
+				if ($current) {
+					$current.classList.add(currentClass);
+					position = $current.offsetTop - offsetTop;
+					window.scrollTo(0, position);
+				}
+			}
+		}
+        $clearBtn.addEventListener("click", function() {
+			$contentMark.unmark();
+			$input.value = ""
+			$input.focus();
+			variableCounter = 0;
+			totalCount = 0;
+			$(".kwt-count").html("-");
+		});
+        };
     </script>
 </html>
