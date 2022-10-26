@@ -3,8 +3,6 @@ const server = require("../../bin/www");
 const OneChat = require("../models/OneChat");
 const randomStack = require("../public/js/chat/randomChatList");
 
-var nowUser = 0;
-
 class Socket{
     constructor(){
         const io = SocketIO(server,{path:'/socket.io'});
@@ -57,7 +55,8 @@ class Socket{
                         for(var j = 0; i<randomStack.clients.length; j++){
                             if(randomStack.clients[j].id == data.userId){
                                 randomStack.clients[j].status = 0;
-                                randomStack.clients[j].roomName = randomStack.clients[i].roomName;
+                                var roomName = randomStack.clients[i].roomName;
+                                randomStack.clients[j].roomName = roomName;
                                 console.log(randomStack.clients);
                                 break;
                             }
@@ -65,28 +64,34 @@ class Socket{
                         break;
                     } else{
                         console.log("방 만들기");
-                        randomStack.clients[i].roomName = socket.id;
-                        socket.join(socket.id);
+                        var roomName = socket.id;
+                        randomStack.clients[i].roomName = roomName;
+                        socket.join(roomName);
                         console.log(randomStack.clients);
                         break;
                     }
                 }
-            })
+                io.sockets.to(roomName).emit("sendRoomName", {roomName});
+            });
 
             //random chat 나가기
             socket.on('exitRoom', function(data){
                 for(var i = 0; i<randomStack.clients.length; i++){
                     if(randomStack.clients[i].id == data.userId){
+                        socket.leave(randomStack.clients[i].roomName);
                         randomStack.clients.splice(i, 1);
                         console.log(randomStack.clients);
                         break;
                     }
                 }
-            })
+            });
 
             //랜덤 채팅 메시지 전송
             socket.on('sendMessage', function(data){
-            })
+                console.log(data.data);
+                const text = data.data;
+                io.sockets.to(data.roomName).emit('recMessage', {text});
+            });
 
 
 

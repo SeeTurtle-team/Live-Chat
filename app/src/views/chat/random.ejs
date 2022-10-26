@@ -27,16 +27,24 @@
             <button onclick="searching()">랜덤 상대 찾기</button>
         </div>
         <div id="disabled" style="display: none">
+            <div id="chatBox">
+
+            </div>
             <span>id : <%=userId%></span>
-            <input type="text" id="message"/>
-            <button onclick="send()">전송</button>
+            <input type="text" id="text"/>
+            <button id="send">전송</button>
             <button onclick="exit()">나가기</button>
         </div>
     </body>
     <script>
         const userId = document.getElementById("id").innerText;
+        var roomName = "";
 
         var socket = io.connect('http://localhost:5000');
+
+        socket.on("sendRoomName", function(data) {
+            roomName = data.roomName;
+        })
 
         function searching(){
             document.getElementById("abled").style.display = "none";
@@ -50,8 +58,29 @@
             socket.emit('exitRoom', {userId:userId});
         }
 
-        function send(){
-            socket.emit('sendMessage', {});
+        document.getElementById("text").addEventListener("keypress", function(e) {
+            if (e.code === "Enter") {
+                document.getElementById("send").click();
+            }
+        });
+
+        document.getElementById("send").onclick = function() {
+            var text = document.getElementById('text').value;
+            if(text === '') {
+                alert("내용을 입력하세요.");
+                return ;
+            }
+            var str = userId;
+            str += " : ";
+            str += text;
+            socket.emit('sendMessage', {roomName:roomName, data:str});
+            document.getElementById('text').value = '';
         }
+
+        socket.on('recMessage', function(data) {
+            const p = document.createElement('p');
+            document.getElementById('chatBox').append(data.text);
+            document.getElementById('chatBox').append(p);
+        })
     </script>
 </html>
