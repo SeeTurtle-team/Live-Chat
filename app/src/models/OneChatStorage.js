@@ -6,9 +6,10 @@ class OneChatStorage{
     static async oneList(id){  //해당 유저의 일대일 채팅방 리스트
         console.log("id :" +id);
         return new Promise((resolve,reject) => {
-            const query = "select a.seq, a.userId userId1, b.userId userId2"
-                        + " from oneChatList a,oneChatList b "
-                        + "where a.userId =? and a.seq=b.seq and a.userId!=b.userId";
+            const query = "select a.seq, a.userId userId1, b.userId userId2, COUNT(c.flag) as flag"
+                        + " from oneChatList a,oneChatList b,oneChat c "
+                        + "where a.userId =? and a.seq=b.seq and a.userId!=b.userId "
+                        + "and c.chatSeq = a.seq and flag=1 group by seq";
             db.query(query,[id],(err,rows) => {
                 if(err){reject(err)};
                 console.log("storage : "+rows);
