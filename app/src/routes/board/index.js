@@ -16,10 +16,14 @@ router.get('/writeG', interceptor,ctrl.output.writeG);
 
 router.get('/content/:seq', interceptor,ctrl.output.content);
 
-// router.get('/list', ctrl.output.table);
+router.get('/page/:page', interceptor,ctrl.output.page);
 
-router.get('/page/:page', ctrl.output.page);
+router.get('/listUpdate', interceptor,ctrl.output.listUpdateG);
+
+//---------------post------------------//
 
 router.post('/writeP', interceptor,ctrl.process.writeP);
+
+router.post('/listUpdateP', interceptor,ctrl.process.listUpdateP);
 
 module.exports=router;
