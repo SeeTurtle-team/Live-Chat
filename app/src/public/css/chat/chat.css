@@ -157,3 +157,13 @@ mark {
 mark.current {
 	background: orange;
 }
+
+.readFlag{
+    background: rgb(255, 60, 0);
+    color : white;
+    width: 10px;
+    border-radius: 8px;
+    margin-left: 5px;
+    border: 0;
+    text-align: center;
+}
