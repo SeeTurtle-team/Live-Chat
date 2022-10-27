@@ -129,7 +129,7 @@
             .then((res)=>res.json())
             .then((res)=>{
                 if(res.success){
-                    if(!roomName){
+                    if(!roomName){  //url에 방이름이 없는 새로 시작하는 방일 경우
                         roomName=res.seq+"one";
                         socket.emit('joinRoom',{roomName:roomName,userId:userId});
                         seq = res.seq;

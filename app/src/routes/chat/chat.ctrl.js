@@ -114,13 +114,11 @@ const process = {
 
     oneInsert : async (req,res) => {
         const one = new OneChat(req.body);
-        const userId = req.body.userId;
-        const otherId = req.body.otherId;
+        const userId = req.body.userId; //내 아이디
+        const otherId = req.body.otherId; //상대 아이디
         const chat = req.body.chat;
         const seq = (req.body.seq);
-        if(seq===''){
-            console.log(req.body);
-        }
+       
         const response = await one.insertOneChat(userId,otherId,chat,seq);
         console.log("success : "+response.success + ", "+response.seq);
         return res.json(response);

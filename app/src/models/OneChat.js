@@ -73,17 +73,17 @@ class OneChat{
     }
 
     async insertOneChat(userId,otherId,chat,seq){
-        if(seq==''){
+        if(seq==''){  //처음 생성된 방일시
             console.log("seq is null");
-            const check = await this.checkOne(userId,otherId);
+            const check = await this.checkOne(userId,otherId);  //있는 방인지 아닌지 체크
             console.log("check : "+ check.success);
             if(check.success){
-                const res = await this.insertOne(userId,otherId);
+                const res = await this.insertOne(userId,otherId);  //방 새로 만들기
                 if(!res.success){
                     return res;
                 }else{
                     console.log(res.seq);
-                    seq=res.seq;
+                    seq=res.seq;//새로 만들 방인 경우 다음 seq 값 받아오기
                 }
             }
             
@@ -91,7 +91,7 @@ class OneChat{
         
         try{
             seq = parseInt(seq);
-            const response = await OneChatStorage.insertOneChat(userId,chat,seq);
+            const response = await OneChatStorage.insertOneChat(userId,chat,seq); //채팅 넣기
             return response;
         }catch(err){
             return {success : false, msg : err};
