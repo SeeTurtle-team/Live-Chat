@@ -106,7 +106,7 @@ const process = {
     oneStart : async (req,res) => {   //일대일 채팅 방 만들기
         const userId1 = req.session.userId;
         const userId2 = req.body.id;
-        console.log(req.body.id + " 와"+userId1 + " 일대일 채팅 시작");
+        
         const one = new OneChat(req.body);
         const response = await one.insertOne(userId1,userId2);
         return res.json(response);
@@ -115,10 +115,23 @@ const process = {
     oneInsert : async (req,res) => {
         const one = new OneChat(req.body);
         const userId = req.body.userId;
+        const otherId = req.body.otherId;
         const chat = req.body.chat;
-        const seq = parseInt(req.body.seq);
-        const response = await one.insertOneChat(userId,chat,seq);
-        console.log("success : "+response.success);
+        const seq = (req.body.seq);
+        if(seq===''){
+            console.log(req.body);
+        }
+        const response = await one.insertOneChat(userId,otherId,chat,seq);
+        console.log("success : "+response.success + ", "+response.seq);
+        return res.json(response);
+    },
+
+    checkOne : async (req,res) => {
+        const userId1 = req.session.userId;
+        const userId2 = req.body.id;
+        console.log(req.body.id + " 와"+userId1 + " 일대일 채팅 시작");
+        const one = new OneChat(req.body);
+        const response = await one.checkOne(userId1,userId2);
         return res.json(response);
     }
 }

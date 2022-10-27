@@ -66,7 +66,7 @@ class OneChatStorage{
             const query = "insert oneChat(userId,chat,chatSeq,flag) values (?,?,?,1);";
             db.query(query,[userId,chat,seq],(err) => {
                 if(err){reject(err)}
-                resolve({success:true});
+                resolve({success:true,seq:seq});
             })
         })
     }

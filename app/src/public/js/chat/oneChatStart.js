@@ -6,7 +6,7 @@ function goChat(id,seq){
     const req = {
         id : id,
     }
-    fetch('/chat/oneStart',{
+    fetch('/chat/checkOne',{
         method : "POST",
         headers : {
             "Content-Type" : "application/json",

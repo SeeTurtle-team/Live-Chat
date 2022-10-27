@@ -17,9 +17,7 @@ class OneChat{
         }
     }
 
-    async insertOne(userId1,userId2){
-        const maxSeq = await this.maxSeq();
-        const nextSeq = parseInt(maxSeq[0].seq)+1;
+    async checkOne(userId1,userId2){
         const check = await OneChatStorage.checkOne(userId1,userId2);
         console.log(check.length);
         if(check.length!==0){
@@ -28,6 +26,13 @@ class OneChat{
         if(userId1===userId2){
             return ({success:false,msg : "본인과는 채팅을 할 수 없습니다"});
         }
+        console.log(check);
+        return {success:true};
+    }
+
+    async insertOne(userId1,userId2){
+        const maxSeq = await this.maxSeq();
+        const nextSeq = parseInt(maxSeq[0].seq)+1;
         try{
             console.log("insertOne 들어옴")
             const response1 = await OneChatStorage.insertOne(userId1,nextSeq);
@@ -35,7 +40,7 @@ class OneChat{
             console.log(response1.success)
             if(response1.success && response2.success){
                 console.log("hi");
-                return ({success : true});
+                return ({success : true,seq:nextSeq});
             }else{
                 return ({success : false, msg : "채팅방 만들기 실패"})
             }
@@ -67,8 +72,25 @@ class OneChat{
         }
     }
 
-    async insertOneChat(userId,chat,seq){
+    async insertOneChat(userId,otherId,chat,seq){
+        if(seq==''){
+            console.log("seq is null");
+            const check = await this.checkOne(userId,otherId);
+            console.log("check : "+ check.success);
+            if(check.success){
+                const res = await this.insertOne(userId,otherId);
+                if(!res.success){
+                    return res;
+                }else{
+                    console.log(res.seq);
+                    seq=res.seq;
+                }
+            }
+            
+        }
+        
         try{
+            seq = parseInt(seq);
             const response = await OneChatStorage.insertOneChat(userId,chat,seq);
             return response;
         }catch(err){

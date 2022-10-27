@@ -148,7 +148,7 @@ class Socket{
                 for(var i=0; i<room.length;i++){
                     console.log(room[i]+"  for 문이 돌음")
                     if(room[i]===test){
-                        console.log(room);
+                        console.log("roomName : " + test);
                         var roomSeq = room[i];
                         var userId = data.userId;
                         socket.broadcast.to(roomSeq).emit('oneMsg',{class:'other',comment: userId + " : " + data.comment+'\n'})//msg 보낸 사람빼고 전부

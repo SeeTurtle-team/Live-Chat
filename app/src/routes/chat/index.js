@@ -32,4 +32,6 @@ router.post('/oneStart',interceptor, ctrl.process.oneStart);
 
 router.post('/oneInsert',ctrl.process.oneInsert);
 
+router.post('/checkOne',ctrl.process.checkOne);
+
 module.exports=router;

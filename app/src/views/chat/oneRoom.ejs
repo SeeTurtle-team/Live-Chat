@@ -71,12 +71,13 @@
         const url = new URL(pageUrl);
         const urlParams = url.searchParams;
 
-        const roomName = urlParams.get('name'); 
+        let roomName = urlParams.get('name'); 
+        const otherId = urlParams.get('id');
 
         const userId = document.getElementById("id").innerText;
         console.log(userId);
 
-        const seq = document.getElementById("seq").value;  //채팅방 시퀀스
+        let seq = document.getElementById("seq").value;  //채팅방 시퀀스
         console.log(seq);
         var socket = io.connect('http://localhost:5000');
         
@@ -113,6 +114,7 @@
             var message = document.getElementById("user").value ;
             const req = {
                 userId : userId,
+                otherId : otherId,
                 chat : message,
                 seq : seq,
             }
@@ -127,6 +129,13 @@
             .then((res)=>res.json())
             .then((res)=>{
                 if(res.success){
+                    if(!roomName){
+                        roomName=res.seq+"one";
+                        socket.emit('joinRoom',{roomName:roomName,userId:userId});
+                        seq = res.seq;
+                        console.log(roomName);
+                        console.log(seq);
+                    }
                     oneMsg(message);
                 }else{
                     alert("채팅 발송 중 오류 발생");
@@ -149,39 +158,5 @@
             chat.appendChild(msg);
         }
     </script>
-    <script>
-        document.body.onload = function(){
-            var input = document.querySelector("#search"),
-                clearBtn = document.querySelector("#next"),
-                nextBtn = document.querySelector("#next"),
-                prevBtn = document.querySelector("#prev"),
-                count = document.querySelector("#count");
-                contentMark = new Mark(content),
-                offsetTop = 200,
-                currnetIndex = 0;
-            var variableCounter = 0;
-            var totalCount = 0;
-            var result;
-
-            input.addEventListener("input",()=>{
-                var searchVal = this.value;
-                contentMark.unmark( {
-				done: function(totalMatches) {
-					contentMark.mark(searchVal, {
-                        separateWordSearch: false,
-						acrossElements: true,
-						done: function(totalMatches) {
-							$results = $content.querySelectorAll("mark");
-							totalCount = totalMatches;
-							if (totalCount) {
-								variableCounter = 1;
-								$(".kwt-count").html(variableCounter+ " / " +totalCount);
-							}
-						}
-					});
-				}
-			});
-            })
-        }
-    </script>
+   
 </html>
