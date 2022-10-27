@@ -8,7 +8,7 @@
         <link rel = "stylesheet" href="/css/chat/chat.css">
         <script src="/js/chat/oneChatStart.js"></script>
         <script src="/socket.io/socket.io.js"></script>
-        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js"></script>
     </head>
     
     <body>
@@ -72,12 +72,11 @@
         const urlParams = url.searchParams;
 
         const roomName = urlParams.get('name'); 
-        const otherId = urlParams.get("id");
 
         const userId = document.getElementById("id").innerText;
         console.log(userId);
 
-        let seq = document.getElementById("seq").value;  //채팅방 시퀀스
+        const seq = document.getElementById("seq").value;  //채팅방 시퀀스
         console.log(seq);
         var socket = io.connect('http://localhost:5000');
         
@@ -116,7 +115,6 @@
                 userId : userId,
                 chat : message,
                 seq : seq,
-                otherId : otherId
             }
 
             fetch('/chat/oneInsert',{
@@ -129,8 +127,6 @@
             .then((res)=>res.json())
             .then((res)=>{
                 if(res.success){
-                    seq = res.seq;
-                    console.log(seq);
                     oneMsg(message);
                 }else{
                     alert("채팅 발송 중 오류 발생");
@@ -142,7 +138,6 @@
 
         function oneMsg(message){
             console.log(roomName);
-            console.log(seq);
             socket.emit('one',{roomName:roomName,userId:userId,comment:message,seq:seq})
             //socket.emit(roomName, {comment:msg});
             document.getElementById('user').value = '';
@@ -154,6 +149,39 @@
             chat.appendChild(msg);
         }
     </script>
+    <script>
+        document.body.onload = function(){
+            var input = document.querySelector("#search"),
+                clearBtn = document.querySelector("#next"),
+                nextBtn = document.querySelector("#next"),
+                prevBtn = document.querySelector("#prev"),
+                count = document.querySelector("#count");
+                contentMark = new Mark(content),
+                offsetTop = 200,
+                currnetIndex = 0;
+            var variableCounter = 0;
+            var totalCount = 0;
+            var result;
 
-            
+            input.addEventListener("input",()=>{
+                var searchVal = this.value;
+                contentMark.unmark( {
+				done: function(totalMatches) {
+					contentMark.mark(searchVal, {
+                        separateWordSearch: false,
+						acrossElements: true,
+						done: function(totalMatches) {
+							$results = $content.querySelectorAll("mark");
+							totalCount = totalMatches;
+							if (totalCount) {
+								variableCounter = 1;
+								$(".kwt-count").html(variableCounter+ " / " +totalCount);
+							}
+						}
+					});
+				}
+			});
+            })
+        }
+    </script>
 </html>

@@ -117,11 +117,7 @@ const process = {
         const userId = req.body.userId;
         const chat = req.body.chat;
         const seq = parseInt(req.body.seq);
-        const otherId = req.body.otherId;
-        const userId1 = req.session.userId;
-        console.log(seq.length);
-        console.log("seq : "+seq.size)
-        const response = await one.insertOneChat(userId,chat,seq,userId1,otherId);
+        const response = await one.insertOneChat(userId,chat,seq);
         console.log("success : "+response.success);
         return res.json(response);
     }

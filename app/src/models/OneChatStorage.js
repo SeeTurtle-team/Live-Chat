@@ -61,13 +61,12 @@ class OneChatStorage{
     }
 
     static async insertOneChat(userId,chat,seq){
-        
         console.log("tlfgodehlsl");
         return new Promise((resolve,reject) =>{
             const query = "insert oneChat(userId,chat,chatSeq,flag) values (?,?,?,1);";
             db.query(query,[userId,chat,seq],(err) => {
                 if(err){reject(err)}
-                resolve({success:true,seq:seq});
+                resolve({success:true});
             })
         })
     }

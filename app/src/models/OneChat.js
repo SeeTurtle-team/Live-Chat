@@ -18,7 +18,8 @@ class OneChat{
     }
 
     async insertOne(userId1,userId2){
-        
+        const maxSeq = await this.maxSeq();
+        const nextSeq = parseInt(maxSeq[0].seq)+1;
         const check = await OneChatStorage.checkOne(userId1,userId2);
         console.log(check.length);
         if(check.length!==0){
@@ -27,9 +28,7 @@ class OneChat{
         if(userId1===userId2){
             return ({success:false,msg : "본인과는 채팅을 할 수 없습니다"});
         }
-
-        return ({success:true})
-        /*try{
+        try{
             console.log("insertOne 들어옴")
             const response1 = await OneChatStorage.insertOne(userId1,nextSeq);
             const response2 = await OneChatStorage.insertOne(userId2,nextSeq);
@@ -45,7 +44,7 @@ class OneChat{
         }catch(err){
             console.log(err);
             return {success : false, msg : err};
-        }*/
+        }
                        
     }
 
@@ -68,33 +67,9 @@ class OneChat{
         }
     }
 
-    async insertOneChat(userId,chat,seq,userId1,otherId){
-        if(seq.length===undefined){  //이 부분 함수 분리 예정
-            console.log("seq,length===undefined")
-            try{
-                const maxSeq = await this.maxSeq();
-                const nextSeq = parseInt(maxSeq[0].seq)+1;
-                console.log("insertOne 들어옴")
-               
-                const response1 = await OneChatStorage.insertOne(userId1,nextSeq);
-                const response2 = await OneChatStorage.insertOne(otherId,nextSeq);
-                console.log(response1.success)
-                if(response1.success && response2.success){
-                    console.log("채팅방 만들기 성공");
-                    seq = nextSeq;
-                }else{
-                    return ({success : false, msg : "채팅방 만들기 실패"})
-                }
-    
-                
-            }catch(err){
-                console.log(err);
-                return {success : false, msg : err};
-            }
-        }
+    async insertOneChat(userId,chat,seq){
         try{
             const response = await OneChatStorage.insertOneChat(userId,chat,seq);
-            console.log("메세지 발송 후 : "+response.seq)
             return response;
         }catch(err){
             return {success : false, msg : err};
