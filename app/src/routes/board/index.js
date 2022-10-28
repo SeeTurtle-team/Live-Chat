@@ -18,7 +18,9 @@ router.get('/content/:seq', interceptor,ctrl.output.content);
 
 router.get('/page/:page', interceptor,ctrl.output.page);
 
-router.get('/listUpdate', interceptor,ctrl.output.listUpdateG);
+router.get('/listUpdate', interceptor,ctrl.output.listUpdate);
+
+router.get('/listUpdateG', interceptor,ctrl.output.listUpdateG);
 
 //---------------post------------------//
 

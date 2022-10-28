@@ -37,25 +37,18 @@ const output = {
         });
         
     },
-    listUpdateG : (req, res, row) => {
-        // var body = req.body;
-        // var seq = req.params.seq;
-        // var params = [body.seq, body.writer, body.title, body.content];
-        // var sql = "SELECT seq, writer, title, content, date, views FROM socket.write WHERE seq=?";
-        // var params = [body.seq, body.writer, body.title, body.content];
-        // db.query(`UPDATE socket.write SET title=${body.title}, content=${body.content}, date=NOW() WHERE seq=${body.seq}`);
-        // db.query(`UPDATE socket.write SET title=yo, content=ungwoo, date=NOW() WHERE writer=${seq}`);
-        // db.query(sql, params, (err, row) => {
-        //     if(err) console.error(err);
-        //     else res.render('board/listUpdate', {row : row[0]});
-        // });
-
+    listUpdate : (req, res) => {
+        res.render('board/listUpdate');
+    },
+    listUpdateG : (req, res) => {
+        var body = req.body;
         var seq = req.params.seq;
-        var query = `SELECT * FROM socket.write WHERE seq = "${seq}"`;
-        db.query(query, (err, row) => {
+        var sql = `SELECT * FROM socket.write WHERE seq=?`;
+        var params = [body.seq, body.writer, body.title, body.content];
+        db.query(sql, params, (err, row) => {
             if(err) console.error(err);
-            else res.render('board/content', {row : row[0]})
-        })
+            else res.render('/listUpdate', {row : row[0]});
+        });
     },
 
 }
@@ -72,43 +65,14 @@ const process = {
         })
     },
     listUpdateP : (req, res) => {
-        // var body = req.body;
-        // var params = [body.seq, body.writer, body.title, body.content];
-        // var sql =`UPDATE socket.write SET title=${body.title}, content=${body.content}, date=NOW() WHERE seq=${id}`;
-        // console.log(body.seq);
-        // var sql = `UPDATE socket.write SET title=yo, content=ungwoo, date=NOW() WHERE seq=1`;
-        // db.query(`UPDATE socket.write SET title=yo, content=ungwoo, date=NOW() WHERE seq=1`);
-        // db.query(sql, params, function(err) {
-            // if(err) console.error(err);
-            // else res.redirect('/board/page/1');
-        // })
-
-        // var body = req.body;
-        // const id = req.session.userId;
-        // var sql = `INSERT INTO socket.write VALUES(?, '${id}', ?, ?, NOW(), 0)`;
-        // var params = [body.writer, body.title, body.content];
-        // db.query(sql, params, function(err) {
-        //     if(err) console.error(err);
-        //     else res.redirect('/board/page/1');
-        // })
-
-        var seq = req.params.seq;
-        var writer = req.body.writer;
-        var title = req.body.title;
-        var content = req.body.content;
-        var date = req.body.date;
-        var views = req.body.views;
-
-        var query = `UPDATE socket.write SET writer = "${writer}", title = "${title}", content = "${content}", date = "${date}", views = "${views}" WHERE seq = "${seq}",`;
-        db.query(query, (err, data) => {
-            if(error) {
-                throw err;
-            }
-            else{
-                res.redirect('board/listUpdate');
-            }
+        var body = req.body;
+        var params = [body.title, body.content, body.date];
+        var sql = `UPDATE socket.write SET title = ?, content = ?, date = NOW() WHERE seq = 1`;
+        db.query(sql, params, (err) => {
+            if(err) console.error(err);
+            else res.redirect('/board/listUpdate');
         })
-    }
+    },
 }
 
 module.exports = {
