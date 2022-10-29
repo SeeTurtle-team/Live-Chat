@@ -39,6 +39,11 @@
             location.href = "/chat/openRoom?seq=" + seq;
         }
     </script>
+    <script>
+        function goModify(seq) {
+            location.href = '/board/content?seq=' + seq;
+        }
+    </script>
     <body>
         <div class = "container">
             <header>
@@ -86,7 +91,7 @@
         <tr>
             <td><%=i+1 %></td>
             <td><%=data.writer %></td>
-            <td onclick = "location.href='/board/content/<%=data.seq%>'"><%=data.title %></td>
+            <td onclick = "goModify('<%=data.seq%>')"><%=data.title %></td>
             <td><%=data.date %></td>
             <td><%=data.views %></td>
         </tr>

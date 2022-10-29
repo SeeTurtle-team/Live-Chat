@@ -67,7 +67,8 @@ const process = {
     listUpdateP : (req, res) => {
         var body = req.body;
         var params = [body.title, body.content, body.date];
-        var sql = `UPDATE socket.write SET title = ?, content = ?, date = NOW() WHERE seq = 1`;
+        var data = req.query.seq;
+        var sql = `UPDATE socket.write SET title = ?, content = ?, date = NOW() WHERE seq = '${data}'`;
         db.query(sql, params, (err) => {
             if(err) console.error(err);
             else res.redirect('/board/listUpdate');
