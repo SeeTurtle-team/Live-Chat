@@ -18,6 +18,15 @@ class Socket{
             
             socket.on('disconnect',()=>{
                 console.log('클라이언트 접속 해제',socket.id);
+                var text = "상대가 퇴장했습니다.";
+                for(var i = 0; i<randomStack.clients.length; i++){
+                    if(randomStack.clients[i].id == instanceId){
+                        io.sockets.to(randomStack.clients[i].roomName).emit('recMessage', {text});
+                        socket.leave(randomStack.clients[i].roomName);
+                        randomStack.deleteClient(i);
+                        break;
+                    }
+                }
                 clearInterval(socket.interval);
                 
             });
@@ -50,6 +59,7 @@ class Socket{
                 for(var i = 0; i<randomStack.clients.length; i++){
                     if(randomStack.clients[i].status == 1 && data.userId != randomStack.clients[i].id){
                         console.log("입장");
+                        var firstMessage = "매칭되었습니다."
                         socket.join(randomStack.clients[i].roomName);
                         randomStack.clients[i].status = 0;
                         for(var j = 0; i<randomStack.clients.length; j++){
@@ -65,22 +75,24 @@ class Socket{
                     } else{
                         console.log("방 만들기");
                         var roomName = socket.id;
+                        var firstMessage = "상대를 기다리는 중.."
                         randomStack.clients[i].roomName = roomName;
                         socket.join(roomName);
                         console.log(randomStack.clients);
                         break;
                     }
                 }
-                io.sockets.to(roomName).emit("sendRoomName", {roomName});
+                io.sockets.to(roomName).emit("sendRoomName", {roomName:roomName, firstMessage:firstMessage});
             });
 
             //random chat 나가기
             socket.on('exitRoom', function(data){
+                var text = "상대가 퇴장했습니다.";
                 for(var i = 0; i<randomStack.clients.length; i++){
                     if(randomStack.clients[i].id == data.userId){
+                        io.sockets.to(randomStack.clients[i].roomName).emit('recMessage', {text});
                         socket.leave(randomStack.clients[i].roomName);
-                        randomStack.clients.splice(i, 1);
-                        console.log(randomStack.clients);
+                        randomStack.deleteClient(i);
                         break;
                     }
                 }

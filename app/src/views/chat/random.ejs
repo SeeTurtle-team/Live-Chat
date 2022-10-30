@@ -44,9 +44,16 @@
 
         socket.on("sendRoomName", function(data) {
             roomName = data.roomName;
-        })
+            const p = document.createElement('p');
+            document.getElementById('chatBox').append(data.firstMessage);
+            document.getElementById('chatBox').append(p);
+        });
 
         function searching(){
+            const parent = document.getElementById('chatBox');
+            while(parent.firstChild){
+                parent.removeChild(parent.firstChild);
+            }
             document.getElementById("abled").style.display = "none";
             document.getElementById("disabled").style.display = "block";
             socket.emit('requestRandomChat', {userId:userId});
@@ -78,6 +85,7 @@
         }
 
         socket.on('recMessage', function(data) {
+            console.log(data);
             const p = document.createElement('p');
             document.getElementById('chatBox').append(data.text);
             document.getElementById('chatBox').append(p);
