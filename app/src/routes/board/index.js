@@ -14,7 +14,7 @@ router.get('/newBoard', interceptor,ctrl.output.newBoard);
 
 router.get('/writeG', interceptor,ctrl.output.writeG);
 
-router.get('/content/:seq', interceptor,ctrl.output.content);
+router.get('/content/seq=:seq', interceptor,ctrl.output.content);
 
 router.get('/page/:page', interceptor,ctrl.output.page);
 
