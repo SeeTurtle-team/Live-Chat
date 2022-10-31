@@ -14,6 +14,10 @@
     <form action="/board/listUpdateP" method="post">
     <table class = "table">
         <tr>
+            <td>seq: </td>
+            <td><input type="text" name="seq" id="seq" value="<%=row.seq%>"></td>
+        </tr>
+        <tr>
             <td>작성자: </td>
             <td><input type="text" name="name" id="name" value="<%=row.writer%>"></td>
         </tr>
@@ -35,7 +39,7 @@
         </tr>
         <tr>
             <td colspan = "2">
-                <button type="submit" onclick="location.href='/board/listUpdateG'">수정</button>
+                <button type="submit" onclick="location.href='/board/listUpdateP'">수정</button>
                 <a href = "/board/page/1">리스트</a>
             </td>
         </tr>

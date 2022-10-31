@@ -30,6 +30,7 @@ const output = {
     content : (req, res, next) => {
         var seq = req.params.seq;
         var sql = "SELECT seq, writer, title, content, date, views FROM socket.write WHERE seq=?";
+        console.log(seq);
         db.query(`UPDATE socket.write SET views=views+1 WHERE seq='${seq}'`);
         db.query(sql, [seq], (err, row) => {
             if(err) console.error(err);
@@ -42,7 +43,6 @@ const output = {
     },
     listUpdateG : (req, res) => {
         var body = req.body;
-        var seq = req.params.seq;
         var sql = `SELECT * FROM socket.write WHERE seq=?`;
         var params = [body.seq, body.writer, body.title, body.content];
         db.query(sql, params, (err, row) => {
@@ -65,14 +65,24 @@ const process = {
         })
     },
     listUpdateP : (req, res) => {
+        const id = req.session.userId;
+
+        var seq = req.body.seq;
+        var title = req.body.title;
+        var content = req.body.content;
+        var date = req.body.date;
+        var views = req.body.views;
+
         var body = req.body;
         var params = [body.title, body.content, body.date];
-        var data = req.query.seq;
-        var sql = `UPDATE socket.write SET title = ?, content = ?, date = NOW() WHERE seq = '${data}'`;
+        var seq = req.body.seq;
+        var writer = req.body.writer;
+        var sql = `UPDATE socket.write SET seq = '${seq}', writer = '${id}', title = ?, content = ?, date = NOW() WHERE seq = '${seq}'`;
         db.query(sql, params, (err) => {
-            if(err) console.error(err);
+            if(err) console.error(err);  
             else res.redirect('/board/listUpdate');
         })
+        
     },
 }
 
