@@ -15,7 +15,8 @@ class OneChatStorage{
                             +") x left join "
                             +"(select b.userId userId1, COUNT(a.flag) as flag, a.chatSeq chatSeq "
                             +"from oneChat a, oneChatList b "
-                            +"where b.userId = ? and a.chatSeq=b.seq and a.flag=1"
+                            +"where b.userId = ? and a.chatSeq=b.seq and a.flag=1 "
+                            +"group by a.userId"
                             +") y "
                             +"on x.userId1 = y.userId1 and x.seq=y.chatSeq"
             db.query(query,[id,id],(err,rows) => {
