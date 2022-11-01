@@ -22,6 +22,8 @@ router.get('/listUpdate', interceptor,ctrl.output.listUpdate);
 
 router.get('/listUpdateG', interceptor,ctrl.output.listUpdateG);
 
+router.get('/content/update/seq=:seq', interceptor,ctrl.output.update);
+
 //---------------post------------------//
 
 router.post('/writeP', interceptor,ctrl.process.writeP);

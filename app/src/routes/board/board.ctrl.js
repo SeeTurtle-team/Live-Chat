@@ -50,13 +50,23 @@ const output = {
             else res.render('/listUpdate', {row : row[0]});
         });
     },
-
+    update : (req, res, next) => {
+        var seq = req.params.seq;
+        var body = req.body;
+        var sql = `SELECT * FROM socket.write WHERE seq='${seq}'`;
+        var params = [body.seq, body.writer, body.title, body.content, body.date, body.views];
+        db.query(sql, params, (err, row) => {
+            if(err) console.error(err);
+        res.render('board/update', {row : row[0]});
+        });
+    },
 }
 
 const process = {
     writeP : (req, res) => {
         var body = req.body;
         const id = req.session.userId;
+        console.log(seq);
         var sql = `INSERT INTO socket.write VALUES(?, '${id}', ?, ?, NOW(), 0, ?)`;
         var params = [body.writer, body.title, body.content, body.passwd];
         db.query(sql, params, function(err) {
@@ -74,22 +84,14 @@ const process = {
         var views = req.body.views;
         var passwd = req.body.passwd;
         var body = req.body;
-        var params = [body.title, body.content, body.passwd, body.date];
-        var seq = req.body.seq;
         var writer = req.body.writer;
-        var sql = `UPDATE socket.write SET title = ?, content = ?, date = NOW() WHERE seq = '${seq}' and passwd=?`;
+        var params = [body.title, body.content, body.date];
+        var seq = req.body.seq;        
+        var sql = `UPDATE socket.write SET seq = '${seq}', writer = '${id}',  title = ?, content = ?, date = NOW() WHERE seq = '${seq}'?`;
         db.query(sql, params, (err,result) => {
             if(err) console.error(err);
-            if(result.affectedRows == 0)
-            {
-                res.send("<script>alert('패스워드가 일치하지 않습니다.');history.back();</script>");
-            }
-            else
-            {
                 res.redirect('/board/listUpdate');
-            }
-        })
-        
+            });
     },
 }
 
