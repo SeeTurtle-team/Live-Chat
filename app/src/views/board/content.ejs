@@ -23,15 +23,19 @@
         </tr>
         <tr>
             <td>제목: </td>
-            <td><input type="text" name="title" id="title" value="<%=row.title%>" size="30"></td>
+            <td><input type="text" name="title" id="title" value="<%=row.title%>" size="30" required></td>
         </tr>
         <tr>
             <td>내용: </td>
             <td><textarea name="content" id="content" cols="80" rows="20" required><%=row.content%></textarea></td>
         </tr>
         <tr>
+            <td>패스워드</td>
+            <td><input type="password" name="passwd" id="passwd" required/></td>
+        </tr>
+        <tr>
             <td>날자: </td>
-            <td><input type="text" name="date" id="date" value="<%=row.date%>" size="50"></td>
+            <td><input type="text" name="date" id="date" value="<%=row.date%>" size="50" required></td>
         </tr>
         <tr>
             <td>조회수: </td>

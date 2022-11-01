@@ -9,9 +9,25 @@
 <body>
     <h2>게시글 작성</h2>
     <form action="writeP" method="post">
-        제목: <input type="text" name="title" required><br>
-        내용: <textarea name="content" id="content" cols="80" rows="20" required></textarea><br>
-        <button type = "submit">작성하기</button>
+        <table border = "1">
+            <tr>
+                <td>제목</td>
+                <td><input type="text" name="title" id="title" required/></td>
+            </tr>
+            <tr>
+                <td>내용</td>
+                <td><textarea name="content" id="content" cols="30" rows="10" required></textarea></td>
+            </tr>
+            <tr>
+                <td>패스워드</td>
+                <td><input type="password" name="passwd" id="passwd" required/></td>
+            </tr>
+            <tr>
+                <td colspan = "2">
+                    <button type = "submit">작성하기</button>
+                </td>
+            </tr>
+    </table>
     </form>
 </body>
 </html>
