@@ -7,6 +7,7 @@
         <link rel = "stylesheet" href ="/css/home/index.css">
         <link rel = "stylesheet" href="/css/chat/chat.css">
         <script src="/js/chat/oneChatStart.js"></script>
+       
         <script src="/socket.io/socket.io.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js"></script>
     </head>
@@ -63,6 +64,11 @@
                 <input class="text-submit" type="text" id="user"/>
                 <spam class="imgPlus" onclick = "imgUpload()">＋</spam>
                 <button onclick="myOnClick()" class="btn-submit">전송</button>
+                <!-- 사진 업로드 -->
+                <form id="uploadForm" style="display:none" ><!--enctype="multipart/form-data">-->
+                    <input type="file" name="testImg" id="imgTest"/>
+                    <button type="submit" id="uploadBtn">Save</button>
+                </form>
             </div>
         </div>
         <input type="hidden" id = "seq" value="<%=seq%>"/>
@@ -160,9 +166,35 @@
             chat.appendChild(msg);
         }
 
-        function imgUpload(){
+        function imgUpload(){//이미지 업로드 창 나오게
+            const flag = document.getElementById("uploadForm").style.display;
 
+            if(flag === 'none'){
+                document.getElementById("uploadForm").style.display = "block";
+            }else{
+                document.getElementById("uploadForm").style.display = "none";
+            }
         }
+
+        /*function imgOnClick(){
+            const imageForm = document.querySelector("#uploadForm");
+            const imageFile = document.querySelector('#imgTest');
+
+            const file = imageFile.files[0];
+            
+            console.log(file)
+            const req = {
+                file:file
+            }
+            fetch('/chat/imgUpload',{
+                method:"POST",
+                headers : {
+                    "Content-Type" : "application/json",
+                },
+                body:JSON.stringify(file)
+            })
+        }*/
+       
     </script>
-   
+    <script src="/js/chat/imgUpload.js"></script>
 </html>

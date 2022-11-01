@@ -22,7 +22,9 @@ router.get('/oneSearch',interceptor,ctrl.output.oneSearch);//일대일 검색기
 
 router.get('/oneMyList',interceptor, ctrl.output.oneMyList);//일대일 채팅방 리스트
 
-router.get('/oneRoom', interceptor,ctrl.output.oneRoom);
+router.get('/oneRoom', interceptor,ctrl.output.oneRoom);//일대일 채팅하기
+
+router.get('/imgurl', ctrl.output.imgurl);
 
 router.get('/video',ctrl.output.video);
 //---------------post------------------//
@@ -33,5 +35,7 @@ router.post('/oneStart',interceptor, ctrl.process.oneStart);
 router.post('/oneInsert',ctrl.process.oneInsert);
 
 router.post('/checkOne',ctrl.process.checkOne);
+
+router.post('/imgUpload', ctrl.process.imgUpload);
 
 module.exports=router;

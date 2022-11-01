@@ -4,6 +4,7 @@ const { json } = require("express");
 const Open = require("../../models/Open");//오픈채팅
 const OneChat = require("../../models/OneChat");
 
+const { generateUploadURL } = require("../../config/s3");
 const useArr = require("../../public/js/chat/oneChatList");//접속한 유저 저장 리스트
 
 const output = {
@@ -82,6 +83,11 @@ const output = {
         
     },
 
+    imgurl : async (req,res) => {
+        const url = await generateUploadURL();
+        res.json({ url })
+    },
+
     //--------------랜덤채팅--------------//
     random : (req,res) => {
         var userId = req.session.userId;
@@ -131,6 +137,10 @@ const process = {
         const one = new OneChat(req.body);
         const response = await one.checkOne(userId1,userId2);
         return res.json(response);
+    },
+
+    imgUpload : async (req,res) => {
+        console.log(req.body)
     }
 }
 
