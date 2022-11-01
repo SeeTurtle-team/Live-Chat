@@ -28,10 +28,11 @@
         </div>
         <div class = "search-box">
             <input type="text" id="search"/>
+            <!--
             <button data-search="next" id="next" class="next-btn">∨</button>
             <button data-search="prev" id="prev" class="prev-btn">∧</button>
             <button data-search="clear" id="clear" class="clear-btn">Ⅹ</button>
-            <span class="kwt-count" id="count">-</span>
+            <span class="kwt-count" id="count">-</span>-->
             <button onclick = "" class="btn-search">검색하기</button>
         </div>
 
@@ -60,6 +61,7 @@
             <div>
                 <span id ="id"><%=userId%></span>
                 <input class="text-submit" type="text" id="user"/>
+                <spam class="imgPlus" onclick = "imgUpload()">＋</spam>
                 <button onclick="myOnClick()" class="btn-submit">전송</button>
             </div>
         </div>
@@ -156,6 +158,10 @@
             msg.classList.add('me');
             msg.appendChild(node);
             chat.appendChild(msg);
+        }
+
+        function imgUpload(){
+
         }
     </script>
    
