@@ -50,13 +50,13 @@
                         if(imgFlag){
                             if(id===userId){
                                 if(flag===0){%>
-                                    <div class="me"><img src="<%=data.chat%>"/><span class="flag"></div>
+                                    <div class="me"><img class="imgChat" src="<%=data.chat%>"/><span class="flag"></div>
                                 <%}else{%>
-                                    <div class="me"><img src="<%=data.chat%>"/><span class="flag"><%=data.flag%>&nbsp;</span></div>
+                                    <div class="me"><img class="imgChat" src="<%=data.chat%>"/><span class="flag"><%=data.flag%>&nbsp;</span></div>
                                 <%}        
                             }else{
                                 %>
-                                <div class="other"><img src="<%=data.chat%>"/></div>
+                                <div class="other"><img class="imgChat" src="<%=data.chat%>"/></div>
                             <%}
                         }else{
                             if(id===userId){
@@ -124,11 +124,12 @@
         socket.on('oneImgMsg', function (data) {//이미지 받기
                       
             var className=data.class;
-            alert(data.url)
+            
             var chat = document.getElementById('chat')
             var msg = document.createElement('div')
             let x = document.createElement("IMG");
-            x.setAttribute("src",data.url)
+            x.setAttribute("src",data.url);
+            x.classList.add('imgChat');
             msg.classList.add(className);
             msg.appendChild(x);
             chat.appendChild(msg);
@@ -238,7 +239,8 @@
             var chat = document.getElementById('chat')
             var msg = document.createElement('div')
             let x = document.createElement("IMG");
-            x.setAttribute("src",url)
+            x.setAttribute("src",url);
+            x.classList.add('imgChat');
             msg.classList.add('me');
             msg.appendChild(x);
             chat.appendChild(msg);

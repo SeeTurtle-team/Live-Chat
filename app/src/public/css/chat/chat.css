@@ -136,6 +136,10 @@
   margin-top: 10px;
 }
 
+.imgChat{
+    width: 90%; 
+}
+
 
 /*일대일 채팅*/
 .oneBtn {
