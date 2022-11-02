@@ -182,10 +182,12 @@
             document.getElementById("uploadForm").style.display = "none";
 
             var chat = document.getElementById('chat')
+            var msg = document.createElement('div')
             let x = document.createElement("IMG");
             x.setAttribute("src",url)
-
-            chat.appendChild(x);
+            msg.classList.add('me');
+            msg.appendChild(x);
+            chat.appendChild(msg);
 
         }
 
