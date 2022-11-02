@@ -194,14 +194,15 @@ class Socket{
 
             socket.on('oneImg',function(data){//일대일 채팅 이미지
                 var test = data.roomName;
-                console.log('test count');
+                console.log('일대일 채팅 이미지');
                 for(var i=0; i<room.length;i++){
                     console.log(room[i]+"  for 문이 돌음")
                     if(room[i]===test){
                         console.log("roomName : " + test);
                         var roomSeq = room[i];
                         var userId = data.userId;
-                        socket.broadcast.to(roomSeq).emit('oneImg',{class:'other',url: data.url+".png"+'\n'})//msg 보낸 사람빼고 전부
+                        
+                        socket.broadcast.to(roomSeq).emit('oneImgMsg',{class:'other',url: data.url+'\n'})//msg 보낸 사람빼고 전부
                     }
                 }              
             }) 

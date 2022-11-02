@@ -106,15 +106,17 @@
             chat.appendChild(message);
         });
 
-        socket.on('oneImg', function (data) {//이미지 받기
-            console.log(data.comment)
-            var chat = document.getElementById('chat');
+        socket.on('oneImgMsg', function (data) {//이미지 받기
+                      
             var className=data.class;
-            
-            var message = document.createElement('div');
+            alert(data.url)
+            var chat = document.getElementById('chat')
+            var msg = document.createElement('div')
             let x = document.createElement("IMG");
             x.setAttribute("src",data.url)
-            chat.appendChild(message);
+            msg.classList.add(className);
+            msg.appendChild(x);
+            chat.appendChild(msg);
         });
 
         function myOnClick() {
@@ -175,9 +177,45 @@
             }
         }
 
+        function imgDB(url) {
+            url=url.split('?')[0];
+            alert("imgDB : "+url)
+            const req = {
+                userId : userId,
+                otherId : otherId,
+                chat : url,
+                seq : seq,
+            }
+
+            fetch('/chat/oneInsert',{
+                method:"POST",
+                headers : {
+                    "Content-Type" : "application/json",
+                },
+                body:JSON.stringify(req)
+            })
+            .then((res)=>res.json())
+            .then((res)=>{
+                if(res.success){
+                    if(!roomName){  //url에 방이름이 없는 새로 시작하는 방일 경우
+                        roomName=res.seq+"one";
+                        socket.emit('joinRoom',{roomName:roomName,userId:userId});
+                        seq = res.seq;
+                        console.log(roomName);
+                        console.log(seq);
+                    }
+                    imgOne(url);
+                }else{
+                    alert("채팅 발송 중 오류 발생");
+                }
+            })
+            
+            
+        }
+
         function imgOne(url){
             console.log(url);
-            url=url.split('?')[0];
+            
             socket.emit('oneImg',{roomName:roomName,userId:userId,url:url,seq:seq});
             document.getElementById("uploadForm").style.display = "none";
 
