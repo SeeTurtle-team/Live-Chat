@@ -46,16 +46,31 @@
                         var data = rows[i];
                         var id = data.userId;
                         var flag = data.flag;
-                        if(id===userId){
-                            if(flag===0){%>
-                                <div class="me"><%=data.userId%> : <%=data.chat%><span class="flag"></div>
-                            <%}else{%>
-                                <div class="me"><%=data.userId%> : <%=data.chat%><span class="flag"><%=data.flag%>&nbsp;</span></div>
-                            <%}        
+                        var imgFlag = data.imgFlag;
+                        if(imgFlag){
+                            if(id===userId){
+                                if(flag===0){%>
+                                    <div class="me"><img src="<%=data.chat%>"/><span class="flag"></div>
+                                <%}else{%>
+                                    <div class="me"><img src="<%=data.chat%>"/><span class="flag"><%=data.flag%>&nbsp;</span></div>
+                                <%}        
+                            }else{
+                                %>
+                                <div class="other"><img src="<%=data.chat%>"/></div>
+                            <%}
                         }else{
-                            %>
-                            <div class="other"><%=data.userId%> : <%=data.chat%></div>
-                        <%}
+                            if(id===userId){
+                                if(flag===0){%>
+                                    <div class="me"><%=data.userId%> : <%=data.chat%><span class="flag"></div>
+                                <%}else{%>
+                                    <div class="me"><%=data.userId%> : <%=data.chat%><span class="flag"><%=data.flag%>&nbsp;</span></div>
+                                <%}        
+                            }else{
+                                %>
+                                <div class="other"><%=data.userId%> : <%=data.chat%></div>
+                            <%}
+                        }
+                        
                     }%>
            
             </div>
@@ -185,6 +200,7 @@
                 otherId : otherId,
                 chat : url,
                 seq : seq,
+                imgFlag : 1
             }
 
             fetch('/chat/oneInsert',{

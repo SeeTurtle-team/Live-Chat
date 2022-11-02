@@ -124,8 +124,8 @@ const process = {
         const otherId = req.body.otherId; //상대 아이디
         const chat = req.body.chat;
         const seq = (req.body.seq);
-       
-        const response = await one.insertOneChat(userId,otherId,chat,seq);
+        const imgFlag = req.body.imgFlag;
+        const response = await one.insertOneChat(userId,otherId,chat,seq,imgFlag);
         console.log("success : "+response.success + ", "+response.seq);
         return res.json(response);
     },

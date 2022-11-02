@@ -72,7 +72,7 @@ class OneChat{
         }
     }
 
-    async insertOneChat(userId,otherId,chat,seq){
+    async insertOneChat(userId,otherId,chat,seq,imgFlag){
         if(seq==''){  //처음 생성된 방일시
             console.log("seq is null");
             const check = await this.checkOne(userId,otherId);  //있는 방인지 아닌지 체크
@@ -91,7 +91,7 @@ class OneChat{
         
         try{
             seq = parseInt(seq);
-            const response = await OneChatStorage.insertOneChat(userId,chat,seq); //채팅 넣기
+            const response = await OneChatStorage.insertOneChat(userId,chat,seq,imgFlag); //채팅 넣기
             return response;
         }catch(err){
             return {success : false, msg : err};
