@@ -91,23 +91,11 @@
         
         socket.emit('joinRoom',{roomName:roomName,userId:userId});
 
-        socket.on('oneMsg', function (data) {
+        socket.on('oneMsg', function (data) {//텍스트 받기
             console.log(data.comment)
             var chat = document.getElementById('chat');
             var className=data.class;
-            /*switch(className) {
-                case 'msg':
-                className = 'other'
-                break
-
-                case 'connect':
-                className = 'connect'
-                break
-
-                case 'disconnect':
-                className = 'disconnect'
-                break
-            }*/
+            
             var message = document.createElement('div');
             var node = document.createTextNode(data.comment)
             //document.getElementById("chat").append(data.comment);
@@ -115,6 +103,17 @@
 
             message.classList.add(className);
             message.appendChild(node);
+            chat.appendChild(message);
+        });
+
+        socket.on('oneImg', function (data) {//이미지 받기
+            console.log(data.comment)
+            var chat = document.getElementById('chat');
+            var className=data.class;
+            
+            var message = document.createElement('div');
+            let x = document.createElement("IMG");
+            x.setAttribute("src",data.url)
             chat.appendChild(message);
         });
 
@@ -174,6 +173,20 @@
             }else{
                 document.getElementById("uploadForm").style.display = "none";
             }
+        }
+
+        function imgOne(url){
+            console.log(url);
+            url=url.split('?')[0];
+            socket.emit('oneImg',{roomName:roomName,userId:userId,url:url,seq:seq});
+            document.getElementById("uploadForm").style.display = "none";
+
+            var chat = document.getElementById('chat')
+            let x = document.createElement("IMG");
+            x.setAttribute("src",url)
+
+            chat.appendChild(x);
+
         }
 
         /*function imgOnClick(){

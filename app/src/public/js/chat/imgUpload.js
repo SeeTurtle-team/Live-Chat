@@ -20,5 +20,5 @@ imageForm.addEventListener('submit', async () => {
       })
     
       const imageURL = url.split('?')[0];
-      alert(imageURL)
+      imgOne(url);
   })

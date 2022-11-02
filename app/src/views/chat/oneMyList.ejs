@@ -45,8 +45,10 @@
                     }
                 %>
                     <div class="openChat">
-                        <p class="openName">상대 ID : <%=other%>
-                            <%if(data.flag!=null){%><input class="readFlag" type="text" value="<%=data.flag%>" disabled><%}%></p>
+                        <p class="openName">
+                            상대 ID : <%=other%>
+                            <%if(data.flag!=null){%><input class="readFlag" type="text" value="<%=data.flag%>" disabled><%}%>
+                        </p>
                         <button onclick="oneChatStart('<%=other%>','<%=data.seq%>')" class="oneBtn">채팅하기</button>
                     </div>
                     <hr>
