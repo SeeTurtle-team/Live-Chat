@@ -11,7 +11,7 @@
         <script src="/socket.io/socket.io.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js"></script>
     </head>
-    
+
     <body>
         <div class = "container">
             <header>
@@ -119,6 +119,7 @@
             message.classList.add(className);
             message.appendChild(node);
             chat.appendChild(message);
+            document.getElementById("chat").scrollTop = document.getElementById("chat").scrollHeight
         });
 
         socket.on('oneImgMsg', function (data) {//이미지 받기
@@ -133,6 +134,7 @@
             msg.classList.add(className);
             msg.appendChild(x);
             chat.appendChild(msg);
+            document.getElementById("chat").scrollTop = document.getElementById("chat").scrollHeight
         });
 
         function myOnClick() {
@@ -181,6 +183,7 @@
             msg.classList.add('me');
             msg.appendChild(node);
             chat.appendChild(msg);
+            document.getElementById("chat").scrollTop = document.getElementById("chat").scrollHeight
         }
 
         function imgUpload(){//이미지 업로드 창 나오게
@@ -244,7 +247,7 @@
             msg.classList.add('me');
             msg.appendChild(x);
             chat.appendChild(msg);
-
+            document.getElementById("chat").scrollTop = document.getElementById("chat").scrollHeight
         }
 
         /*function imgOnClick(){
@@ -265,7 +268,11 @@
                 body:JSON.stringify(file)
             })
         }*/
-       
+
+    </script>
+        <script>
+            document.getElementById("chat").scrollTop = document.getElementById("chat").scrollHeight
+        
     </script>
     <script src="/js/chat/imgUpload.js"></script>
 </html>
