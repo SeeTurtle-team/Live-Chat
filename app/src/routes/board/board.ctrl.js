@@ -4,6 +4,7 @@ const session = require("express-session");
 const { json, response } = require("express");
 const db = require("../../config/db");
 const Open = require("../../models/WriteStorage");
+const { addListener } = require("../../config/db");
 
 const output = {
     board : (req, res) => {
@@ -66,6 +67,7 @@ const process = {
     writeP : (req, res) => {
         var body = req.body;
         const id = req.session.userId;
+        var writer = req.body.writer;
         console.log(seq);
         var sql = `INSERT INTO socket.write VALUES(?, '${id}', ?, ?, NOW(), 0, ?)`;
         var params = [body.writer, body.title, body.content, body.passwd];
@@ -82,16 +84,21 @@ const process = {
         var content = req.body.content;
         var date = req.body.date;
         var views = req.body.views;
-        var passwd = req.body.passwd;
         var body = req.body;
         var writer = req.body.writer;
         var params = [body.title, body.content, body.date];
-        var seq = req.body.seq;        
+        var seq = req.body.seq;
+        var writer = req.body.writer;
         var sql = `UPDATE socket.write SET seq = '${seq}', writer = '${id}',  title = ?, content = ?, date = NOW() WHERE seq = '${seq}'?`;
-        db.query(sql, params, (err,result) => {
+        if(id !== writer) {
+            res.send("<script>alert('아이디 불일치');history.back();</script>");
+        }
+        else {
+        db.query(sql, params, (err) => {
             if(err) console.error(err);
-                res.redirect('/board/listUpdate');
-            });
+            else res.redirect('/board/listUpdate');
+        })
+    }
     },
 }
 
