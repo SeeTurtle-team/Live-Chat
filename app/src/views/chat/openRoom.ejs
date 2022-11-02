@@ -8,6 +8,9 @@
         <link rel = "stylesheet" href="/css/chat/chat.css">
         <script src="/socket.io/socket.io.js"></script>
     </haed>
+    <script>
+        document.getElementById("chat").scrollTop = document.getElementById("chat").scrollHeight
+    </script>
     <body>
         <div class = "container">
             <header>
@@ -80,6 +83,8 @@
             message.classList.add(className);
             message.appendChild(node);
             chat.appendChild(message);
+            document.getElementById("chat").scrollTop = document.getElementById("chat").scrollHeight
+
         });
 
         function myOnClick() {
@@ -94,6 +99,8 @@
             msg.classList.add('me');
             msg.appendChild(node);
             chat.appendChild(msg);
+            document.getElementById("chat").scrollTop = document.getElementById("chat").scrollHeight
+
         }
     </script>
 </html>
