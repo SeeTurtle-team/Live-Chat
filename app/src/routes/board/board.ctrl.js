@@ -61,6 +61,28 @@ const output = {
         res.render('board/update', {row : row[0]});
         });
     },
+    writer : (req, res) => {
+        const id = req.session.userId;
+        var sql = `SELECT * FROM socket.comment WHERE id='${id}'`;
+        var parmas = [nickName, ctt, dt];
+        db.query(sql, params, (err) => {
+            if(err) console.error(err);
+            res.render('board/update');
+        })
+    },
+    search: (req, res) => {
+        var boardSearcch = req.query.boardSearch;
+        var sql = `SELECT writer, title, content FROM sockt.writer LIKE`+ RTCPeerConnection.escape('%'+req.query.boardSearch+'%');
+        db.query(sql, (err) => {
+            if(err) console.error(err);
+            else if(rows[0] == undefined) {
+                res.render('board/page/update', {'id':req.writer})
+            }
+            else {
+                res.render('board/page',{rows:rows, 'id':req.writer})
+            }
+        })
+    }
 }
 
 const process = {
@@ -71,7 +93,7 @@ const process = {
         console.log(seq);
         var sql = `INSERT INTO socket.write VALUES(?, '${id}', ?, ?, NOW(), 0, ?)`;
         var params = [body.writer, body.title, body.content, body.passwd];
-        db.query(sql, params, function(err) {
+        db.query(sql, params, (err) => {
             if(err) console.error(err);
             else res.redirect('/board/page/1');
         })
