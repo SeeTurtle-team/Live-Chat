@@ -26,7 +26,7 @@ router.get('/content/update/seq=:seq', interceptor,ctrl.output.update);
 
 router.get('/content/update/writer=:writer', interceptor,ctrl.output.writer);
 
-router.get('/', interceptor,ctrl.output.search);
+router.get('/search', interceptor,ctrl.output.searchWriter);
 
 //---------------post------------------//
 

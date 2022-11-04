@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="/css/home/login.css">
+        <link rel="stylesheet" href="/css/home/index.css">
+        <link rel="stylesheet" href="/css/chat/chat.css">
+        <script src="/js/board/boardTable.js" defer></script>
+            <!--css 모듈화 및 불필요 링크들 제거-->
+        <style>
+            div.select-box {
+                border: 2px solid #B8860B;
+                width: 450px;
+                position: fixed;
+                top: 100px;
+                right: 400px;
+            }
+            div.menu {
+                position: fixed;
+                top:-150px;
+                right: 400px;
+
+            }
+            .table {
+                position: fixed;
+                top:200px;
+                left: 200px;
+            }
+        </style>
+
+        <title>Page</title>
+    </head>
+    <body>
+        <div class = "container">
+            <header>
+                <nav>
+                    <div class = "icon" onclick="location.href = '/'">LiveChat</div>
+                    <div class = "gnb">
+                        <a href="/chat">오픈 채팅</a>
+                        <a href="/board/page/1">게시판</a>
+                        <a href="/chat/oneChat">1대1 채팅</a>
+                        <a href="/chat/random">랜덤채팅</a>
+                        <a href="/login" class="login_menu">로그아웃</a>
+                    </div>
+                </nav>
+            </header>
+        </div>
+        <div class="main">
+            <div><h3>검색결과가 존재하지 않습니다.</h3>
+            <div><a href="/board/page/1">게시글 목록으로 이동</a>
+            </div>
+            </div>
+        </div>
+    </body>
+</html>

@@ -66,15 +66,17 @@
         </div>
         <div class = "menu">
         <span class = "select-box" style="vertical-align:middle;">
-            <select id = "list" name = "list" style="width:100px;">
+            <select id = "list" name = "list" class="navar-toggle" style="width:100px;">
                 <option value = "작성자" >작성자</option>
                 <option value = "제목">제목</option>
                 <option value = "내용">내용</option>
         </div>
+        <form action="/search" method="get">
         <span class = "search-box">
-            <input type="text" id="search"/>
-            <button class="btn-search" type = "submit" >검색하기</button>
+            <input type="text" id="search" name="boardSearch" placeholder="검색어를 입력해주세요">
+            <button class="btn-search" type = "submit" onclick="location.href='/board/search'">검색하기</button>
         </span>
+        </form>
         <span>
             <button class = "btn-write" onclick="location.href='/board/newBoard'">게시글 작성하기</button>
         </span>

@@ -70,10 +70,10 @@ const output = {
             res.render('board/update');
         })
     },
-    search: (req, res) => {
-        var boardSearcch = req.query.boardSearch;
-        var sql = `SELECT writer, title, content FROM sockt.writer LIKE`+ RTCPeerConnection.escape('%'+req.query.boardSearch+'%');
-        db.query(sql, (err) => {
+    searchWriter: (req, res) => {
+        var boardSearch = req.query.writer;
+        var sql = `SELECT writer, title, content FROM sockt.writer LIKE`+ db.escape('%'+boardSearch+'%');
+        db.query(sql, (err, rows) => {
             if(err) console.error(err);
             else if(rows[0] == undefined) {
                 res.render('board/page/update', {'id':req.writer})
