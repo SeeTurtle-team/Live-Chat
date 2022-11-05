@@ -66,35 +66,32 @@ class Socket{
             socket.on('requestRandomChat', function(data) {
                 randomStack.addClient(data.userId, socket.id, 1, null);
                 for(var i = 0; i<randomStack.clients.length; i++){
-                    if(randomStack.clients[i].status == 1 && data.userId != randomStack.clients[i].id){
+                    if(randomStack.clients[i].status == 1 && randomStack.clients[i].id != data.userId){
                         console.log("입장");
-                        var firstMessage = "매칭되었습니다."
+                        var firstMessage = "매칭되었습니다.";
                         socket.join(randomStack.clients[i].roomName);
                         randomStack.clients[i].status = 0;
-                        for(var j = 0; i<randomStack.clients.length; j++){
+
+                        for(var j = 0; j<randomStack.clients.length; j++){
                             if(randomStack.clients[j].id == data.userId){
                                 randomStack.clients[j].status = 0;
                                 var roomName = randomStack.clients[i].roomName;
                                 randomStack.clients[j].roomName = roomName;
-                                console.log(randomStack.clients);
-                                break;
                             }
                         }
                         break;
-                    } else{
+                    }else{
                         console.log("방 만들기");
+                        var firstMessage = "상대를 기다리는 중..";
                         var nowTime = randomStack.nowTime();
                         var roomName = socket.id + nowTime;
-                        console.log("roomName : ", roomName);
-                        var firstMessage = "상대를 기다리는 중.."
+                        socket.join(roomName);
                         for(var k = 0; k<randomStack.clients.length; k++){
                             if(randomStack.clients[k].id == data.userId){
                                 randomStack.clients[k].roomName = roomName;
+                                break;
                             }
                         }
-                        socket.join(roomName);
-                        console.log(randomStack.clients);
-                        break;
                     }
                 }
                 io.sockets.to(roomName).emit("sendRoomName", {roomName:roomName, firstMessage:firstMessage});
