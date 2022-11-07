@@ -16,6 +16,7 @@ const express = require('express');
 const app = express();
 const bodyParser= require("body-parser");
 const dotenv = require("dotenv");
+const cors = require('cors');
 dotenv.config();
 
 const session = require('express-session');
@@ -42,6 +43,7 @@ const sessionObj = {
 };
   
 app.use(session(sessionObj));
+app.use(cors());
 app.use("/",home);
 app.use("/chat",chat);
 app.use("/board",board);

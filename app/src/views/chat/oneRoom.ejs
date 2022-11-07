@@ -102,6 +102,7 @@
 
         let seq = document.getElementById("seq").value;  //채팅방 시퀀스
         console.log(seq);
+        //var socket = io.connect('http://내 IP:5000');  //내 개인 아이피 주소로 크롬에서 접근해야만 외부기기 접속이 가능합니다
         var socket = io.connect('http://localhost:5000');
         
         socket.emit('joinRoom',{roomName:roomName,userId:userId});
@@ -150,6 +151,7 @@
                 method:"POST",
                 headers : {
                     "Content-Type" : "application/json",
+                    "Origin" :'http://localhost:5000'
                 },
                 body:JSON.stringify(req)
             })
