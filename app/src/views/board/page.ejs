@@ -71,7 +71,9 @@
                 <option value = "제목">제목</option>
                 <option value = "내용">내용</option>
         </div>
-        <form action="/search" method="get">
+        <form action="/search" method="get"><!--이 부분 굳이 폼 쓰지 않고 onclick으로 함수 선언해서 get방식으로 넘겨보세요
+        간단한 데이터를 넘기는거니 파라미터로 넘겨주셔도 무방합니다
+        일단 저기 위에 select는 일단 나중으로 미루시고 제목으로 검색하는거 우선 구현해보세요-->
         <span class = "search-box">
             <input type="text" id="search" name="boardSearch" placeholder="검색어를 입력해주세요">
             <button class="btn-search" type = "submit" onclick="location.href='/board/search'">검색하기</button>
