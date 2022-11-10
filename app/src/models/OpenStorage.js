@@ -35,6 +35,16 @@ class OpenStorage{
             })
         })
     }
+
+    static async deleteOpen(seq){
+        return new Promise((resolve, reject) => {
+            const query = "delete from openchat where seq = ?;";
+            db.query(query,[seq],(err)=>{
+                if(err) reject('${err}');
+                resolve({success:true});
+            })
+        })
+    }
 }
 
 module.exports = OpenStorage;

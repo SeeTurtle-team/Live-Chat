@@ -13,6 +13,7 @@ class Socket{
         const io = SocketIO(server,{path:'/socket.io'});
         var room = new Array();  //생성된 방 목록들
         var open = new Array();
+        var openPeople ={};
         io.on('connection',(socket)=>{
             const session = require('express-session');
             var instanceId = session.userId;
@@ -136,15 +137,18 @@ class Socket{
                 socket.join(data.roomName);
                 var roomName = data.roomName;
                 var userId = data.userId;
+
                 for(var i=0; i<open.length;i++){
                     if(open[i]===roomName){
                         io.sockets.in(roomName).emit('recMsg',{class:'connect',comment: userId + " 님이 입장하였습니다. " +'\n'})
+                        openPeople[roomName]+=1;
                         return;
                     }
                     
                 }
                 open.push(roomName);
-                console.log(open);
+                openPeople[roomName]=1;
+                console.log(openPeople);
             });
         
             socket.on('test',function(data){

@@ -1,5 +1,6 @@
 "use strict";
 
+const { deleteOpen } = require("./OpenStorage");
 const OpenStorage = require("./OpenStorage");
 
 class Open{
@@ -34,6 +35,15 @@ class Open{
             return response;
         }catch(err){
             console.log('실패');
+        }
+    }
+
+    async deleteOpen(seq){
+        try{
+            const response = await OpenStorage.deleteOpen(seq);
+            return response;
+        }catch(err){
+            console.log('삭제 실패');
         }
     }
 }
