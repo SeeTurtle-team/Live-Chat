@@ -12,6 +12,7 @@ class Socket{
     startChat(server){
         const io = SocketIO(server,{path:'/socket.io'});
         var room = new Array();  //생성된 방 목록들
+        var open = new Array();
         io.on('connection',(socket)=>{
             const session = require('express-session');
             var instanceId = session.userId;
@@ -46,7 +47,7 @@ class Socket{
                 var userId = data.userId;
                 for(var i=0; i<room.length;i++){
                     if(room[i]===roomName){
-                        io.sockets.in(roomName).emit('recMsg',{class:'connect',comment: userId + " 님이 입장하였습니다. " +'\n'})
+                        io.sockets.in(roomName).emit('oneMsg',{class:'connect',comment: userId + " 님이 입장하였습니다. " +'\n'})
                         return;
                     }
                     
@@ -128,20 +129,37 @@ class Socket{
 
 
 
+            /*오픈 채팅*/
 
-
-
+            socket.on('joinOpen',function (data) {
+                console.log(data);
+                socket.join(data.roomName);
+                var roomName = data.roomName;
+                var userId = data.userId;
+                for(var i=0; i<open.length;i++){
+                    if(open[i]===roomName){
+                        io.sockets.in(roomName).emit('recMsg',{class:'connect',comment: userId + " 님이 입장하였습니다. " +'\n'})
+                        return;
+                    }
+                    
+                }
+                open.push(roomName);
+                console.log(open);
+            });
+        
             socket.on('test',function(data){
                 console.log("/-----------테스트 시작--------------//")
                 var test = data.roomName;
                 console.log('test count');
-                for(var i=0; i<room.length;i++){
-                    console.log(room[i]+"  for 문이 돌음")
-                    if(room[i]===test){
-                        console.log(room);
-                        var roomSeq = room[i];
+                console.log(test);
+                for(var i=0; i<open.length;i++){
+                    console.log(open[i]+"  for 문이 돌음")
+                    if(open[i]===test){
+                        
+                        var roomSeq = open[i];
                         var userId = data.userId;
-                        socket.broadcast.to(roomSeq).emit('recMsg',{class:'msg',comment: userId + " : " + data.comment+'\n'})//msg 보낸 사람빼고 전부
+                        console.log("roomSeq : "+roomSeq);
+                        socket.broadcast.to(roomSeq).emit('recMsg',{class:'other',comment: userId + " : " + data.comment+'\n'})//msg 보낸 사람빼고 전부
                         //io.sockets.in(roomSeq).emit('recMsg',{comment: userId + " : " + data.comment+'\n'})//방 전부
                         /*
                         socket.on(roomSeq,function(data){
@@ -172,9 +190,6 @@ class Socket{
                  console.log(data);
             });
             
-            socket.emit('news','hello monkey');
-
-
             socket.on('one',function(data){//일대일 채팅 텍스트
                 var test = data.roomName;
                 console.log('test count');

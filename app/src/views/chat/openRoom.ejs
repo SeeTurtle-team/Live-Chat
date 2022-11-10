@@ -56,7 +56,7 @@
         console.log(userId);
         var socket = io.connect('http://localhost:5000');
         
-        socket.emit('joinRoom',{roomName:roomName,userId:userId});
+        socket.emit('joinOpen',{roomName:roomName,userId:userId});
 
         socket.on('recMsg', function (data) {
             console.log(data.comment)
