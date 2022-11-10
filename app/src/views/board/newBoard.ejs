@@ -5,25 +5,47 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>글작성</title>
+    <link rel = "stylesheet" href ="/css/home/index.css">
+    <link rel = "stylesheet" href ="/css/board/board.css">
 </head>
 <body>
-    <h2>게시글 작성</h2>
-    <form action="writeP" method="post">
-        <table border = "1">
-            <tr>
-                <td>제목</td>
-                <td><input type="text" name="title" id="title" required/></td>
-            </tr>
-            <tr>
-                <td>내용</td>
-                <td><textarea name="content" id="content" cols="30" rows="10" required></textarea></td>
-            </tr>
-            <tr>
-                <td colspan = "2">
-                    <button type = "submit">작성하기</button>
-                </td>
-            </tr>
-    </table>
-    </form>
+    <div class = "container">
+        <header>
+            <nav>
+                <div class = "icon" onclick="location.href='/'">LiveChat</div>
+                <div class = "gnb">
+                    <a href="/chat">오픈 채팅</a>
+                    <a href="/board/page/1">게시판</a>
+                    <a href="/chat/oneChat">1대1 채팅</a>
+                    <a href="/chat/random">랜덤채팅</a>
+                    <a href="/login" class="login_menu">로그아웃</a>
+                </div>
+                
+            </nav>
+            
+        </header>
+
+    </div>
+    <div>
+        <h2>게시글 작성</h2>
+        <form action="writeP" method="post">
+            <table border = "1">
+                <tr>
+                    <td class="table-h">제목</td>
+                    <td><input type="text" class="input" name="title" id="title" required/></td>
+                </tr>
+                <tr>
+                    <td class="table-h">내용</td>
+                    <td><textarea name="content" class="board-content" id="content" cols="30" rows="10" required></textarea></td>
+                </tr>
+                <tr>
+                    <td colspan = "2">
+                        <button class='btn-only' type = "submit">작성하기</button>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+    
 </body>
 </html>
