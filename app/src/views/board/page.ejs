@@ -7,6 +7,7 @@
         <link rel="stylesheet" href="/css/home/login.css">
         <link rel="stylesheet" href="/css/home/index.css">
         <link rel="stylesheet" href="/css/chat/chat.css">
+        <link rel="stylesheet" href="/css/board/board.css">
         <script src="/js/board/boardTable.js" defer></script>
             <!--css 모듈화 및 불필요 링크들 제거-->
         <style>
@@ -64,33 +65,30 @@
                 </nav>
             </header>
         </div>
-        <div class = "menu">
-        <span class = "select-box" style="vertical-align:middle;">
-            <select id = "list" name = "list" class="navar-toggle" style="width:100px;">
-                <option value = "작성자" >작성자</option>
-                <option value = "제목">제목</option>
-                <option value = "내용">내용</option>
+        <div class = "board-search-box">
+                 <form action="/search" method="get"><!--이 부분 굳이 폼 쓰지 않고 onclick으로 함수 선언해서 get방식으로 넘겨보세요
+                간단한 데이터를 넘기는거니 파라미터로 넘겨주셔도 무방합니다
+                일단 저기 위에 select는 일단 나중으로 미루시고 제목으로 검색하는거 우선 구현해보세요-->
+                    <select id = "list" name = "list" class="navar-toggle" style="width:100px;">
+                        <option value = "작성자" >작성자</option>
+                        <option value = "제목">제목</option>
+                        <option value = "내용">내용</option>
+                    </select>
+            
+                    <input type="text" id="search" name="boardSearch" placeholder="검색어를 입력해주세요">
+                    <button class="btn-search" type = "submit" onclick="location.href='/board/search'">검색하기</button>
+                
+                </form>
+            
         </div>
-        <form action="/search" method="get"><!--이 부분 굳이 폼 쓰지 않고 onclick으로 함수 선언해서 get방식으로 넘겨보세요
-        간단한 데이터를 넘기는거니 파라미터로 넘겨주셔도 무방합니다
-        일단 저기 위에 select는 일단 나중으로 미루시고 제목으로 검색하는거 우선 구현해보세요-->
-        <span class = "search-box">
-            <input type="text" id="search" name="boardSearch" placeholder="검색어를 입력해주세요">
-            <button class="btn-search" type = "submit" onclick="location.href='/board/search'">검색하기</button>
-        </span>
-        </form>
-        <span>
-            <button class = "btn-write" onclick="location.href='/board/newBoard'">게시글 작성하기</button>
-        </span>
-    </div>
-    <table class = "table">
-        <tr>
-            <td width = "50">seq</td>
-            <td width = "100">작성자</td>
-            <td width = "300">제목</td>
-            <td width = "500">작성일</td>
-            <td width = "50">조회수</td>
-        </tr>
+    <table class = "board-table">
+        <thead>
+            <th width = "50">seq</th>
+            <th width = "100">작성자</th>
+            <th width = "300">제목</th>
+            <th width = "500">작성일</th>
+            <th width = "50">조회수</th>
+        </thead>
         <% for(var i = (page * page_num) - page_num; i < (page * page_num); i++) { 
             if(i > length){
                 i++
@@ -119,5 +117,8 @@
         </td>
     </tr>
     </table>
+    <span>
+        <button class = "btn-write" onclick="location.href='/board/newBoard'">게시글 작성하기</button>
+    </span>
     </body>
 </html>
