@@ -95,9 +95,14 @@ const process = {
         var body = req.body;
         const id = req.session.userId;
         var writer = req.body.writer;
-        console.log(seq);
-        var sql = `INSERT INTO socket.write VALUES(?, '${id}', ?, ?, NOW(), 0, ?)`;
-        var params = [body.writer, body.title, body.content, body.passwd];
+        const date = new Date();
+        const hours = date.getHours();
+        const minutes = date.getMinutes();
+        const seconds = date.getSeconds();
+    
+        var nowTime = hours + ':' + minutes + ':' + seconds;
+        var sql = `INSERT INTO socket.write(writer,title,content,date) VALUES('${id}', ?, ?, ?)`;
+        var params = [ body.title, body.content,nowTime];
         db.query(sql, params, (err) => {
             if(err) console.error(err);
             else res.redirect('/board/page/1');

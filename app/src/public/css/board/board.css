@@ -77,3 +77,26 @@ h2{
 .table-h{
     font-size: 20px;
 }
+
+.mt-4{
+    margin-left:5%;
+    padding:30px;
+}
+.input-comment{
+    border: 0px;
+	width : 50%;
+	
+	border-radius: 5px;
+    font-size: 20px;
+}
+
+.comment{
+    position:relative;
+    width: 20%;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.comment_form {
+    display: inline-block;
+}

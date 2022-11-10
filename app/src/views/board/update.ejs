@@ -5,6 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>contnet</title>
+    <link rel = "stylesheet" href ="/css/home/index.css">
+    <link rel = "stylesheet" href ="/css/board/board.css">
 </head>
 <script>
 
@@ -14,6 +16,20 @@
     }
 </script>
 <body>
+    <div class = "container">
+        <header>
+            <nav>
+                <div class = "icon" onclick="location.href = '/'">LiveChat</div>
+                <div class = "gnb">
+                    <a href="/chat">오픈 채팅</a>
+                    <a href="/board/page/1">게시판</a>
+                    <a href="/chat/oneChat">1대1 채팅</a>
+                    <a href="/chat/random">랜덤채팅</a>
+                    <a href="/login" class="login_menu">로그아웃</a>
+                </div>
+            </nav>
+        </header>
+    </div>
     <h2>게시판 내용</h2>
     <table class = "table">
         <tr>
@@ -49,14 +65,14 @@
     </table>
     </form>
     <div class="mt-4">
-        <h3>댓글</h3>
         <div id="comment_form" class="input-group mb-3">
-            <input id="comment" type="text" class="form-control" placeholder="댓글을 입력하세요." >
-            <button  class="btn btn-primary" type="button" id="comment_btn">댓글등록</button>
+            <span class="comment">댓글&nbsp;  </span>
+            <input id="comment" class="input-comment" type="text" class="form-control" placeholder="댓글을 입력하세요." >
+            <button  class="btn-only" type="button" id="comment_btn">댓글등록</button>
         </div>
         <div id="comment_wrap">
             <table class="table">
-                <thead>
+                
                     <tr>
                         <th style="min-width:4rem;">닉네임</th>
                         <th style="min-width:9rem;">내용</th>
@@ -64,7 +80,7 @@
                         <th style="min-width:2.5rem"></th>
                         <th style="min-width:2.5rem"></th>
                     </tr>
-                </thead>
+                
                 <tbody id="comment_table">
 
                 </tbody>
