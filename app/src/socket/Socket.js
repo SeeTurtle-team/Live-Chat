@@ -276,7 +276,7 @@ class Socket{
             
         })
 
-        schedule.scheduleJob('10 * * * * *', async function(){
+        schedule.scheduleJob('10 1 * * * *', async function(){
             console.log('스케줄러 작동');
             //console.log(Object.keys(openPeople).length)
             //console.log(open)
@@ -288,7 +288,11 @@ class Socket{
                     console.log(openPeople[chatRoom]);
                     const seq = chatRoom.substr(0,1);
                     const response = await openInterface.deleteOpen(seq);
-                    console.log(response)
+                    console.log(response);
+                    if(response.success){
+                        delete openPeople[[chatRoom]];
+                        delete open[i];
+                    }
                 }
             }
         });   
