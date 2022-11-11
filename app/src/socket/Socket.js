@@ -16,7 +16,7 @@ class Socket{
         const io = SocketIO(server,{path:'/socket.io'});
         var room = new Array();  //생성된 방 목록들
         var open = new Array();
-        var openArray = new Array();
+        //var openArray = new Array();
         var openPeople ={};
         io.on('connection',(socket)=>{
             const session = require('express-session');
@@ -272,7 +272,9 @@ class Socket{
                 }
             });
         
-
+            socket.on("error",(err) => {
+                console.log(err + ',' +err.stack);
+            })
             
         })
 
@@ -295,7 +297,9 @@ class Socket{
                     }
                 }
             }
-        });   
+        });
+        
+        
     }
     
 }

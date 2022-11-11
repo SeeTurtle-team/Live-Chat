@@ -4,12 +4,17 @@ const app =require("../app");
 const Socket = require("../src/socket/Socket");
 
 const port =process.env.PORT || 5000;
-const server = app.listen(port,()=>{
-    console.log('서버 가동');
-});
+try{
+    const server = app.listen(port,()=>{
+        console.log('서버 가동');
+    });
+    
+    const chat = new Socket();
+    chat.startChat(server);
+}catch(err){
+    console.log(err);
+}
 
-const chat = new Socket();
-chat.startChat(server);
 
 
 /*
