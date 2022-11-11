@@ -2,6 +2,8 @@ const SocketIO = require('socket.io');
 const server = require("../../bin/www");
 const OneChat = require("../models/OneChat");
 const randomStack = require("../public/js/chat/randomChatList");
+const schedule = require('node-schedule');
+const Open = require("../models/Open");//오픈채팅
 
 class Socket{
     constructor(){
@@ -10,9 +12,11 @@ class Socket{
     }
 
     startChat(server){
+
         const io = SocketIO(server,{path:'/socket.io'});
         var room = new Array();  //생성된 방 목록들
         var open = new Array();
+        var openArray = new Array();
         var openPeople ={};
         io.on('connection',(socket)=>{
             const session = require('express-session');
@@ -263,9 +267,25 @@ class Socket{
 
             
         })
-
-       
+/*
+        schedule.scheduleJob('10 * * * * *', async function(){
+            console.log('스케줄러 작동');
+            //console.log(Object.keys(openPeople).length)
+            //console.log(open)
+            const openInterface = new Open();
+            for(var i=0;i<open.length;i++){
+                var chatRoom = open[i];
+                console.log(chatRoom)
+                if(openPeople[chatRoom]>0){
+                    console.log(openPeople[chatRoom]);
+                    const seq = chatRoom.substr(0,1);
+                    const response = await openInterface.deleteOpen(seq);
+                    console.log(response)
+                }
+            }
+        });   */
     }
+    
 }
 
 module.exports = Socket;
