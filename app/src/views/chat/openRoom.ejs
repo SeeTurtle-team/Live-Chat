@@ -40,12 +40,16 @@
                 <span id ="id"><%=userId%></span>
                 <input class="text-submit" type="text" id="user"/>
                 <button onclick="myOnClick()" class="btn-submit">전송</button>
-                <button class="btn-submit">나가기</button>
+                <button onclick="openOut()" class="btn-submit">나가기</button>
             </div>
         </div>
         
     </body>
     <script>
+        function openOut(){
+            socket.emit('outOpen',{roomName:roomName});
+            location.href='/chat';
+        }
         const pageUrl = window.location.href;
         
         const url = new URL(pageUrl);

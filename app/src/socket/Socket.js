@@ -154,6 +154,14 @@ class Socket{
                 openPeople[roomName]=1;
                 console.log(openPeople);
             });
+
+            socket.on('outOpen',function (data) {
+                for(var i=0; i<open.length;i++){
+                    if(open[i]===data.roomName){
+                        openPeople[data.roomName]-=1;
+                    }
+                }
+            })
         
             socket.on('test',function(data){
                 console.log("/-----------테스트 시작--------------//")
@@ -267,7 +275,7 @@ class Socket{
 
             
         })
-/*
+
         schedule.scheduleJob('10 * * * * *', async function(){
             console.log('스케줄러 작동');
             //console.log(Object.keys(openPeople).length)
@@ -276,14 +284,14 @@ class Socket{
             for(var i=0;i<open.length;i++){
                 var chatRoom = open[i];
                 console.log(chatRoom)
-                if(openPeople[chatRoom]>0){
+                if(openPeople[chatRoom]===0){
                     console.log(openPeople[chatRoom]);
                     const seq = chatRoom.substr(0,1);
                     const response = await openInterface.deleteOpen(seq);
                     console.log(response)
                 }
             }
-        });   */
+        });   
     }
     
 }
