@@ -10,6 +10,10 @@
 랜덤채팅, 게시판 마무리
 읽지 않은 거 채팅 리스트 페이지에서 뜨기
 */
+
+/*Error: read ECONNRESET
+    at TCP.onStreamRead (node:internal/stream_base_commons:217:20)
+    혹시 작업 중 이런 에러 나면 말씀해주세요*/
 //모듈
 const express = require('express');
 
