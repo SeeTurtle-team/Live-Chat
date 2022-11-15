@@ -50,7 +50,7 @@ const process ={
         return res.json(response);
     },
 
-    logout : (req, res) => {
+    logout : (req , res) => {
         
         req.session.destroy(()=>{
             useArr.deleteUser(session.userId);

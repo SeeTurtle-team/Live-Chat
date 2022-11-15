@@ -16,6 +16,7 @@
     혹시 작업 중 이런 에러 나면 말씀해주세요*/
 //모듈
 const express = require('express');
+const serverless = require('serverless-http');
 
 const app = express();
 const bodyParser= require("body-parser");
@@ -48,6 +49,7 @@ const sessionObj = {
   
 app.use(session(sessionObj));
 app.use(cors());
+
 app.use("/",home);
 app.use("/chat",chat);
 app.use("/board",board);

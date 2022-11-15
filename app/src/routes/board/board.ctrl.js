@@ -37,7 +37,7 @@ const output = {
             if(err) console.error(err);
             else res.render('board/content', {row : row[0]});
         });
-        
+    
     },
     listUpdate : (req, res) => {
         res.render('board/listUpdate');
