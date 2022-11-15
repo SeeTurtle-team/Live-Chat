@@ -28,9 +28,13 @@
             <button class="btn" onclick="searching()">랜덤 상대 찾기</button>
         </div>
         <div id="disabled" style="display: none">
+            <div class="chatOuter">
+                <div id="loader" class="loader"></div>
             <div id="chatBox">
-
+                
             </div>
+            </div>
+            
             <div>
             <span>id : <%=userId%></span>
             <input type="text" id="text"/>
@@ -38,6 +42,7 @@
             <button class="btn" onclick="exit()">나가기</button>
             </div>
         </div>
+        
     </body>
     <script>
         const userId = document.getElementById("id").innerText;
@@ -45,11 +50,20 @@
 
         var socket = io.connect('http://localhost:5000');
 
+        function loader(flag){
+            if(flag == 0){
+                document.getElementById("loader").style.display = "none";
+            }else{
+                document.getElementById("loader").style.display = "inline-block";
+            }
+        }
+
         socket.on("sendRoomName", function(data) {
             roomName = data.roomName;
             const p = document.createElement('p');
             document.getElementById('chatBox').append(data.firstMessage);
             document.getElementById('chatBox').append(p);
+            loader(data.flag);
         });
 
         function searching(){

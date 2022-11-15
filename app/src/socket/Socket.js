@@ -75,6 +75,7 @@ class Socket{
                     if(randomStack.clients[i].status == 1 && randomStack.clients[i].id != data.userId){
                         console.log("입장");
                         var firstMessage = "매칭되었습니다.";
+                        var flag = 0;
                         socket.join(randomStack.clients[i].roomName);
                         randomStack.clients[i].status = 0;
 
@@ -89,6 +90,7 @@ class Socket{
                     }else{
                         console.log("방 만들기");
                         var firstMessage = "상대를 기다리는 중..";
+                        var flag = 1;
                         var nowTime = randomStack.nowTime();
                         var roomName = socket.id + nowTime;
                         socket.join(roomName);
@@ -100,7 +102,7 @@ class Socket{
                         }
                     }
                 }
-                io.sockets.to(roomName).emit("sendRoomName", {roomName:roomName, firstMessage:firstMessage});
+                io.sockets.to(roomName).emit("sendRoomName", {roomName:roomName, firstMessage:firstMessage, flag:flag});
             });
 
             //random chat 나가기
