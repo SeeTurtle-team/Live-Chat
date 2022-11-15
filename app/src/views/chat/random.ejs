@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>랜덤 채팅</title>
         <link rel = "stylesheet" href ="/css/home/index.css">
+        <link rel = "stylesheet" href="/css/chat/random.css">
         <script src="/socket.io/socket.io.js"></script>
     </head>
     <body>
@@ -24,16 +25,18 @@
         </div>
         <div id="abled" style="display: block">
             <span id="id"><%=userId%></span>님 환영합니다.
-            <button onclick="searching()">랜덤 상대 찾기</button>
+            <button class="btn" onclick="searching()">랜덤 상대 찾기</button>
         </div>
         <div id="disabled" style="display: none">
             <div id="chatBox">
 
             </div>
+            <div>
             <span>id : <%=userId%></span>
             <input type="text" id="text"/>
-            <button id="send">전송</button>
-            <button onclick="exit()">나가기</button>
+            <button class="btn" id="send">전송</button>
+            <button class="btn" onclick="exit()">나가기</button>
+            </div>
         </div>
     </body>
     <script>
@@ -80,15 +83,26 @@
             var str = userId;
             str += " : ";
             str += text;
-            socket.emit('sendMessage', {roomName:roomName, data:str});
+            socket.emit('sendMessage', {roomName:roomName, data:str, userId:userId});
             document.getElementById('text').value = '';
         }
 
         socket.on('recMessage', function(data) {
-            console.log(data);
-            const p = document.createElement('p');
-            document.getElementById('chatBox').append(data.text);
-            document.getElementById('chatBox').append(p);
+            var className = "";
+            if(data.userId == userId){
+                className = "me";
+            }else{
+                className = "other";
+            }
+            var chatBox = document.getElementById('chatBox');
+            var messageDiv = document.createElement('div');
+            var node = document.createTextNode(data.text);
+            messageDiv.classList.add(className);
+            messageDiv.appendChild(node);
+            chatBox.appendChild(messageDiv);
+            
+            let chat = document.querySelector('#chatBox');
+            chat.scrollTop = chat.scrollHeight;
         })
     </script>
 </html>

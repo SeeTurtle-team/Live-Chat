@@ -129,7 +129,8 @@ class Socket{
             socket.on('sendMessage', function(data){
                 console.log(data.data);
                 const text = data.data;
-                io.sockets.to(data.roomName).emit('recMessage', {text});
+                var id = data.userId;
+                io.sockets.to(data.roomName).emit('recMessage', {text:text, userId:id});
             });
 
 

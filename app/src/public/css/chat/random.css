@@ -1,0 +1,38 @@
+.btn{
+    color : white;
+    background : black;
+    border-radius: 10px;
+    font-size: 20px;
+}
+
+#abled{
+    font-size: 30px;
+    margin-top: 10%;
+    text-align: center;
+}
+
+#disabled{
+    font-size: 30px;
+    text-align: center;
+}
+
+#chatBox{
+    font-size: 20px;
+    margin-top: 1%;
+    height: 600px;
+    width: 40%;
+    background: #e1e2e1;
+    display: inline-block;
+    overflow: auto;
+    flex-direction: column;
+ }
+
+ .me{
+    background-color: lemonchiffon;
+    margin-top: 10px;
+ }
+
+ .other{
+    background-color: white;
+    margin-top: 10px;
+ }
