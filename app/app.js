@@ -15,9 +15,10 @@
     at TCP.onStreamRead (node:internal/stream_base_commons:217:20)
     혹시 작업 중 이런 에러 나면 말씀해주세요*/
 //모듈
-const express = require('express');
-const serverless = require('serverless-http');
-
+//const express = require('express');
+//const serverless = require('serverless-http');
+const handler = require('serverless-express/handler')
+const express = require('serverless-express/express');
 const app = express();
 const bodyParser= require("body-parser");
 const dotenv = require("dotenv");
