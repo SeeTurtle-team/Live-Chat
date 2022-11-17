@@ -3,23 +3,38 @@
 const WriteStorage = require("./WriteStorage");
 
 class Write{
-    constructor(body){
+    constructor(body) {
         this.body = body;
     }
 
-    async script() {
-        try{
-            const response = await WriteStorage.openBoardTable();
-            return response;
-        }catch(err) {
-            console.log('실패');
+    async getId(id) {
+        try {
+            const rows = await WriteStorage.getWriteInfo(id);
+            return rows;
+        } catch(err) {
+            console.log(err);
+            return{success : false, msg : err};
         }
-
     }
 
+    async newUpdate(seq) {
+        try {
+        const row = await WriteStorage.dataUpdate();
+        return row;
+        } catch(err) {
+            console.log(err);
+            return{success : false, msg : err};
+        }
+    }
 
-
-
+    async writePost() {
+        try {
+            const response = await WriteStorage.getWritePost(seq,userId);
+            return response;
+        }catch(err){
+            return {success : false, msg:err};
+        }
+    }
 
 }
 

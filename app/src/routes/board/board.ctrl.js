@@ -5,6 +5,7 @@ const { json, response } = require("express");
 const db = require("../../config/db");
 const Open = require("../../models/WriteStorage");
 const { addListener } = require("../../config/db");
+const Write = require("../../models/Write");
 
 const output = {
     board : (req, res) => {
@@ -51,24 +52,25 @@ const output = {
             else res.render('/listUpdate', {row : row[0]});
         });
     },
-    update : (req, res, next) => {
+    update : (req, res) => {
         var seq = req.params.seq;
-        var body = req.body;
-        var sql = `SELECT * FROM socket.write WHERE seq='${seq}'`;
-        var params = [body.seq, body.writer, body.title, body.content, body.date, body.views];
-        db.query(sql, params, (err, row) => {
-            if(err) console.error(err);
+        // var body = req.body;
+        const WritePost = new Write(req.body);
+        const row = WritePost.writePost(seq);
+        // var sql = `SELECT * FROM socket.write WHERE seq='${seq}'`;
+        // var params = [body.seq, body.writer, body.title, body.content, body.date, body.views];
+        // db.query(sql, params, (err, row) => {
+        //     if(err) console.error(err);
+        //     res.render('board/update', {row : row[0]});
+        // });
         res.render('board/update', {row : row[0]});
-        });
     },
     writer : (req, res) => {
+        const getId = new Write(req.body);
         const id = req.session.userId;
-        var sql = `SELECT * FROM socket.comment WHERE id='${id}'`;
-        var parmas = [nickName, ctt, dt];
-        db.query(sql, params, (err) => {
-            if(err) console.error(err);
-            res.render('board/update');
-        })
+        const rows = getId.getId(id);
+        console.log(rows);
+        res.render('board/update');
     },
     searchWriter: (req, res) => {
         var boardSearch = req.query.writer;
