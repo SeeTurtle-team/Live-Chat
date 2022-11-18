@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>랜덤 채팅</title>
+        <link rel = "stylesheet" href ="/css/home/index.css">
+        <link rel = "stylesheet" href ="/css/chat/random.css">
+        <script src="/socket.io/socket.io.js"></script>
+    </head>
+    <body>
+        <div class = "container">
+            <header>
+                <nav>
+                    <div class = "icon" onclick="location.href='/'">LiveChat</div>
+                    <div class = "gnb">
+                        <a href="/chat">오픈 채팅</a>
+                        <a href="/board">게시판</a>
+                        <a href="/chat/oneChat">1대1 채팅</a>
+                        <a href="/chat/random">랜덤채팅</a>
+                        <a href="/login" class="login_menu">로그아웃</a>
+                    </div>
+                </nav>
+            </header>
+        </div>
+            <div class="myBox">
+                <p class="header">마이페이지</p>
+                <div>
+                <img class="img"src="https://ifh.cc/g/QCO7Gm.png"/>
+                </div>
+                <span class="center">프로필</span>
+                
+                <p class="info">아이디 : <%=userId%></p>
+                <p class="info">소개글 : 안녕하세요 반갑습니다. ^_^</p><hr>
+
+                <div class="center">
+                <button class="btn">친구 보기</button>
+                <button class="btn">내 채팅방 보기</button>
+                <button class="btn">개인 정보 수정</button>
+                </div>
+            </div>

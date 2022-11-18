@@ -26,6 +26,11 @@ const output = {
 
     register:(req,res) => {
         res.render("home/register");
+    },
+
+    mypage:(req,res) => {
+        var userId = req.session.userId;
+        res.render("home/mypage", {userId});
     }
 }
 
