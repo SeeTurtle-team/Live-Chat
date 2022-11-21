@@ -19,6 +19,8 @@ router.get('/logout', ctrl.process.logout);
 
 router.get('/mypage', interceptor, ctrl.output.mypage);
 
+router.get('/editMypage', interceptor, ctrl.output.editMypage);
+
 //------------------post----------------------//
 router.post("/register", ctrl.process.register);
 

@@ -34,7 +34,14 @@ const output = {
         const mypage = new MyPage();
         const rows = await mypage.getInfo(userId);
         res.render("home/mypage", {userId:userId, rows:rows});
-    }
+    },
+
+    editMypage: async (req, res)=> {
+        var userId = req.session.userId;
+        const mypage = new MyPage();
+        const rows = await mypage.getInfo(userId);
+        res.render("home/editMypage", {userId:userId, rows:rows});
+    },
 }
 
 const process ={

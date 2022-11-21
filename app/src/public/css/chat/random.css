@@ -122,8 +122,14 @@
     margin: auto;
 }
 
-.info{
+.info, .info input{
     font-size: 25px;
+}
+
+.intro{
+    font-size: 25px;
+    width: 97%;
+    margin-left: 1%;
 }
 
 .img{
