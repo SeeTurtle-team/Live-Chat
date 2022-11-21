@@ -3,6 +3,7 @@
 const session = require("express-session");
 const User = require("../../models/User");
 const useArr = require("../../public/js/chat/oneChatList");
+const MyPage = require("../../models/MyPage");
 
 const output = {
     home:(req,res) => {
@@ -28,9 +29,11 @@ const output = {
         res.render("home/register");
     },
 
-    mypage:(req,res) => {
+    mypage:async (req,res) => {
         var userId = req.session.userId;
-        res.render("home/mypage", {userId});
+        const mypage = new MyPage();
+        const rows = await mypage.getInfo(userId);
+        res.render("home/mypage", {userId:userId, rows:rows});
     }
 }
 
