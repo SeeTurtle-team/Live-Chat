@@ -6,6 +6,7 @@ const OneChat = require("../../models/OneChat");
 
 const { generateUploadURL } = require("../../config/s3");
 const useArr = require("../../public/js/chat/oneChatList");//접속한 유저 저장 리스트
+const MyPage = require("../../models/MyPage");
 
 const output = {
     chat : async (req,res) => {  //오픈 채팅 목록 페이지
@@ -89,9 +90,11 @@ const output = {
     },
 
     //--------------랜덤채팅--------------//
-    random : (req,res) => {
+    random : async (req,res) => {
         var userId = req.session.userId;
-        res.render('chat/random', {userId});
+        const mypage = new MyPage();
+        const rows = await mypage.getInfo(userId);
+        res.render('chat/random', {userId:userId, rows:rows});
     },
 
     //--------------화상채팅 고민 중----------//
