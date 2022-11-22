@@ -35,7 +35,7 @@
 
                 <div class="center">
                 <button class="btn">친구 보기</button>
-                <button class="btn">내 채팅방 보기</button>
+                <button class="btn" onclick="myList()">내 채팅방 보기</button>
                 <button class="btn" onclick="edit()">개인 정보 수정</button>
                 </div>
             </div>
@@ -43,6 +43,10 @@
     <script>
         function edit(){
             location.href = "/editMypage";
+        }
+
+        function myList(){
+            location.href="/chat/oneMyList";
         }
     </script>
             

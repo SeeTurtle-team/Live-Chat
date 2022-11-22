@@ -26,4 +26,6 @@ router.post("/register", ctrl.process.register);
 
 router.post("/login", ctrl.process.login);
 
+router.post("/editMypage", ctrl.process.editMypage);
+
 module.exports=router;

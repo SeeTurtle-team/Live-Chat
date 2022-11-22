@@ -12,6 +12,16 @@ class MyPageStorage{
             });
         });
     };
+
+    static async update(id, nickname, intro){
+        return new Promise((resolve, reject) => {
+            const query = "UPDATE users set userNickname = ?, intro = ? where userId = ?;";
+            db.query(query, [nickname, intro, id], (err, data) => {
+                if(err) reject('${err}');
+                resolve({success: true});
+            });
+        });
+    };
 }
 
 module.exports = MyPageStorage;

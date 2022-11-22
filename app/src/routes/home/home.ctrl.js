@@ -78,6 +78,15 @@ const process ={
                 location.href='/';
             </script>
         `)
+    },
+
+    editMypage: async(req, res) => {
+        const userId = req.session.userId;
+        const nickname = req.body.nickname;
+        const intro = req.body.intro;
+        const info = new MyPage();
+        const response = await info.update(userId, nickname, intro);
+        return res.json(response);
     }
 }
 

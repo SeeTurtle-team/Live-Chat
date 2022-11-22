@@ -11,6 +11,15 @@ class MyPage{
             console.log("fail");
         }
     }
+
+    async update(id, nickname, intro){
+        try{
+            const response = await MyPageStorage.update(id, nickname, intro);
+            return response;
+        }catch(err){
+            console.log("fail");
+        }
+    }
 }
 
 module.exports = MyPage;

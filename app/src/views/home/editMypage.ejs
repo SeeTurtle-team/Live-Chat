@@ -7,6 +7,7 @@
         <link rel = "stylesheet" href ="/css/home/index.css">
         <link rel = "stylesheet" href ="/css/chat/random.css">
         <script src="/socket.io/socket.io.js"></script>
+        <script src="/js/home/editMypage.js" defer></script>
         <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
     </head>
     <body>
@@ -31,12 +32,12 @@
                 </div>
                 <span class="center">프로필</span>
                 
-                <p class="info">닉네임 : <input type="text" maxlength="20" placeholder=<%=rows.userNickname%>></p>
+                <p class="info">닉네임 : <input type="text" id="nickname" maxlength="20" placeholder=<%=rows.userNickname%>></p>
                 <p class="info">소개글 </p>
                 <textarea id="intro" class="intro" placeholder="50자 이하로 작성" rows="5" cols="21"></textarea>
-                <div id="cnt">(0 / 100)</div><hr>
+                <div id="cnt">(0 / 50)</div><hr>
                 <div class="center">
-                <button class="btn">수정</button>
+                <button class="btn" onclick="edit()">수정</button>
                 </div>
             </div>
     </body>
