@@ -3,12 +3,10 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>마이페이지 수정</title>
+        <title>친구 프로필</title>
         <link rel = "stylesheet" href ="/css/home/index.css">
         <link rel = "stylesheet" href ="/css/chat/random.css">
         <script src="/socket.io/socket.io.js"></script>
-        <script src="/js/home/editMypage.js" defer></script>
-        <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
     </head>
     <body>
         <div class = "container">
@@ -26,35 +24,19 @@
             </header>
         </div>
             <div class="myBox">
-                <p class="header">마이페이지 수정</p>
+                <p class="header">친구 프로필</p>
                 <div>
                 <img class="img"src="https://ifh.cc/g/QCO7Gm.png"/>
                 </div>
                 <span class="center">프로필</span>
-                <p class="info">아이디 : <%=rows.userId%></p>
-                <p class="info">닉네임 : <input type="text" id="nickname" maxlength="20"></p>
-                <p class="info">소개글 </p>
-                <textarea id="intro" class="intro" rows="5" cols="21"></textarea>
-                <div id="cnt">(0 / 50)</div><hr>
                 <div class="center">
-                <button class="btn" onclick="edit()">수정</button>
+                <button class="btn" onclick="del()">삭제</button>
                 </div>
             </div>
     </body>
     <script>
-        $(document).ready(function(){
-            $('#intro').on('keyup', function(){
-                $('#cnt').html("("+$(this).val().length+" / 50)");
-
-                if($(this).val().length >50){
-                    $(this).val($(this).val().substring(0, 50));
-                    $('#cnt').html("(50 / 50)");
-                }
-            })
-        })
-
-        var str = "<%=rows.userNickname%>"
-        var str1 = "<%=rows.intro%>"
-        $('#nickname').attr('placeholder', str);
-        $('#intro').attr('placeholder', str1);
+        function del(){
+            console.log("del");
+        }
     </script>
+            

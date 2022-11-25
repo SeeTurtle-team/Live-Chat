@@ -20,6 +20,15 @@ class MyPage{
             console.log("fail");
         }
     }
+
+    async friends(id){
+        try{
+            const response = await MyPageStorage.friends(id);
+            return response;
+        }catch(err){
+            console.log('fail');
+        }
+    }
 }
 
 module.exports = MyPage;

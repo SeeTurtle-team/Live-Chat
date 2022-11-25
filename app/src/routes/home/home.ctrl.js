@@ -42,6 +42,18 @@ const output = {
         const rows = await mypage.getInfo(userId);
         res.render("home/editMypage", {userId:userId, rows:rows});
     },
+
+    friends: async (req, res) => {
+        var userId = req.session.userId;
+        const friend = new MyPage();
+        const rows = await friend.friends(userId);
+        res.render("home/friends", {userId:userId, rows:rows});
+    },
+
+    friendPage: async (req, res) => {
+        var userId = req.session.userId;
+        res.render("home/friendPage", {userId:userId});
+    },
 }
 
 const process ={

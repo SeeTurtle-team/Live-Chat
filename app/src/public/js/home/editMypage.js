@@ -3,7 +3,6 @@
 const nickname = document.querySelector('#nickname');
 const intro = document.querySelector('#intro');
 
-
 function edit(){
     const req = {
         nickname: nickname.value,
@@ -31,4 +30,11 @@ function edit(){
     .catch((err) => {
         console.log(new Error("수정 중 에러 발생"));
     });
+}
+
+function getProfile(id){
+    const req = {id: id};
+    console.log(req.id);
+    console.log(JSON.stringify(req));
+    location.href="/friendPage?id="+req.id;
 }

@@ -30,11 +30,12 @@
                 </div>
                 <span class="center">프로필</span>
                 
+                <p class="info">아이디 : <%=rows.userId%></p>
                 <p class="info">닉네임 : <%=rows.userNickname%></p>
                 <p class="info">소개글 : <%=rows.intro%></p><hr>
 
                 <div class="center">
-                <button class="btn">친구 보기</button>
+                <button class="btn" onclick="friends()">친구 보기</button>
                 <button class="btn" onclick="myList()">내 채팅방 보기</button>
                 <button class="btn" onclick="edit()">개인 정보 수정</button>
                 </div>
@@ -47,6 +48,10 @@
 
         function myList(){
             location.href="/chat/oneMyList";
+        }
+
+        function friends(){
+            location.href="/friends";
         }
     </script>
             

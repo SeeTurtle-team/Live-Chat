@@ -138,3 +138,16 @@
     display: block;
     margin: auto;
 }
+
+.friend{
+    font-size: 25px;
+    margin-left: 2%;
+}
+.friend .btn{
+    margin-left: 70%;
+}
+
+.scroll{
+    overflow: auto;
+    height: 500px;
+}

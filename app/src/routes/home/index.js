@@ -21,6 +21,10 @@ router.get('/mypage', interceptor, ctrl.output.mypage);
 
 router.get('/editMypage', interceptor, ctrl.output.editMypage);
 
+router.get('/friends', interceptor, ctrl.output.friends);
+
+router.get('/friendPage', interceptor, ctrl.output.friendPage);
+
 //------------------post----------------------//
 router.post("/register", ctrl.process.register);
 
