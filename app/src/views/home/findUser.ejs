@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>사용자 검색</title>
+        <link rel = "stylesheet" href ="/css/home/index.css">
+        <link rel = "stylesheet" href ="/css/chat/random.css">
+        <script src="/socket.io/socket.io.js"></script>
+        <script src="/js/home/editMypage.js" defer></script>
+    </head>
+    <body>
+        <div class = "container">
+            <header>
+                <nav>
+                    <div class = "icon" onclick="location.href='/'">LiveChat</div>
+                    <div class = "gnb">
+                        <a href="/chat">오픈 채팅</a>
+                        <a href="/board">게시판</a>
+                        <a href="/chat/oneChat">1대1 채팅</a>
+                        <a href="/chat/random">랜덤채팅</a>
+                        <a href="/login" class="login_menu">로그아웃</a>
+                    </div>
+                </nav>
+            </header>
+        </div>
+        <div class="myBox">
+            <p class="header">사용자 검색</p>
+            <div class="center">
+                <input type="text" id="value" class="info" placeholder="검색" onkeyup="filter()">
+            </div><hr>
+            <div id="scroll" class="scroll">
+                <%
+                    for(var i = 0; i<users.length; i++){
+                        var id = users[i].userId;
+                        var nickName = users[i].userNickname;
+                %>
+                <p>
+                    <%=id%>(<%=nickName%>)<hr>
+                </p>
+                    <%}%>
+            </div>
+        </div>
+    </body>
+    <script>
+        function filter(){
+            var value, text;
+            value = document.getElementById('value').value.toUpperCase();
+            var box = document.getElementById('scroll');
+            while(box.firstChild){
+                box.removeChild(box.firstChild);
+            }
+            <%
+                for(var i = 0; i<users.length; i++){
+                    var id = users[i].userId.toUpperCase();
+                    var nickname = users[i].userNickname.toUpperCase();
+                    var text = id+"("+nickname+")";
+            %>
+            if("<%=text%>".indexOf(value) > -1){
+                var newP = document.createElement('p');
+                var newHr = document.createElement('hr');
+                newP.innerHTML = "<%=text%>";
+                box.appendChild(newP);
+                box.appendChild(newHr);
+            }
+                <%}%>
+        }
+    </script>

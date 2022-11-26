@@ -41,7 +41,17 @@ class MyPageStorage{
                 resolve({success: true});
             });
         });
-    }
+    };
+
+    static async getUsers(){
+        return new Promise((resolve, reject) => {
+            const query = "select * from users;";
+            db.query(query, (err, data) => {
+                if(err) reject('${err}');
+                resolve({data: data});
+            });
+        });
+    };
 }
 
 module.exports = MyPageStorage;

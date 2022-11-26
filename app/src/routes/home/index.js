@@ -25,6 +25,8 @@ router.get('/friends', interceptor, ctrl.output.friends);
 
 router.get('/friendPage', interceptor, ctrl.output.friendPage);
 
+router.get('/findUser', interceptor, ctrl.output.findUser);
+
 //------------------post----------------------//
 router.post("/register", ctrl.process.register);
 

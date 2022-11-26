@@ -65,3 +65,7 @@ function del(){
         console.log(new Error("수정 중 에러 발생"));
     });
 }
+
+function findUser(){
+    location.href = "/findUser";
+}

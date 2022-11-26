@@ -38,6 +38,15 @@ class MyPage{
             console.log('fail');
         }
     }
+
+    async getUser(){
+        try{
+            const response = await MyPageStorage.getUsers();
+            return response;
+        }catch(err){
+            console.log('fail');
+        }
+    }
 }
 
 module.exports = MyPage;

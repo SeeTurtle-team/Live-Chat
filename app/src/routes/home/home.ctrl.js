@@ -56,6 +56,12 @@ const output = {
         const rows = await mypage.getInfo(friendId);
         res.render("home/friendPage", {rows: rows});
     },
+
+    findUser: async (req, res) => {
+        const mypage = new MyPage();
+        const users = await mypage.getUser();
+        res.render("home/findUser", {users: users.data});
+    }
 }
 
 const process ={
