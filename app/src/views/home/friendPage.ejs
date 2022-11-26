@@ -6,6 +6,7 @@
         <title>친구 프로필</title>
         <link rel = "stylesheet" href ="/css/home/index.css">
         <link rel = "stylesheet" href ="/css/chat/random.css">
+        <script src="/js/home/editMypage.js" defer></script>
         <script src="/socket.io/socket.io.js"></script>
     </head>
     <body>
@@ -29,7 +30,7 @@
                 <img class="img"src="https://ifh.cc/g/QCO7Gm.png"/>
                 </div>
                 <span class="center">프로필</span>
-                <p class="info">아이디 : <%=rows.userId%></p>
+                <p class="info">아이디 : <sapn id="friendId"><%=rows.userId%></sapn></p>
                 <p class="info">닉네임 : <%=rows.userNickname%></p>
                 <p class="info">소개글 : <%=rows.intro%></p><hr>
                 <div class="center">
@@ -37,9 +38,4 @@
                 </div>
             </div>
     </body>
-    <script>
-        function del(){
-            console.log("del");
-        }
-    </script>
             

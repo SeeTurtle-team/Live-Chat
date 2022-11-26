@@ -32,4 +32,6 @@ router.post("/login", ctrl.process.login);
 
 router.post("/editMypage", ctrl.process.editMypage);
 
+router.post("/friendPage", ctrl.process.friendPage);
+
 module.exports=router;

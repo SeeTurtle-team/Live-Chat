@@ -29,6 +29,15 @@ class MyPage{
             console.log('fail');
         }
     }
+
+    async delete(userId, friendId){
+        try{
+            const response = await MyPageStorage.delete(userId, friendId);
+            return response;
+        }catch(err){
+            console.log('fail');
+        }
+    }
 }
 
 module.exports = MyPage;

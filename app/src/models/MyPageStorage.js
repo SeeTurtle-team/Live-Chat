@@ -32,6 +32,16 @@ class MyPageStorage{
             });
         });
     };
+
+    static async delete(userId, friendId){
+        return new Promise((resolve, reject) => {
+            const query = "delete from friend where userId=? and friends=?;";
+            db.query(query ,[userId, friendId], (err, data) => {
+                if(err) reject('${err}');
+                resolve({success: true});
+            });
+        });
+    }
 }
 
 module.exports = MyPageStorage;

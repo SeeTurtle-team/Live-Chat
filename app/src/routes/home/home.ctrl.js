@@ -101,6 +101,15 @@ const process ={
         const info = new MyPage();
         const response = await info.update(userId, nickname, intro);
         return res.json(response);
+    },
+
+    friendPage: async(req, res) => {
+        const userId = req.session.userId;
+        const friendId = req.body.friendId;
+        const mypage = new MyPage();
+        var response = await mypage.delete(userId, friendId);
+        var response = await mypage.delete(friendId, userId);
+        return res.json(response);
     }
 }
 
