@@ -1,6 +1,6 @@
 # Live-Chat
 
-socket and express
+socket and express and AWS
 
 실시간 채팅
 
