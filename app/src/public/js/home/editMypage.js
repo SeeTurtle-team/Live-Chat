@@ -34,7 +34,5 @@ function edit(){
 
 function getProfile(id){
     const req = {id: id};
-    console.log(req.id);
-    console.log(JSON.stringify(req));
     location.href="/friendPage?id="+req.id;
 }

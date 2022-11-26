@@ -51,8 +51,10 @@ const output = {
     },
 
     friendPage: async (req, res) => {
-        var userId = req.session.userId;
-        res.render("home/friendPage", {userId:userId});
+        const friendId = req.query.id;
+        const mypage = new MyPage();
+        const rows = await mypage.getInfo(friendId);
+        res.render("home/friendPage", {rows: rows});
     },
 }
 
