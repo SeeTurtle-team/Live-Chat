@@ -52,9 +52,10 @@ const output = {
 
     friendPage: async (req, res) => {
         const friendId = req.query.id;
+        const flag = req.query.flag;
         const mypage = new MyPage();
         const rows = await mypage.getInfo(friendId);
-        res.render("home/friendPage", {rows: rows});
+        res.render("home/friendPage", {rows: rows, flag: flag});
     },
 
     findUser: async (req, res) => {

@@ -34,7 +34,16 @@
                 <p class="info">닉네임 : <%=rows.userNickname%></p>
                 <p class="info">소개글 : <%=rows.intro%></p><hr>
                 <div class="center">
-                <button class="btn" onclick="del()">삭제</button>
+                    <%
+                        if(flag == 1){
+                    %>
+                        <button class="btn" onclick="del()">삭제</button>
+                        <%}%>
+                        <%
+                        if(flag == 0){
+                    %>
+                        <button class="btn" onclick="">친구 추가</button>
+                        <%}%>
                 </div>
             </div>
     </body>

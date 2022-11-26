@@ -35,9 +35,7 @@
                         var id = users[i].userId;
                         var nickName = users[i].userNickname;
                 %>
-                <p>
-                    <%=id%>(<%=nickName%>)<hr>
-                </p>
+                    <a onclick="getProfile(<%=id%>, '0')"><%=id%>(<%=nickName%>)</a><hr>
                     <%}%>
             </div>
         </div>
@@ -52,15 +50,17 @@
             }
             <%
                 for(var i = 0; i<users.length; i++){
-                    var id = users[i].userId.toUpperCase();
-                    var nickname = users[i].userNickname.toUpperCase();
-                    var text = id+"("+nickname+")";
+                    var id = users[i].userId;
+                    var nickname = users[i].userNickname;
+                    var text = id+"("+nickname+")".toUpperCase();
+                    var flag = "0";
             %>
             if("<%=text%>".indexOf(value) > -1){
-                var newP = document.createElement('p');
+                var newA = document.createElement('a');
+                newA.setAttribute('onclick', 'getProfile("<%=id%>", <%=flag%>)');
                 var newHr = document.createElement('hr');
-                newP.innerHTML = "<%=text%>";
-                box.appendChild(newP);
+                newA.innerHTML = "<%=text%>";
+                box.appendChild(newA);
                 box.appendChild(newHr);
             }
                 <%}%>

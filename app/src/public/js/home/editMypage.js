@@ -32,9 +32,9 @@ function edit(){
     });
 }
 
-function getProfile(id){
-    const req = {id: id};
-    location.href="/friendPage?id="+req.id;
+function getProfile(id, flag){
+    const req = {id: id, flag: flag};
+    location.href="/friendPage?id="+req.id+"&flag="+req.flag;
 }
 
 function del(){
