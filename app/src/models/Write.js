@@ -19,7 +19,7 @@ class Write{
 
     async newUpdate(seq) {
         try {
-        const row = await WriteStorage.dataUpdate();
+            const row = await WriteStorage.dataUpdate(seq);
         return row;
         } catch(err) {
             console.log(err);

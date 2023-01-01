@@ -3,7 +3,7 @@
 const app =require("../app");
 const Socket = require("../src/socket/Socket");
 
-const port =process.env.PORT || 5000;
+const port =process.env.PORT || 5001;
 try{
     const server = app.listen(port,()=>{
         console.log('서버 가동');

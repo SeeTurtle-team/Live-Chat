@@ -62,6 +62,10 @@ const output = {
         const mypage = new MyPage();
         const users = await mypage.getUser();
         res.render("home/findUser", {users: users.data});
+    },
+
+    first : (req,res) => {
+        res.render("home/test");
     }
 }
 

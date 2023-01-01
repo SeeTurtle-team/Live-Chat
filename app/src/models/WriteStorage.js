@@ -14,14 +14,17 @@ class WriteStorage{
     }
 
     static dataUpdate(seq) {
-        var seq = req.params.seq;
-        var body = req.body;
-        var sql = `SELECT * FROM socket.write WHERE seq='${seq}'`;
-        var params = [body.seq, body.writer, body.title, body.content, body.date, body.views];
-        db.query(sql, params, (err, row) => {
-            if(err) console.error(err);
-            else res.render('board/update', {row : row[0]});
+        return new Promise((test,reject)=>{
+            var sql = `SELECT * FROM socket.write WHERE seq=?`;
+            //var params = [body.seq, body.writer, body.title, body.content, body.date, body.views];
+            db.query(sql, [seq], (err, row) => {
+                if(err) {reject(err)};
+                test(row);
             });
+        })
+        //var seq = req.params.seq;
+        //var body = req.body;
+        
     }
     
 

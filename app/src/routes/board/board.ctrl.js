@@ -52,11 +52,11 @@ const output = {
             else res.render('/listUpdate', {row : row[0]});
         });
     },
-    update : (req, res) => {
+    update : async (req, res) => {
         var seq = req.params.seq;
         // var body = req.body;
         const WritePost = new Write(req.body);
-        const row = WritePost.writePost(seq);
+        const row = await WritePost.newUpdate(req.params.seq);
         // var sql = `SELECT * FROM socket.write WHERE seq='${seq}'`;
         // var params = [body.seq, body.writer, body.title, body.content, body.date, body.views];
         // db.query(sql, params, (err, row) => {

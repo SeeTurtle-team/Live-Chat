@@ -22,7 +22,7 @@ class OneChatStorage{
             db.query(query,[id,id],(err,rows) => {
                 if(err){reject(err)};
                 console.log("storage : "+rows);
-                resolve(rows);
+                resolve(rows); 
             })
         })
     }
